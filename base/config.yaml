@@ -1,0 +1,16 @@
+CourseTitle: "Edit config.yaml to change course title"
+
+MenuLinks:
+  - MenuLinkName: Schedule
+    MenuLinkURL: /
+  - MenuLinkName: Edit config.yaml
+    MenuLinkURL: /link/
+  - MenuLinkName: To add links
+    MenuLinkURL: /anotherlink/
+
+FirstQuarterDay: 2016-03-07
+LastBeforeBreak: 2016-04-01
+FirstAfterBreak: 2016-04-11
+ClassOnWeekDays: mtrf
+
+TimeZone: America/Indiana/Indianapolis

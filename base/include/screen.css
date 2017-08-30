@@ -1,0 +1,156 @@
+* {
+color: #333;
+}
+
+
+h3, h4 {
+margin-bottom: -0.06em;
+}
+
+a {
+background: none;
+color: #966;
+}
+
+body {
+font-family: Helvetica, Arial, sans-serif;
+margin: 0px;
+padding-bottom: 20px;
+}
+
+#content {
+margin: 1em;
+width: 40em;
+}
+
+table {
+border: 1px solid #000;
+border-collapse: collapse;
+}
+
+tr {
+vertical-align: top;
+}
+
+td {
+padding: 0.15em;
+padding-bottom: 0.5em;
+border: 1px solid #aaa;
+}
+
+li {
+margin-left: -1em;
+padding-right: 0.5em;
+margin-bottom: 0.5em;
+}
+
+video {
+width: 100%;
+}
+
+@keyframes glowRed {
+	from{color:black;}
+	to{color:red;}
+}
+
+@-webkit-keyframes glowRed {
+	from{color:black;}
+	to{color:red;}
+}
+
+.startHere {
+	font-weight: bold;
+	animation-name: glowRed;
+	-webkit-animation-name: glowRed;
+	animation-duration: 1s;
+	-webkit-animation-duration: 1s;
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+	animation-direction: alternate;
+	-webkit-animation-direction: alternate;
+}
+
+.rubric {
+font-size: smaller;
+}
+
+.classTopicTrv {
+border-left: 2px solid #aaa;
+}
+
+.assign { background-color: #cfa; }
+.due { background-color: #fcc; }
+.tableHead { font-weight: bold; }
+
+.classNumber { text-align: center; }
+.classDate { text-align: center; }
+
+.scheduleTable { font-size: smaller; }
+.scheduleDate { font-weight: bold; }
+.scheduleTopics{
+border-bottom: 1px solid #888;
+margin-bottom: 0.5em;
+}
+
+#header {
+background: #555;
+padding: 0em;
+}
+
+#header a{
+position: relative;
+float: left;
+margin-left: 1em;
+margin-right: 1em;
+padding: 1em;
+color: #ddd;
+background: #555;
+}
+
+#header a:hover{
+background: #222;
+}
+
+.noBullets {
+list-style-type: none;
+}
+
+h1>a, h2>a, h3>a, h4>a, 
+a>h1, a>h2, a>h3, a>h4 {
+color: #333;
+}
+
+.quizInput {
+	vertical-align: text-top;
+}
+
+#hidePastSessions ~ #pastSessions {
+}
+
+#hidePastSessions:checked ~ #pastSessions {
+display:none;
+}
+
+#hidePastSessions {
+display:none;
+}
+
+#sessionToggleLabel {
+color: #666;
+border: 1px solid #aaa;
+padding: 2px;
+margin: 2px;
+}
+
+#sessionToggleLabel:active {
+position: relative;
+left: 1px;
+top: 1px;
+}
+
+
+.textC1 { color: #66c2a5; }
+.textC2 { color: #fc8d62; }
+.textC3 { color: #8da0cb; }
+
+.printonly { display: none; }

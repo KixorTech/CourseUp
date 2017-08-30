@@ -1,0 +1,46 @@
+<?
+require_once('CourseUp/common.php');
+?>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title><? print $config['CourseTitle']; ?></title>
+
+<link rel="stylesheet" type="text/css" href="<? printRoot(); ?>/include/screen.css" />
+<link rel="stylesheet" type="text/css" media="print" href="<? printRoot(); ?>/include/print.css" />
+<script src="<? printWebRoot() ?>/include/helpers.js" language="javascript"></script>
+</head>
+
+<body>
+
+<? requireLatex(); ?>
+
+<div id="header">
+<?
+$menuLinks = $config['MenuLinks'];
+for($i=0; $i<count($menuLinks); $i++) {
+	print '<a href="';
+	printRoot();
+	//print '/';
+	print $menuLinks[$i]['MenuLinkURL'];
+	print '">';
+	print $menuLinks[$i]['MenuLinkName'];
+	print '</a>';
+	print "\n";
+}
+?>
+
+<?
+if($online)
+if($session->isValid())
+	print '<a href="' .getWebRoot(). '/logout/">Logout ' .$session->getUsername(). '</a>';
+else
+	print '<a href="' .getWebRoot(). '/login/">Login</a>';
+?>
+<div style="clear:both;"></div>
+</div>
+
+
+<div id="content">
