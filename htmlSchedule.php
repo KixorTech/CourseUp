@@ -25,18 +25,27 @@ function getFile($path)
    return $s;
 }
 
-function getNextClassDay($currentDay)
+function iterateToClassDay($currentDay, $direction)
 {
 	$oneDay = new DateInterval('P1D');
 	$nextDay = clone $currentDay;
+	if($direction < 0)
+		$oneDay->invert = 1;
 	$nextDay->add($oneDay);
 
 	//if current day is not class weekday
-	while( !isClassDay($nextDay) || onBreak($nextDay) )
+	$numTries = 100;
+	for($i=0; $i<$numTries && (!isClassDay($nextDay) || onBreak($nextDay) ); $i++)
 		$nextDay->add($oneDay);
 
 	return $nextDay;
 }
+
+function getPrevClassDay($currentDay)
+{ return iterateToClassDay($currentDay, -1); }
+
+function getNextClassDay($currentDay)
+{ return iterateToClassDay($currentDay, 1); }
 
 function removeCommentLines($string)
 {
