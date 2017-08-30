@@ -12,5 +12,7 @@ FirstQuarterDay: 2016-03-07
 LastBeforeBreak: 2016-04-01
 FirstAfterBreak: 2016-04-11
 ClassOnWeekDays: mtrf
+ShowPastSessions: 0
+ShowFutureSessions: 5
 
 TimeZone: America/Indiana/Indianapolis
