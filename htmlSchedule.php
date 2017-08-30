@@ -7,6 +7,8 @@ $FirstQuarterDay = '';
 $LastBeforeBreak = '';
 $FirstAfterBreak = '';
 $ClassOnWeekDays = '';
+$ShowPastSessions = 1;
+$ShowFutureSessions = 3;
 
 function getFile($path)
 {
@@ -68,6 +70,9 @@ function getConfigSetting($key)
 	global $LastBeforeBreak;
 	global $FirstAfterBreak;
 	global $ClassOnWeekDays;
+	global $ShowPastSessions;
+	global $ShowFutureSessions;
+
 	$val = $config[$key];
 	$val = trim($val);
 
@@ -97,6 +102,12 @@ function getConfigSetting($key)
 		if( strpos($days, 'f') !== FALSE)
 			array_push($ClassOnWeekDays, 'Fri');
 		//print_r($ClassOnWeekDays);
+	}
+	else if(strpos($key, 'ShowPastSessions') !== FALSE) {
+		$ShowPastSessions = $val;
+	}
+	else if(strpos($key, 'ShowFutureSessions') !== FALSE) {
+		$ShowFutureSessions = $val;
 	}
 }
 
@@ -227,7 +238,11 @@ function getHtmlSchedule()
 	getConfigSetting('LastBeforeBreak');
 	getConfigSetting('FirstAfterBreak');
 	getConfigSetting('ClassOnWeekDays');
+	getConfigSetting('ShowPastSessions');
+	getConfigSetting('ShowFutureSessions');
 
+	global $ShowPastSessions;
+	global $ShowFutureSessions;
 	global $ClassOnWeekDays;
 
 	date_default_timezone_set('UTC');
@@ -247,16 +262,25 @@ function getHtmlSchedule()
 	$scheduleHtml .= '<input type="checkbox" id="hidePastSessions" checked>';
 	$scheduleHtml .= "<div id=\"pastSessions\">\n\n";
 	$now = new DateTime();
+	$pastSessionTime = $now;
+	$futureSessionTime = $now;
 	$dayAndABit = new DateInterval('P1DT6H');
 	$now->sub($dayAndABit);
 	$pastSessionsDone = FALSE;
+
+	for($i=0; $i<$ShowPastSessions; $i++)
+		$pastSessionTime = getPrevClassDay($pastSessionTime);
+	for($i=0; $i<$ShowFutureSessions; $i++)
+		$futureSessionTime = getNextClassDay($futureSessionTime);
 
 	#$daysInWeek = strlen($config['ClassOnWeekDays']);
 	$daysInWeek = count($ClassOnWeekDays);
 
 	for($i=1; $i<count($sessions); $i++)
 	{
-		if($currentDay > $now && !$pastSessionsDone) {
+		if($currentDay > $futureSessionTime)
+			return $scheduleHtml;
+		if($currentDay > $pastSessionTime && !$pastSessionsDone) {
 			$scheduleHtml .= "</div>\n\n";
 			$pastSessionsDone = TRUE;
 		}
