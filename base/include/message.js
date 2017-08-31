@@ -63,7 +63,7 @@ function newBoxHandler(e)
 	header += '<span style="float: right;">';
 	header += '<span title="Reply" class="hoverGlow">&#x1F4AC;</span>';
 	header += ' <span title="Hide" class="hoverGlow">&#x1F53A;</span>';
-	header += '</span></div><textarea cols="20" rows="4"></textarea>';
+	header += '</span></div><textarea autofocus cols="20" rows="4"></textarea>';
 	d.innerHTML = header;
 
 	//add div
