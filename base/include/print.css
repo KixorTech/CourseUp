@@ -40,3 +40,8 @@ transform: rotate(270deg);
 
 .printonly { display: block; }
 
+.entrySpace { padding-top: 2em; display: inline-block; border-bottom: 1px solid black; }
+.nameSpace { width:20em; }
+.boxSpace { width:5em; }
+.dateSpace { width:8em; }
+

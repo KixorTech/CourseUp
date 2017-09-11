@@ -154,3 +154,10 @@ top: 1px;
 .textC3 { color: #8da0cb; }
 
 .printonly { display: none; }
+
+
+.entrySpace { padding-top: 2em; display: inline-block; border-bottom: 1px solid black; }
+.nameSpace { width:20em; }
+.boxSpace { width:5em; }
+.dateSpace { width:8em; }
+
