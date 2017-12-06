@@ -21,6 +21,12 @@ class PDExtension extends ParsedownExtra
 		$pagebreakTags = '<div class="pagebreak"></div>';
 		$markup = preg_replace('/\$pagebreak\$/', $pagebreakTags, $markup);
 
+		//centering
+		$beginCenteringTags = '<div class="beginCentering" style="text-align:center">';
+		$endCenteringTags = '</div>';
+		//$markup = preg_replace('/\$beginCentering\$/', $beginCenteringTags, $markup);
+		//$markup = preg_replace('/\$endCentering\$/', $endCenteringTags, $markup);
+
 		//these should be replaced with login info in online mode
 		//replace namebox keyword
 		$boxStyle='padding-top:2em; display:inline-block; border-bottom:1px solid black; width:';
