@@ -9,6 +9,7 @@ class PDExtension extends ParsedownExtra
 	{
 		$markup = $text;
 
+		//get latex markers
 		$markup = preg_replace('/\\\\\(/', '\\\\\\(', $markup);
 		$markup = preg_replace('/\\\\\)/', '\\\\\\)', $markup);
 
@@ -19,6 +20,18 @@ class PDExtension extends ParsedownExtra
 		//replace pagebreak keyword
 		$pagebreakTags = '<div class="pagebreak"></div>';
 		$markup = preg_replace('/\$pagebreak\$/', $pagebreakTags, $markup);
+
+		//these should be replaced with login info in online mode
+		//replace namebox keyword
+		$boxStyle='padding-top:2em; display:inline-block; border-bottom:1px solid black; width:';
+		$nameboxTags = 'Name: <span class="namebox" style="'.$boxStyle.'20em;"></span>';
+		$markup = preg_replace('/\$namebox\$/', $nameboxTags, $markup);
+		//replace mailbox keyword
+		$mailboxTags = 'Box: <span class="mailbox" style="'.$boxStyle.'5em;"></span>';
+		$markup = preg_replace('/\$mailbox\$/', $mailboxTags, $markup);
+		//replace datebox keyword
+		$dateboxTags = 'Date: <span class="datebox" style="'.$boxStyle.'8em;"></span>';
+		$markup = preg_replace('/\$datebox\$/', $dateboxTags, $markup);
 
 		$markup = parent::text($markup);
 		return $markup;
