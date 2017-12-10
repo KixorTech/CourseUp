@@ -31,13 +31,13 @@ class PDExtension extends ParsedownExtra
 		//replace namebox keyword
 		$boxStyle='padding-top:2em; display:inline-block; border-bottom:1px solid black; width:';
 		$nameboxTags = 'Name: <span class="namebox" style="'.$boxStyle.'20em;"></span>';
-		$markup = preg_replace('/\$namebox\$/', $nameboxTags, $markup);
+		$markup = preg_replace('/\\\\namebox/', $nameboxTags, $markup);
 		//replace mailbox keyword
 		$mailboxTags = 'Box: <span class="mailbox" style="'.$boxStyle.'5em;"></span>';
-		$markup = preg_replace('/\$mailbox\$/', $mailboxTags, $markup);
+		$markup = preg_replace('/\\\\mailbox/', $mailboxTags, $markup);
 		//replace datebox keyword
 		$dateboxTags = 'Date: <span class="datebox" style="'.$boxStyle.'8em;"></span>';
-		$markup = preg_replace('/\$datebox\$/', $dateboxTags, $markup);
+		$markup = preg_replace('/\\\\datebox/', $dateboxTags, $markup);
 
 		$markup = parent::text($markup);
 		return $markup;
