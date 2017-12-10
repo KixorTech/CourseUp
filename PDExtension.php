@@ -54,6 +54,16 @@ class PDExtension extends ParsedownExtra
 			}
 		}
 
+		//answer box
+		/*
+		$answerboxCD = '/\\\\answerbox\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
+		$count = preg_match($answerboxCD, $markup, $matches);
+		if($count > 0) {
+			$answerboxTag = '<div style="width:'.$matches[1].'; height:'.$matches[2].';"></div>';
+			$markup = preg_replace($answerboxCD, $answerboxTag, $markup);
+		}
+		 */
+
 		$markup = parent::text($markup);
 		return $markup;
 	}
