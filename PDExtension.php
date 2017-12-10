@@ -54,6 +54,37 @@ class PDExtension extends ParsedownExtra
 			}
 		}
 
+		//handle solution bounds
+		$beginSolTag = '\ifsolution';
+		$elseSolTag = '\else';
+		$endSolTag = '\fi';
+		$beginSize = strlen($beginSolTag);
+		$elseSize = strlen($elseSolTag);
+		$endSize = strlen($endSolTag);
+
+		while(strpos($markup, $beginSolTag) != FALSE) {
+			$beginPos = strpos($markup, $beginSolTag);
+			$elsePos = strpos($markup, $elseSolTag, $beginPos);
+			$endPos = strpos($markup, $endSolTag, $beginPos);
+
+			$trueString = substr($markup, $beginPos+$beginSize, $endPos-$beginPos+$beginSize);
+			$falseString = '';
+			if($elsePos != FALSE && $elsePos < $endPos) {
+				$trueString = substr($markup, $beginPos+$beginSize, $elsePos-$beginPos+$beginSize);
+				$falseString = substr($markup, $elsePos+$elseSize, $endPos-$elsePos+$elseSize);
+			}
+
+			$beforeCondition = substr($markup, 0, $beginPos);
+			$afterCondition = substr($markup, $endPos+$endSize);
+			$trueString = 'true';
+			$falseString = 'false';
+			if(isset($showSolution))
+				$markup = $beforeCondition . $trueString . $afterCondition;
+			else
+				$markup = $beforeCondition . $falseString . $afterCondition;
+		}
+
+
 		//answer box
 		/*
 		$answerboxCD = '/\\\\answerbox\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
