@@ -39,6 +39,21 @@ class PDExtension extends ParsedownExtra
 		$dateboxTags = 'Date: <span class="datebox" style="'.$boxStyle.'8em;"></span>';
 		$markup = preg_replace('/\\\\datebox/', $dateboxTags, $markup);
 
+		//handle simple solution bounds
+		$beginSolTag = '\beginSolution';
+		$endSolTag = '\endSolution';
+		if(isset($showSolution)) {
+			$markup = str_replace($beginSolTag, '', $markup);
+			$markup = str_replace($endSolTag, '', $markup);
+		}
+		else {
+			while(strpos($markup, $beginSolTag) != FALSE) {
+				$start = strpos($markup, $beginSolTag);
+				$end = strpos($markup, $endSolTag, $start) + strlen($endSolTag);
+				$markup = substr($markup, 0, $start-1) . substr($markup, $end);
+			}
+		}
+
 		$markup = parent::text($markup);
 		return $markup;
 	}
