@@ -15,4 +15,6 @@ ClassOnWeekDays: mtrf
 ShowPastSessions: 0
 ShowFutureSessions: 5
 
+PublicErrorMessages: false
+
 TimeZone: America/Indiana/Indianapolis
