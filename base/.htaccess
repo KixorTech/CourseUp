@@ -1,5 +1,11 @@
 RewriteEngine on
 
+#disallow source control paths
+RedirectMatch 404 \.git 
+RedirectMatch 404 \.svn 
+RedirectMatch 404 \.subversion 
+
+
 #if content.md exists at request path
 # and the uri does not have resource= in it
 # then add ?resource=NAME to uri
