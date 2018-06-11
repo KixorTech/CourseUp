@@ -141,10 +141,15 @@ function getWebRoot()
 	$scriptSysPath = realpath($_SERVER['SCRIPT_FILENAME']);
 	$scriptWebPath = $_SERVER['PHP_SELF'];
 	$c = substr_count($scriptSysPath, '/');
-	#print 'ori: ' .$thisSysPath .'<br>';
-	#print 'sys: ' . dirname($thisSysPath) .'<br>';
-	#print 'scr: ' .$scriptSysPath .'<br>';
-	#print 'web: ' .$scriptWebPath .'<br>';
+	#print '<table border><tr><td>';
+	#print 'file: <td>' .__FILE__;
+	#print '<tr><td>';
+	#print 'script: <td>' .$_SERVER['SCRIPT_FILENAME'];
+	#print '<tr><td>';
+	#print 'realscript: <td>' .realpath($_SERVER['SCRIPT_FILENAME']);
+	#print '<tr><td>';
+	#print 'self: <td>' .$_SERVER['PHP_SELF'];
+	#print '</table>';
 
 	//removes the dir that contains the support code
 	$thisSysPath = dirname($thisSysPath);
