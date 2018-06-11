@@ -11,8 +11,7 @@ if(isset($_GET['resource'])) {
 //include '../CourseUp/Parsedown.php';
 require_once('CourseUp/PDExtension.php');
 require_once('CourseUp/htmlSchedule.php');
-
-include('header.htm');
+require_once('CourseUp/common.php');
 
 $publicErrorMessages = $config['PublicErrorMessages'];
 if($publicErrorMessages) {
@@ -20,6 +19,8 @@ if($publicErrorMessages) {
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 }
+
+include('header.htm');
 
 if( $isCourseRoot) {
 	print '<p><h3>';
