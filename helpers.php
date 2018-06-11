@@ -137,6 +137,12 @@ function getURI()
 
 function getWebRoot()
 {
+	$rootPath = dirname($_SERVER['PHP_SELF']);
+	return $rootPath;
+}
+
+function getWebRoot_noRootResourceHandling_deprecated()
+{
 	$thisSysPath = dirname(__FILE__);
 	$scriptSysPath = realpath($_SERVER['SCRIPT_FILENAME']);
 	$scriptWebPath = $_SERVER['PHP_SELF'];
