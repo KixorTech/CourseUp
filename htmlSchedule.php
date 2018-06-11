@@ -3,6 +3,7 @@
 #require_once('Parsedown.php');
 require_once('PDExtension.php');
 
+//TODO move these to a default config setting
 $FirstQuarterDay = '';
 $LastBeforeBreak = '';
 $FirstAfterBreak = '';
@@ -63,6 +64,8 @@ function removeCommentLines($string)
 	return $outS;
 }
 
+//TODO this is brittle, invalid keys are not detected
+//TODO extract this to a config object that maintains the default values
 function getConfigSetting($key)
 {
 	global $config;
