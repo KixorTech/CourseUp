@@ -1,3 +1,4 @@
+\calendar
 // ----------------------------------------
 Session:
 * Read the [syllabus](/syllabus/)
