@@ -235,7 +235,7 @@ function getSessionHtml($session, $dayCount, &$currentDay, &$itemsDue)
 	return $row;
 }
 
-function getHtmlSchedule()
+function getFileHtmlSchedule($fileContents)
 {
 	getConfigSetting('FirstQuarterDay');
 	getConfigSetting('LastBeforeBreak');
@@ -250,7 +250,7 @@ function getHtmlSchedule()
 
 	date_default_timezone_set('UTC');
 
-	$f = file_get_contents('schedule_data.txt');
+	$f = $fileContents;
 	$f = removeCommentLines($f);
 	$sessions = explode('Session:', $f);
 
@@ -304,6 +304,12 @@ function getHtmlSchedule()
 	return $scheduleHtml;
 	//$s = ParsedownExtra::instance()->text($scheduleHtml); 
 	//return $s;
+}
+
+function getHtmlSchedule()
+{
+	$f = file_get_contents('schedule_data.txt');
+	return getFileHtmlSchedule($f);
 }
 
 //$s = getHtmlSchedule();
