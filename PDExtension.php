@@ -9,6 +9,26 @@ class PDExtension extends ParsedownExtra
 	{
 		$markup = $text;
 
+		//handle input keyword
+		$maxInputRecurs = 4;
+		for($depth=0; $depth<$maxInputRecurs; $depth++)
+		{
+			$inputRegex = '/\\\input\((.*)\)\n/';
+			preg_match($inputRegex, $text, $matches);
+			$splitParts = preg_split($inputRegex, $text);
+			$matchId = 0;
+			$inputMarkup = '';
+			for($splitId=0; $splitId<count($splitParts); $splitId+=2)
+			{
+				$inputContent = file_get_contents($matches[$splitId+1]);
+				$first = $splitParts[$splitId];
+				$second = $splitParts[$splitId+1];
+				$inputMarkup .= $first. $inputContent . $second;
+			}
+			$markup = $inputMarkup;
+		}
+
+
 		//get latex markers
 		$markup = preg_replace('/\\\\\(/', '\\\\\\(', $markup);
 		$markup = preg_replace('/\\\\\)/', '\\\\\\)', $markup);
