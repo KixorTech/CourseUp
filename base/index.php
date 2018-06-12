@@ -9,6 +9,7 @@ micah@kixortech.com
 See http://courseup.org for license information.
 */
 
+$resource = '';
 if(isset($_GET['resource'])) {
 	$resource = $_GET['resource'];
 }
