@@ -174,6 +174,12 @@ function getWebRoot_noRootResourceHandling_deprecated()
 		if($scriptSysPath == $thisSysPath)
 			return $scriptWebPath;
 	}
+
+	//add a trailing slash
+	$hasTrailingSlash = substr($scriptWebPath, -1) != '/';
+	if(!$hasTrailingSlash)
+		$scriptWebPath = $scriptWebPath . '/';
+
 	return $scriptWebPath;
 }
 
