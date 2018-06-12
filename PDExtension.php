@@ -1,5 +1,5 @@
 <?
-#require_once('Parsedown.php');
+require_once('Parsedown.php');
 require_once('ParsedownExtra.php');
 
 
