@@ -22,7 +22,7 @@ if($publicErrorMessages) {
 
 include('header.htm');
 
-if( $isCourseRoot) {
+if( false ) { //disable for now
 	print '<p><h3>';
 	print $config['CourseTitle'];
 	print '</h3></p>';
