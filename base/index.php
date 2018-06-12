@@ -9,13 +9,8 @@ micah@kixortech.com
 See http://courseup.org for license information.
 */
 
-$isCourseRoot = TRUE;
-if(isset($resouce))
-	$isCourseRoot = $resource == '';
-
 if(isset($_GET['resource'])) {
 	$resource = $_GET['resource'];
-	$isCourseRoot = $resource == '';
 }
 
 //include '../CourseUp/Parsedown.php';
