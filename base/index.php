@@ -22,21 +22,30 @@ if($publicErrorMessages) {
 
 include('header.htm');
 
-if( false ) { //disable for now
-	print '<p><h3>';
-	print $config['CourseTitle'];
-	print '</h3></p>';
-	print '<div class="scheduleTable">';
-	$schedule = getHtmlSchedule();
-	print $schedule;
-	print '</div>';
-}
-else {
-	$contentPath = $resource . '/content.md';
+{
+	$contentPath = $resource . 'content.md';
 	$f = file_get_contents($contentPath);
-	$p = PDExtension::instance()->text($f); 
-	//$p = ParseDown::instance()->text($f); 
-	echo $p;
+	$isScheduleDoc = false;
+	$calendarKeyword = '/^\\\calendar\n/';
+	$isScheduleDoc = preg_match($calendarKeyword, $f);
+
+	if($isScheduleDoc)
+	{
+		$f = preg_replace($calendarKeyword, '', $f);
+		print '<p><h3>';
+		print $config['CourseTitle'];
+		print '</h3></p>';
+		print '<div class="scheduleTable">';
+		$schedule = getFileHtmlSchedule($f);
+		print $schedule;
+		print '</div>';
+	}
+	else
+	{
+		$p = PDExtension::instance()->text($f);
+		//$p = ParseDown::instance()->text($f);
+		echo $p;
+	}
 }
 
 include('footer.htm');
