@@ -39,7 +39,9 @@ class PDExtension extends ParsedownExtra
 		$markup = preg_replace('/\\\\\)/', '\\\\\\)', $markup);
 
 		//replace webroot keyword
-		$webRootPath = getWebRoot();
+		$webRootPath = '';
+		if(function_exists('getWebRoot'))
+			$webRootPath = getWebRoot();
 		$markup = preg_replace('/printWebRoot\(\)/', $webRootPath, $markup);
 
 		//replace pagebreak keyword
