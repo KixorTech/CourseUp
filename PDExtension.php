@@ -15,6 +15,11 @@ class PDExtension extends ParsedownExtra
 		{
 			$inputRegex = '/\\\input\((.*)\)\n/';
 			preg_match($inputRegex, $text, $matches);
+
+			$noInputCommands = count($matches) < 2;
+			if($noInputCommands)
+				break;
+
 			$splitParts = preg_split($inputRegex, $text);
 			$matchId = 0;
 			$inputMarkup = '';
