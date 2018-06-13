@@ -147,6 +147,12 @@ function getURI()
 function getWebRoot()
 {
 	$rootPath = dirname($_SERVER['PHP_SELF']);
+
+	//remove trailing slash
+	$hasTrailingSlash = substr($rootPath, -1) == '/';
+	if($hasTrailingSlash)
+		$rootPath = rtrim($rootPath, '/');
+
 	return $rootPath;
 }
 
