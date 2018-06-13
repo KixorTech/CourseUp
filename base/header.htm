@@ -27,30 +27,38 @@ require_once('CourseUp/common.php');
 
 <? requireLatex(); ?>
 
-<div id="header">
 <?
-$menuLinks = $config['MenuLinks'];
-for($i=0; $i<count($menuLinks); $i++) {
-	print '<a href="';
-	printRoot();
-	//print '/';
-	print $menuLinks[$i]['MenuLinkURL'];
-	print '">';
-	print $menuLinks[$i]['MenuLinkName'];
-	print '</a>';
-	print "\n";
+$menuLinks = null;
+$menuLinkCount = 0;
+if(isset($config['MenuLinks'])) {
+  $menuLinks = $config['MenuLinks'];
+  $menuHasEntries = $menuLinks != '';
+  if($menuHasEntries)
+    $menuLinkCount = count($menuLinks);
+}
+$hasMenuItems = $menuLinkCount > 0 || $online;
+if($hasMenuItems) {
+  print '<div id="header">';
+  for($i=0; $i<$menuLinkCount; $i++) {
+    print '<a href="';
+    printRoot();
+    //print '/';
+    print $menuLinks[$i]['MenuLinkURL'];
+    print '">';
+    print $menuLinks[$i]['MenuLinkName'];
+    print '</a>';
+    print "\n";
+  }
+
+  if($online)
+    if($session->isValid())
+      print '<a href="' .getWebRoot(). '/logout/">Logout ' .$session->getUsername(). '</a>';
+    else
+      print '<a href="' .getWebRoot(). '/login/">Login</a>';
+  print '<div style="clear:both;"></div>';
+  print '</div>';
 }
 ?>
-
-<?
-if($online)
-if($session->isValid())
-	print '<a href="' .getWebRoot(). '/logout/">Logout ' .$session->getUsername(). '</a>';
-else
-	print '<a href="' .getWebRoot(). '/login/">Login</a>';
-?>
-<div style="clear:both;"></div>
-</div>
 
 <?
 if($online)
