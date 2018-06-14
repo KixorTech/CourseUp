@@ -204,6 +204,33 @@ function getFileRoot()
 	return $f;
 }
 
+function getRelativeDocRoot()
+{
+	$uriPath = $_SERVER['REQUEST_URI'];
+	$fileInURI = substr($uriPath, -1) != '/';
+	if($fileInURI) $uriPath = dirname($uriPath);
+	$uriParts = explode('/', $uriPath);
+
+	$selfPath = dirname($_SERVER['PHP_SELF']);
+	$selfParts = explode('/', $selfPath);
+
+	$pos = 0;
+	while(
+		$pos < count($selfParts) &&
+		$pos < count($uriParts) &&
+		$selfParts[$pos] == $uriParts[$pos]
+		)
+		$pos++;
+
+	$docPath = '';
+	for( ; $pos < count($uriParts); $pos++)
+		$docPath = $docPath . '/' . $uriParts[$pos];
+
+	$docPath = ltrim($docPath, '/');
+
+	return $docPath;
+}
+
 function printRoot()
 { printWebRoot(); }
 
