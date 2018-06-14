@@ -24,27 +24,27 @@ class PDExtension extends ParsedownExtra
 		for($depth=0; $depth<$maxInputRecurs; $depth++)
 		{
 			$inputRegex = '/\\\input\((.*)\)\n/';
-			preg_match($inputRegex, $text, $matches);
+			preg_match_all($inputRegex, $text, $matches);
 
-			$noInputCommands = count($matches) < 2;
+			$noInputCommands = count($matches[1]) < 1;
 			if($noInputCommands)
 				break;
 
 			$splitParts = preg_split($inputRegex, $text);
 			$matchId = 0;
 			$inputMarkup = '';
-			for($splitId=0; $splitId<count($splitParts); $splitId+=2)
+			for($matchId=0; $matchId<count($matches[1]); $matchId++)
 			{
 				$inputContent = '';
-				if(file_exists($matches[$splitId+1]))
-					$inputContent = file_get_contents($matches[$splitId+1]);
+				if(file_exists($matches[1][$matchId]))
+					$inputContent = file_get_contents($matches[1][$matchId]);
 				else //TODO print an error to the log!
 					;
-				$first = $splitParts[$splitId];
-				$second = $splitParts[$splitId+1];
-				$inputMarkup .= $first. $inputContent . $second;
+				$first = $splitParts[$matchId];
+				$inputMarkup .= $first . $inputContent;
 			}
-			$markup = $inputMarkup;
+			$lastPart = $splitParts[$matchId];
+			$markup = $inputMarkup . $lastPart;
 		}
 
 
