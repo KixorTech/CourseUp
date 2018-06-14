@@ -24,13 +24,13 @@ class PDExtension extends ParsedownExtra
 		for($depth=0; $depth<$maxInputRecurs; $depth++)
 		{
 			$inputRegex = '/\\\input\((.*)\)\n/';
-			preg_match_all($inputRegex, $text, $matches);
+			preg_match_all($inputRegex, $markup, $matches);
 
 			$noInputCommands = count($matches[1]) < 1;
 			if($noInputCommands)
 				break;
 
-			$splitParts = preg_split($inputRegex, $text);
+			$splitParts = preg_split($inputRegex, $markup);
 			$matchId = 0;
 			$inputMarkup = '';
 			for($matchId=0; $matchId<count($matches[1]); $matchId++)
