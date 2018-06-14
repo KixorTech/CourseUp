@@ -1,0 +1,5 @@
+
+- _This is double_
+\input(input.txt)
+- **double input text**
+

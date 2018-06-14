@@ -1,0 +1,5 @@
+
+- _This is recurs_
+\input(inputRecurs.txt)
+- **recurs input text**
+
