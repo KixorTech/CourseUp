@@ -17,6 +17,7 @@ class PDExtension extends ParsedownExtra
 {
 	function text($text)
 	{
+		global $publicErrorMessages;
 		$markup = $text;
 
 		//handle input keyword
@@ -38,8 +39,8 @@ class PDExtension extends ParsedownExtra
 				$inputContent = '';
 				if(file_exists($matches[1][$matchId]))
 					$inputContent = file_get_contents($matches[1][$matchId]);
-				else //TODO print an error to the log!
-					;
+				else //TODO log this
+					if($publicErrorMessages) print '<b>Error:</b> Could not read "'.$filePath.'".<br>';
 				$first = $splitParts[$matchId];
 				$inputMarkup .= $first . $inputContent;
 			}
