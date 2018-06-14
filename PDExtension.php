@@ -35,7 +35,11 @@ class PDExtension extends ParsedownExtra
 			$inputMarkup = '';
 			for($splitId=0; $splitId<count($splitParts); $splitId+=2)
 			{
-				$inputContent = file_get_contents($matches[$splitId+1]);
+				$inputContent = '';
+				if(file_exists($matches[$splitId+1]))
+					$inputContent = file_get_contents($matches[$splitId+1]);
+				else //TODO print an error to the log!
+					;
 				$first = $splitParts[$splitId];
 				$second = $splitParts[$splitId+1];
 				$inputMarkup .= $first. $inputContent . $second;
