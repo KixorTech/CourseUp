@@ -37,8 +37,12 @@ class PDExtension extends ParsedownExtra
 			for($matchId=0; $matchId<count($matches[1]); $matchId++)
 			{
 				$inputContent = '';
-				if(file_exists($matches[1][$matchId]))
-					$inputContent = file_get_contents($matches[1][$matchId]);
+				$filePath = $matches[1][$matchId];
+				$noLeadingSlash = substr($filePath, 0, 1) != '/';
+				if($noLeadingSlash && function_exists('getRelativeDocRoot'))
+					$filePath = getRelativeDocRoot() . $filePath;
+				if(file_exists($filePath))
+					$inputContent = file_get_contents($filePath);
 				else //TODO log this
 					if($publicErrorMessages) print '<b>Error:</b> Could not read "'.$filePath.'".<br>';
 				$first = $splitParts[$matchId];
