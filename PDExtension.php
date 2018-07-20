@@ -20,6 +20,10 @@ class PDExtension extends ParsedownExtra
 		global $publicErrorMessages;
 		$markup = $text;
 
+		$webRootPath = '';
+		if(function_exists('getWebRoot'))
+			$webRootPath = getWebRoot();
+
 		//handle input keyword
 		$maxInputRecurs = 4;
 		for($depth=0; $depth<$maxInputRecurs; $depth++)
@@ -58,9 +62,6 @@ class PDExtension extends ParsedownExtra
 		$markup = preg_replace('/\\\\\)/', '\\\\\\)', $markup);
 
 		//replace webroot keyword
-		$webRootPath = '';
-		if(function_exists('getWebRoot'))
-			$webRootPath = getWebRoot();
 		$markup = preg_replace('/printWebRoot\(\)/', $webRootPath, $markup);
 
 		//replace pagebreak keyword
@@ -72,6 +73,38 @@ class PDExtension extends ParsedownExtra
 		$endCenteringTags = '</div>';
 		//$markup = preg_replace('/\$beginCentering\$/', $beginCenteringTags, $markup);
 		//$markup = preg_replace('/\$endCentering\$/', $endCenteringTags, $markup);
+
+		$presentRegex = '/\\\presentation\n/';
+		$count = preg_match($presentRegex, $markup, $matches);
+		if($count == 1) {
+			//$presentStylePath = getRelativeDocRoot . "/include/present.css";
+			$presentStyle = "<style>\n
+#content {
+position: absolute;
+overflow: hidden;
+margin: 0;
+width: 100%;
+height: 100%;
+left: 0;
+top:0;
+font-size: 3vh;
+}
+li { margin-left: 0.2em; }
+h3 {
+font-size: 7vh;
+margin: 0;
+padding: 0.5em;
+color: white;
+background-color: black;
+}
+</style>\n";
+			$presentScript = 
+				"<script language=\"javascript\" src=\"" . $webRootPath . "/include/present.js\"></script>\n";
+			$presentButton = "<button id=\"startPresentationButton\">&#9658;</button>\n";
+			//$presentIncludes =  $presentStyle . $presentScript;
+			$presentIncludes =  $presentButton . $presentScript;
+		$markup = preg_replace($presentRegex, $presentIncludes, $markup);
+		}
 
 		//these should be replaced with login info in online mode
 		//replace namebox keyword
