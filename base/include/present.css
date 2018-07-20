@@ -1,0 +1,23 @@
+#content {
+position: absolute;
+overflow: hidden;
+margin: 0;
+width: 100%;
+height: 100%;
+left: 0;
+top:0;
+font-size: 3vh;
+}
+#startPresentationButton {
+display: none;
+}
+h3 {
+font-size: 7vh;
+margin: 0;
+padding: 0.5em;
+color: white;
+background-color: black;
+}
+li {
+margin-left: 0.2em;
+}
