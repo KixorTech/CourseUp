@@ -171,3 +171,8 @@ top: 1px;
 .boxSpace { width:5em; }
 .dateSpace { width:8em; }
 
+
+#presentStartButton span{
+font-size: 2em;
+}
+

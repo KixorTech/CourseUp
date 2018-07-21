@@ -11,7 +11,7 @@ function waitRestructure() {
 
 function setupPresentation()
 {
-	var b = document.getElementById('startPresentationButton');
+	var b = document.getElementById('presentStartButton');
 	b.onclick = startPresentation;
 }
 

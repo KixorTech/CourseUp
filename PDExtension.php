@@ -100,7 +100,7 @@ background-color: black;
 </style>\n";
 			$presentScript = 
 				"<script language=\"javascript\" src=\"" . $webRootPath . "/include/present.js\"></script>\n";
-			$presentButton = "<button id=\"startPresentationButton\">&#9658;</button>\n";
+			$presentButton = "<button id=\"presentStartButton\"><span class=\"presentStartIcon\">&#9658;</span><br />Start presentation</button>\n";
 			//$presentIncludes =  $presentStyle . $presentScript;
 			$presentIncludes =  $presentButton . $presentScript;
 		$markup = preg_replace($presentRegex, $presentIncludes, $markup);
