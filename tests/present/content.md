@@ -10,11 +10,14 @@ micah@kixortech.com
 See http://courseup.org for license information.
 -->
 
+---
 
-###Start
+#Start
 - This is the first part of the presentation
 
-###Next page
+---
+
+#Next page
 - More details follow
 	- as you might imagine
 - The points are nearly endless
@@ -23,5 +26,7 @@ See http://courseup.org for license information.
 - More, more, more
 - More too
 
-###Ending
+---
+
+#Ending
 - A robust example
