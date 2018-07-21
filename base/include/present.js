@@ -6,7 +6,7 @@ var currentSlide = 0;
 var slides;
 function waitRestructure() {
 	//TODO figure out why the DOM load events fire without DOM being done
-	setupPresentation();
+	setTimeout(setupPresentation, 20);
 }
 
 function setupPresentation()
