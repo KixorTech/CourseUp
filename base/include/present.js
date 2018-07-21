@@ -6,7 +6,11 @@ var currentSlide = 0;
 var slides;
 function waitRestructure() {
 	//TODO figure out why the DOM load events fire without DOM being done
-	//setTimeout(startPresentation, 20);
+	setupPresentation();
+}
+
+function setupPresentation()
+{
 	var b = document.getElementById('startPresentationButton');
 	b.onclick = startPresentation;
 }
@@ -64,6 +68,8 @@ function startPresentation()
 	h = h.replace('"stylesheet alternate"', '"stylesheet"');
 	slides = h.split("<h3>");
 	//console.log(slides);
+	if(currentSlide < 0 || currentSlide > slideCount())
+		currentSlide = 0;
 	updateSlide();
 }
 
@@ -78,5 +84,6 @@ function endPresentation()
 	n = n.replace('"stylesheet"', '"stylesheet alternate"');
 	//console.log(n);
 	c.innerHTML = n;
+	setupPresentation();
 }
 
