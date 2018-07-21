@@ -6,13 +6,12 @@ width: 100%;
 height: 100%;
 left: 0;
 top:0;
-font-size: 3vh;
+font-size: 4vh;
 }
 #presentStartButton {
 display: none;
 }
-h3 {
-font-size: 7vh;
+h1 {
 margin: 0;
 padding: 0.5em;
 color: white;
