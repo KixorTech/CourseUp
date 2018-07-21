@@ -58,7 +58,7 @@ function navPrev(e)
 function updateSlide()
 {
 	var c = document.getElementById('content');
-	c.innerHTML = slides[0] + "<h3>" + slides[currentSlide+1];
+	c.innerHTML = slides[0] + slides[currentSlide+1];
 }
 
 function startPresentation()
@@ -66,7 +66,7 @@ function startPresentation()
 	var c = document.getElementById('content');
 	var h = c.innerHTML;
 	h = h.replace('"stylesheet alternate"', '"stylesheet"');
-	slides = h.split("<h3>");
+	slides = h.split("<hr>");
 	//console.log(slides);
 	if(currentSlide < 0 || currentSlide > slideCount())
 		currentSlide = 0;
@@ -79,7 +79,7 @@ function endPresentation()
 	var n = '';
 	//console.log(slides);
 	for(var i=0; i<slides.length-1; i++)
-		n += slides[i] + '<h3>';
+		n += slides[i] + '<hr>';
 	n += slides[slides.length-1];
 	n = n.replace('"stylesheet"', '"stylesheet alternate"');
 	//console.log(n);
