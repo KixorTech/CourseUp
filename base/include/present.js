@@ -18,11 +18,12 @@ function setupPresentation()
 function handleKeys(e)
 {
 	if(!e) e=event;
+	//console.log(e.key + ':' + e.keyCode + ' ' + e.code + ':'+ e.charCode);
 	if(e.keyCode == 27) endPresentation();
 	if(e.keyCode == 116) startPresentation();
 	if(e.keyCode == 37) navPrev(e);
 	if(e.keyCode == 39) navNext(e);
-	if(e.keyCode == ' ') navNext(e);
+	if(e.charCode == 32) navNext(e);
 }
 
 function slideCount()
