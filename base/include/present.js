@@ -11,6 +11,33 @@ function setupPresentation()
 	b.onclick = startPresentation;
 }
 
+function handleTouch(e)
+{
+	if(!e) e=event;
+
+	var w = window, d = document, m = d.documentElement, g = d.getElementsByTagName('body')[0];
+	var cx = w.innerWidth || m.clientWidth || g.clientWidth;
+
+	//var t = e.touches[0];
+	var t = e.changedTouches[0];
+	var tx = t.clientX;
+
+	var horzPercent = tx / cx;
+	//console.log(tx +'/'+ cx);
+	//alert(tx +'/'+ cx +'='+horzPercent);
+	var validRange = 0.20;
+	if(horzPercent < validRange) {
+		navPrev(e);
+		e.preventDefault();
+		return false;
+	}
+	if(horzPercent > 1-validRange) {
+		navNext(e);
+		e.preventDefault();
+		return false;
+	}
+}
+
 function handleKeys(e)
 {
 	if(!e) e=event;
@@ -62,6 +89,7 @@ function updateSlide()
 function startPresentation()
 {
 	document.addEventListener("keydown", handleKeys);
+	document.addEventListener("touchstart", handleTouch);
 
 	var c = document.getElementById('content');
 	var h = c.innerHTML;
@@ -76,6 +104,7 @@ function startPresentation()
 function endPresentation()
 {
 	document.removeEventListener("keydown", handleKeys);
+	document.removeEventListener("touchstart", handleTouch);
 
 	var c = document.getElementById('content');
 	var n = '';
