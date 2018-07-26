@@ -1,5 +1,3 @@
-\presentation
-<link id="presentStyle" rel="stylesheet alternate" href="/include/present.css" />
 <!--
 This file is part of the CourseUp project.
 http://courseup.org
@@ -9,6 +7,9 @@ micah@kixortech.com
 
 See http://courseup.org for license information.
 -->
+
+\presentation
+<link id="presentStyle" rel="stylesheet alternate" href="../../../include/present.css" />
 
 ---
 
