@@ -1,13 +1,9 @@
 //window.onDOMContentLoaded = restructurePresentation();
-document.onload = waitRestructure();
-document.addEventListener("keypress", handleKeys, false);
+//TODO figure out why the DOM load events fire without DOM being done
+document.onload = setTimeout(setupPresentation, 20);
 
 var currentSlide = 0;
 var slides;
-function waitRestructure() {
-	//TODO figure out why the DOM load events fire without DOM being done
-	setTimeout(setupPresentation, 20);
-}
 
 function setupPresentation()
 {
@@ -20,10 +16,11 @@ function handleKeys(e)
 	if(!e) e=event;
 	//console.log(e.key + ':' + e.keyCode + ' ' + e.code + ':'+ e.charCode);
 	if(e.keyCode == 27) endPresentation();
-	if(e.keyCode == 116) startPresentation();
-	if(e.keyCode == 37) navPrev(e);
-	if(e.keyCode == 39) navNext(e);
-	if(e.charCode == 32) navNext(e);
+	else if(e.keyCode == 116) startPresentation();
+	else if(e.keyCode == 37) navPrev(e);
+	else if(e.keyCode == 8) navPrev(e);
+	else if(e.keyCode == 39) navNext(e);
+	else if(e.keyCode == 32 || e.charCode == 32) navNext(e);
 }
 
 function slideCount()
@@ -64,6 +61,8 @@ function updateSlide()
 
 function startPresentation()
 {
+	document.addEventListener("keydown", handleKeys);
+
 	var c = document.getElementById('content');
 	var h = c.innerHTML;
 	h = h.replace('"stylesheet alternate"', '"stylesheet"');
@@ -76,6 +75,8 @@ function startPresentation()
 
 function endPresentation()
 {
+	document.removeEventListener("keydown", handleKeys);
+
 	var c = document.getElementById('content');
 	var n = '';
 	//console.log(slides);
