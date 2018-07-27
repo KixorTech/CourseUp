@@ -15,15 +15,8 @@ require_once('ParsedownExtra.php');
 
 class PDExtension extends ParsedownExtra
 {
-	function text($text)
+	function parseInput($markup)
 	{
-		global $publicErrorMessages;
-		$markup = $text;
-
-		$webRootPath = '';
-		if(function_exists('getWebRoot'))
-			$webRootPath = getWebRoot();
-
 		//handle input keyword
 		$maxInputRecurs = 4;
 		for($depth=0; $depth<$maxInputRecurs; $depth++)
@@ -55,6 +48,21 @@ class PDExtension extends ParsedownExtra
 			$lastPart = $splitParts[$matchId];
 			$markup = $inputMarkup . $lastPart;
 		}
+
+		return $markup;
+
+	}
+
+	function text($text)
+	{
+		global $publicErrorMessages;
+		$markup = $text;
+
+		$webRootPath = '';
+		if(function_exists('getWebRoot'))
+			$webRootPath = getWebRoot();
+
+		$markup = $this->parseInput($markup);
 
 
 		//get latex markers
