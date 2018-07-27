@@ -260,6 +260,8 @@ function getFileHtmlSchedule($fileContents)
 	date_default_timezone_set('UTC');
 
 	$f = $fileContents;
+	$f = PDExtension::instance()->parseInput($f); 
+
 	$f = removeCommentLines($f);
 	$sessions = explode('Session:', $f);
 
