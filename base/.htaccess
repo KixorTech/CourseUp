@@ -17,6 +17,10 @@ RedirectMatch 404 \.subversion
 #if content.md exists at request path
 # and the uri does not have resource= in it
 # then add ?resource=NAME to uri
+RewriteCond %{REQUEST_FILENAME}index.md -f
+RewriteCond %{REQUEST_URI} !/.*resource=.*/
+RewriteRule ^(.*) index.php?resource=$1 [L]
+
 RewriteCond %{REQUEST_FILENAME}content.md -f
 RewriteCond %{REQUEST_URI} !/.*resource=.*/
 RewriteRule ^(.*) index.php?resource=$1 [L]

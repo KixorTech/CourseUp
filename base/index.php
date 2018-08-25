@@ -30,7 +30,14 @@ include('header.htm');
 
 {
 	$contentPath = $resource . 'content.md';
-	$f = file_get_contents($contentPath);
+	$indexPath = $resource . 'index.md';
+
+	$f = '';
+	if(file_exists($indexPath))
+		$f = file_get_contents($indexPath);
+	else if(file_exists($contentPath))
+		$f = file_get_contents($contentPath);
+
 	$isScheduleDoc = false;
 	$calendarKeyword = '/^\\\calendar\n/';
 	$isScheduleDoc = preg_match($calendarKeyword, $f);
