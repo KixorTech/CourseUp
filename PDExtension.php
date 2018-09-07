@@ -75,6 +75,7 @@ class PDExtension extends ParsedownExtra
 		//replace pagebreak keyword
 		$pagebreakTags = '<div class="pagebreak"></div>';
 		$markup = preg_replace('/\$pagebreak\$/', $pagebreakTags, $markup);
+		$markup = preg_replace('/\\\pagebreak/', $pagebreakTags, $markup);
 
 		//centering
 		$beginCenteringTags = '<div class="beginCentering" style="text-align:center">';
