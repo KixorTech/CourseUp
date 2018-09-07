@@ -53,6 +53,45 @@ class PDExtension extends ParsedownExtra
 
 	}
 
+	function parseAnswerBox($markup)
+	{
+		/*
+		$answerboxCD = '/\\\\answerbox\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
+		$count = preg_match($answerboxCD, $markup, $matches);
+		if($count > 0) {
+			$answerboxTag = '<div style="width:'.$matches[1].'; height:'.$matches[2].';"></div>';
+			$markup = preg_replace($answerboxCD, $answerboxTag, $markup);
+		}
+		 */
+
+		//handle input keyword
+		$inputRegex = '/\\\textInput\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
+		//$inputRegex = '/\\\input\((.*)\)\n/';
+		preg_match_all($inputRegex, $markup, $matches);
+
+		$noMatches = count($matches[1]) < 1;
+		if($noMatches)
+			return $markup;
+
+		$splitParts = preg_split($inputRegex, $markup);
+		$matchId = 0;
+		$newMarkup = '';
+		for($matchId=0; $matchId<count($matches[1]); $matchId++)
+		{
+			$backRef1 = $matches[1][$matchId];
+			$backRef2 = $matches[2][$matchId];
+			$beforeText = $splitParts[$matchId];
+			$replaceContent = '<div style="width:'.$backRef1.'em; height:'.$backRef2.'em;"></div>';
+			//TODO add the interactive version...
+			$newMarkup .= $beforeText . $replaceContent;
+		}
+		$afterText = $splitParts[$matchId];
+		$markup = $newMarkup . $afterText;
+
+	return $markup;
+
+	}
+
 	function text($text)
 	{
 		global $publicErrorMessages;
@@ -174,14 +213,7 @@ background-color: black;
 
 
 		//answer box
-		/*
-		$answerboxCD = '/\\\\answerbox\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
-		$count = preg_match($answerboxCD, $markup, $matches);
-		if($count > 0) {
-			$answerboxTag = '<div style="width:'.$matches[1].'; height:'.$matches[2].';"></div>';
-			$markup = preg_replace($answerboxCD, $answerboxTag, $markup);
-		}
-		 */
+		$markup = $this->parseAnswerBox($markup);
 
 		$markup = parent::text($markup);
 		return $markup;
