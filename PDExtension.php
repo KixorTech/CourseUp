@@ -166,10 +166,11 @@ background-color: black;
 		$dateboxTags = 'Date: <span class="datebox" style="'.$boxStyle.'8em;"></span>';
 		$markup = preg_replace('/\\\\datebox/', $dateboxTags, $markup);
 
+		$showSolution = true;
 		//handle simple solution bounds
 		$beginSolTag = '\beginSolution';
 		$endSolTag = '\endSolution';
-		if(isset($showSolution)) {
+		if(isset($showSolution) && $showSolution) {
 			$markup = str_replace($beginSolTag, '', $markup);
 			$markup = str_replace($endSolTag, '', $markup);
 		}
@@ -193,19 +194,19 @@ background-color: black;
 			$beginPos = strpos($markup, $beginSolTag);
 			$elsePos = strpos($markup, $elseSolTag, $beginPos);
 			$endPos = strpos($markup, $endSolTag, $beginPos);
+			if($endPos == FAlSE)
+				break;
 
-			$trueString = substr($markup, $beginPos+$beginSize, $endPos-$beginPos+$beginSize);
+			$trueString = substr($markup, $beginPos+$beginSize, $endPos-$beginPos-$beginSize);
 			$falseString = '';
 			if($elsePos != FALSE && $elsePos < $endPos) {
-				$trueString = substr($markup, $beginPos+$beginSize, $elsePos-$beginPos+$beginSize);
-				$falseString = substr($markup, $elsePos+$elseSize, $endPos-$elsePos+$elseSize);
+				$trueString = substr($markup, $beginPos+$beginSize, $elsePos-$beginPos-$beginSize);
+				$falseString = substr($markup, $elsePos+$elseSize, $endPos-$elsePos-$elseSize);
 			}
 
 			$beforeCondition = substr($markup, 0, $beginPos);
 			$afterCondition = substr($markup, $endPos+$endSize);
-			$trueString = 'true';
-			$falseString = 'false';
-			if(isset($showSolution))
+			if(isset($showSolution) && $showSolution)
 				$markup = $beforeCondition . $trueString . $afterCondition;
 			else
 				$markup = $beforeCondition . $falseString . $afterCondition;
