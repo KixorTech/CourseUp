@@ -166,7 +166,13 @@ background-color: black;
 		$dateboxTags = 'Date: <span class="datebox" style="'.$boxStyle.'8em;"></span>';
 		$markup = preg_replace('/\\\\datebox/', $dateboxTags, $markup);
 
-		$showSolution = true;
+		//check if solutions are turned on
+		$showSolution = false;
+		$markup = preg_replace('/\\\solutiontrue/', "", $markup, -1, $solCount);
+		if($solCount > 0)
+			$showSolution = true;
+
+
 		//handle simple solution bounds
 		$beginSolTag = '\beginSolution';
 		$endSolTag = '\endSolution';
