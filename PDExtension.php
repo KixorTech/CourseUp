@@ -117,10 +117,10 @@ class PDExtension extends ParsedownExtra
 		$markup = preg_replace('/\\\pagebreak/', $pagebreakTags, $markup);
 
 		//centering
-		$beginCenteringTags = '<div class="beginCentering" style="text-align:center">';
+		$beginCenteringTags = '<div markdown="1" class="beginCentering" style="text-align:center">';
 		$endCenteringTags = '</div>';
-		//$markup = preg_replace('/\$beginCentering\$/', $beginCenteringTags, $markup);
-		//$markup = preg_replace('/\$endCentering\$/', $endCenteringTags, $markup);
+		$markup = preg_replace('/\\\begin\(centering\)/', $beginCenteringTags, $markup);
+		$markup = preg_replace('/\\\end\(centering\)/', $endCenteringTags, $markup);
 
 		$presentRegex = '/\\\presentation\n/';
 		$count = preg_match($presentRegex, $markup, $matches);
