@@ -15,6 +15,54 @@ require_once('ParsedownExtra.php');
 
 class PDExtension extends ParsedownExtra
 {
+	function __construct()
+	{
+		$this->BlockTypes['$'][] = 'LatexDisplayMode';
+	}
+
+	protected function blockLatexDisplayMode($line, $block)
+	{
+		if (preg_match('/\$\$/', $line['text'], $matches))
+		{
+			return array(
+				'char' => $line['text'][0],
+				'element' => array(
+					'text' => '$$',
+				),
+			);
+		}
+	}
+
+	protected function blockLatexDisplayModeContinue($line, $block)
+	{
+		if (isset($block['complete']))
+		{ return; }
+
+		if (isset($block['interrupted']))
+		{
+			$block['element']['text'] .= "\n";
+			unset($block['interrupted']);
+		}
+
+		if (preg_match('/\$\$/', $line['text']))
+		{
+			$block['element']['text'] = substr($block['element']['text'], 0) . '$$';
+			$block['complete'] = true;
+			return $block;
+		}
+
+		$block['element']['text'] .= "\n" . $line['body'];
+
+		return $block;
+	}
+
+	protected function blockLatexDisplayModeComplete($block)
+	{
+		return $block;
+	}
+
+
+
 	function parseInput($markup)
 	{
 		//handle input keyword
