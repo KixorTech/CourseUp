@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 This file is part of the CourseUp project.
 http://courseup.org
@@ -16,18 +16,18 @@ require_once('CourseUp/common.php');
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title><? print $config['CourseTitle']; ?></title>
+<title><?php print $config['CourseTitle']; ?></title>
 
-<link rel="stylesheet" type="text/css" href="<? printRoot(); ?>/include/screen.css" />
-<link rel="stylesheet" type="text/css" media="print" href="<? printRoot(); ?>/include/print.css" />
-<script src="<? printWebRoot() ?>/include/helpers.js" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php printRoot(); ?>/include/screen.css" />
+<link rel="stylesheet" type="text/css" media="print" href="<?php printRoot(); ?>/include/print.css" />
+<script src="<?php printWebRoot() ?>/include/helpers.js" language="javascript"></script>
 </head>
 
 <body>
 
-<? requireLatex(); ?>
+<?php requireLatex(); ?>
 
-<?
+<?php
 $menuLinks = null;
 $menuLinkCount = 0;
 if(isset($config['MenuLinks'])) {
@@ -60,7 +60,7 @@ if($hasMenuItems) {
 }
 ?>
 
-<?
+<?php
 if($online)
 	useMessage();
 ?>

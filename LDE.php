@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 This file is part of the CourseUp project.
 http://courseup.org
