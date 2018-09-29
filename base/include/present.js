@@ -91,6 +91,10 @@ function startPresentation()
 	document.addEventListener("keydown", handleKeys);
 	document.addEventListener("touchstart", handleTouch);
 
+	var b = document.getElementsByTagName('head')[0];
+	bi = b.innerText.replace('"stylesheet"', '"stylesheet alternate"');
+	b.innerHTML = bi;
+
 	var c = document.getElementById('content');
 	var h = c.innerHTML;
 	h = h.replace('"stylesheet alternate"', '"stylesheet"');
@@ -105,6 +109,10 @@ function endPresentation()
 {
 	document.removeEventListener("keydown", handleKeys);
 	document.removeEventListener("touchstart", handleTouch);
+
+	var b = document.getElementsByTagName('head')[0];
+	bi = b.innerText.replace('"stylesheet alternate"', '"stylesheet"');
+	b.innerHTML = bi;
 
 	var c = document.getElementById('content');
 	var n = '';
