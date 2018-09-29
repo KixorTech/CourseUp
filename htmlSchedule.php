@@ -18,7 +18,7 @@ $LastBeforeBreak = '';
 $FirstAfterBreak = '';
 $ClassOnWeekDays = '';
 $ShowPastSessions = 1;
-$ShowFutureSessions = 3;
+$ShowFutureSessions = 3000000;
 
 function getFile($path)
 {
