@@ -140,6 +140,41 @@ class PDExtension extends ParsedownExtra
 
 	}
 
+
+	function parseLikertScale($markup)
+	{
+		//handle keyword
+		$inputRegex = '/\\\likert\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
+		//$inputRegex = '/\\\input\((.*)\)\n/';
+		preg_match_all($inputRegex, $markup, $matches);
+
+		$noMatches = count($matches[1]) < 1;
+		if($noMatches)
+			return $markup;
+
+		$splitParts = preg_split($inputRegex, $markup);
+		$matchId = 0;
+		$newMarkup = '';
+		for($matchId=0; $matchId<count($matches[1]); $matchId++)
+		{
+			$backRef1 = $matches[1][$matchId];
+			$backRef2 = $matches[2][$matchId];
+			$beforeText = $splitParts[$matchId];
+			$replaceContent = '**';
+			for($i=$backRef1; $i<$backRef2; $i++) {
+				$replaceContent = $replaceContent . $i.' ..... ';
+			}
+			$replaceContent = $replaceContent . $backRef2.'**  ';
+			//TODO add the interactive version...
+			$newMarkup .= $beforeText . $replaceContent;
+		}
+		$afterText = $splitParts[$matchId];
+		$markup = $newMarkup . $afterText;
+
+	return $markup;
+
+	}
+
 	function text($text)
 	{
 		global $publicErrorMessages;
@@ -269,6 +304,9 @@ background-color: black;
 
 		//answer box
 		$markup = $this->parseAnswerBox($markup);
+
+		//likert
+		$markup = $this->parseLikertScale($markup);
 
 		$markup = parent::text($markup);
 		return $markup;
