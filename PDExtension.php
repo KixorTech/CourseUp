@@ -141,6 +141,37 @@ class PDExtension extends ParsedownExtra
 	}
 
 
+	function parseLineEntrySpace($markup)
+	{
+		//handle input keyword
+		$inputRegex = '/\\\lineInput\(\s*([0-9]*)\s*,\s*([0-9]*)\s*\)/';
+		//$inputRegex = '/\\\input\((.*)\)\n/';
+		preg_match_all($inputRegex, $markup, $matches);
+
+		$noMatches = count($matches[1]) < 1;
+		if($noMatches)
+			return $markup;
+
+		$splitParts = preg_split($inputRegex, $markup);
+		$matchId = 0;
+		$newMarkup = '';
+		for($matchId=0; $matchId<count($matches[1]); $matchId++)
+		{
+			$backRef1 = $matches[1][$matchId];
+			$backRef2 = $matches[2][$matchId];
+			$beforeText = $splitParts[$matchId];
+			$replaceContent = '<span style="border-bottom: 1px solid black; display: inline-block; width:'.$backRef1.'em; padding-top:'.$backRef2.'em;"></span>';
+			//TODO add the interactive version...
+			$newMarkup .= $beforeText . $replaceContent;
+		}
+		$afterText = $splitParts[$matchId];
+		$markup = $newMarkup . $afterText;
+
+	return $markup;
+
+	}
+
+
 	function parseLikertScale($markup)
 	{
 		//handle keyword
@@ -307,6 +338,9 @@ background-color: black;
 
 		//likert
 		$markup = $this->parseLikertScale($markup);
+
+		//lined entry space
+		$markup = $this->parseLineEntrySpace($markup);
 
 		$markup = parent::text($markup);
 		return $markup;
