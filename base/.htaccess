@@ -21,7 +21,7 @@ RewriteRule ^(.*)index.md $1
 RewriteCond %{REQUEST_URI} !/.*resource=.*/
 RewriteRule ^(.*)content.md $1
 
-#if content.md exists at request path
+#if content.md or index.md exists at request path
 # and the uri does not have resource= in it
 # then add ?resource=NAME to uri
 RewriteCond %{REQUEST_FILENAME}index.md -f
