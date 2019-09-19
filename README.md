@@ -1,0 +1,6 @@
+CourseUp
+--------
+
+Human readable courses
+
+
