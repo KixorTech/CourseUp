@@ -283,6 +283,7 @@ background-color: black;
 		//check if solutions are turned on
 		$showSolution = false;
 		$markup = preg_replace('/^\s*\\\solutiontrue\s*$/m', "\n", $markup, -1, $solCount);
+		$markup = preg_replace('/^\s*\\\solutionfalse\s*$/m', "\n", $markup);
 		if($solCount > 0)
 			$showSolution = true;
 
