@@ -153,6 +153,7 @@ function getWebRoot()
 	if($hasTrailingSlash)
 		$rootPath = rtrim($rootPath, '/');
 
+	$rootPath = trim($rootPath, '\\'); // do only if on windows (actually this is not good--find a universal way)
 	return $rootPath;
 }
 
