@@ -42,9 +42,9 @@ include('header.htm');
 		// print 'content f: ' . $f;
 	}
 
-	$isScheduleDoc = true;
-	$calendarKeyword = '/^\\\calendar\n/'; // match begin line, lots of whitespace, \calendar, whitespace, end of line
-	// $isScheduleDoc = preg_match($calendarKeyword, $f); // find better way to detect \calendar
+	$isScheduleDoc = false;
+	$calendarKeyword = '/^\\\\calendar\r|^\\\\calendar\n/'; // match begin line, lots of whitespace, \calendar, whitespace, end of line
+	$isScheduleDoc = preg_match($calendarKeyword, $f); // find better way to detect \calendar
 
 	if($isScheduleDoc)
 	{
