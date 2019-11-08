@@ -276,12 +276,12 @@ function getFileHtmlSchedule($fileContents)
 	$scheduleHtml .= '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle grid format</label>';
 	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 	$scheduleHtml .= '<input type="checkbox" id="toggleCalendarFormat" checked>';
-	$scheduleHtml .= "<div id=\"calendarFormat\">";
+	// $scheduleHtml .= "<div id=\"calendarFormat\">";
 
-	$calender2 = new \eu\freeplace\php\calendar\Calendar();
-	$calender2->draw();
+	// $calender2 = new \eu\freeplace\php\calendar\Calendar();
+	// $calender2->draw();
 
-	$scheduleHtml .= "</div>\n\n";
+	// $scheduleHtml .= "</div>\n\n";
 
 	$scheduleHtml .= '<script src="include/jquery.min.js"></script>';
 	$scheduleHtml .= '<script src="include/screen.js"></script>';
