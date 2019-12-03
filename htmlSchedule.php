@@ -271,10 +271,10 @@ function getFileHtmlSchedule($fileContents)
 	$itemsDue = Array();
 
 	//http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
-	$scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
+	$scheduleHtml .= '<input type="checkbox" id="pastSessionsCheckbox" checked>';
+	$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelA" onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
 	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
-	$scheduleHtml .= '<input type="checkbox" id="hidePastSessions" checked>';
-	$scheduleHtml .= "<div id=\"pastSessions\">\n\n";
+	$scheduleHtml .= "<div id=\"pastSessionContent\">\n\n";
 	$now = new DateTime();
 	$pastSessionTime = $now;
 	$futureSessionTime = $now;
@@ -296,6 +296,7 @@ function getFileHtmlSchedule($fileContents)
 			return $scheduleHtml;
 		if($currentDay > $pastSessionTime && !$pastSessionsDone) {
 			$scheduleHtml .= "</div>\n\n";
+	$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
 			$pastSessionsDone = TRUE;
 		}
 
