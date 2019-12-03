@@ -222,7 +222,7 @@ function isClassDay($date)
 	return FALSE;
 }
 
-function getSessionHtml($session, $dayCount, &$currentDay, &$itemsDue)
+function getSessionHtml($session, $dayCount, &$currentDay, &$weekCount, &$itemsDue)
 {
 	//$points = explode('Topic:', $session);
 	//$prep = explode('Prep:', $topic[1]);
@@ -233,7 +233,7 @@ function getSessionHtml($session, $dayCount, &$currentDay, &$itemsDue)
 
 
 	$row = '';
-	$row = $row . "\n**".$dayCount .': '.$currentDay->format('D M d'). "**\n";
+	$row = $row . "\n**".$dayCount .': '.$currentDay->format('D M d'). "** <span class=\"weekCount\">".$weekCount."</span>\n";
 	$row = $row . getBulletList($session, clone $currentDay, $itemsDue);
 
 	$currentDay = getNextClassDay($currentDay);
@@ -289,6 +289,7 @@ function getFileHtmlSchedule($fileContents)
 
 	#$daysInWeek = strlen($config['ClassOnWeekDays']);
 	$daysInWeek = count($ClassOnWeekDays);
+	$weekCount = 1;
 
 	for($i=1; $i<count($sessions); $i++)
 	{
@@ -299,11 +300,12 @@ function getFileHtmlSchedule($fileContents)
 			$pastSessionsDone = TRUE;
 		}
 
-		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $itemsDue);
+		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $weekCount, $itemsDue);
 
 		$endOfWeek =  $i > 0 && $i % $daysInWeek == 0;
 		if($endOfWeek) {
 			$sessionHtml = $sessionHtml . "\n-------\n";
+			$weekCount++;
 		}
 
 		$sessionHtml = PDExtension::instance()->text($sessionHtml); 
