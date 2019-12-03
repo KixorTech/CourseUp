@@ -216,6 +216,14 @@ function onBreak($date)
 	return FALSE;
 }
 
+function isLastDayBeforeBreak($date)
+{
+	global $LastBeforeBreak;
+	if($date->format('U') == $LastBeforeBreak->format('U'))
+		return TRUE;
+	return FALSE;
+}
+
 function isClassDay($date)
 {
 	global $ClassOnWeekDays;
@@ -312,6 +320,10 @@ function getFileHtmlSchedule($fileContents)
 		if($endOfWeek) {
 			$sessionHtml = $sessionHtml . "\n-------\n";
 			$weekCount++;
+		}
+
+		if(isLastDayBeforeBreak($currentDay)) {
+			$sessionHtml = $sessionHtml . "<span class=\"breakMark\">Break</span>\n\n-------\n-------\n";
 		}
 
 		$sessionHtml = PDExtension::instance()->text($sessionHtml); 
