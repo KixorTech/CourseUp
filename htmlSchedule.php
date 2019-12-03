@@ -37,7 +37,7 @@ function getFile($path)
    return $s;
 }
 
-function iterateToClassDay($currentDay, $direction)
+function getNextDay($currentDay, $direction=1)
 {
 	$oneDay = new DateInterval('P1D');
 	$nextDay = clone $currentDay;
@@ -45,10 +45,18 @@ function iterateToClassDay($currentDay, $direction)
 		$oneDay->invert = 1;
 	$nextDay->add($oneDay);
 
+	return $nextDay;
+
+}
+
+function iterateToClassDay($currentDay, $direction)
+{
+	$nextDay = getNextDay($currentDay, $direction);
+
 	//if current day is not class weekday
 	$numTries = 100;
 	for($i=0; $i<$numTries && (!isClassDay($nextDay) || onBreak($nextDay) ); $i++)
-		$nextDay->add($oneDay);
+		$nextDay = getNextDay($nextDay, $direction);
 
 	return $nextDay;
 }
@@ -236,8 +244,6 @@ function getSessionHtml($session, $dayCount, &$currentDay, &$weekCount, &$itemsD
 	$row = $row . "\n**".$dayCount .': '.$currentDay->format('D M d'). "** <span class=\"weekCount\">".$weekCount."</span>\n";
 	$row = $row . getBulletList($session, clone $currentDay, $itemsDue);
 
-	$currentDay = getNextClassDay($currentDay);
-
 	//TODO: replace this terrible hack with markdown
 	$row = $row . "\n-------\n";
 
@@ -312,6 +318,8 @@ function getFileHtmlSchedule($fileContents)
 		$scheduleHtml = $scheduleHtml . $sessionHtml;
 		for($j=0; $j<count($itemsDue); $j++)
 			$itemsDue[$j]->daysTillDue--;
+
+		$currentDay = getNextClassDay($currentDay);
 	}
 
 	return $scheduleHtml;
