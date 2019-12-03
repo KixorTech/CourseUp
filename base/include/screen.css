@@ -109,6 +109,16 @@ font-size: 40pt;
 color: #ccc;
 }
 
+.breakMark {
+padding: 1em 0 1em 0;
+margin: -1em 0 -1em 0;
+display: inline-block;
+width: 100%;
+text-align: center;
+background-color: #afa;
+font-weight: bold;
+}
+
 #header {
 background: #555;
 padding: 0em;
