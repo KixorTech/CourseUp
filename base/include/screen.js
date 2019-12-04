@@ -7,12 +7,14 @@ http://courseup.org
 
 
 $(document).ready(() => {
+	$("#calendarActual").hide();
+	
 	$("#toggleCalendarFormat").click(() => {
 		console.log("boi");
 		$("#pastSessions").hide();
 		$("#sessionToggleLabel").toggle();
 		$('#calendarActual').toggle();
-	})
+	});
 
 	$("#sessionToggleLabel").click(() => {
 		$('#calendarActual').hide();
