@@ -57,6 +57,8 @@ include('header.htm');
 		$schedule = getFileHtmlSchedule($f);
 		print $schedule;
 		print '</div>';
+		$calender2 = new \eu\freeplace\php\calendar\Calendar();
+		$calToAdd = $calender2->draw();
 	}
 	else
 	{
