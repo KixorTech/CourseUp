@@ -8,12 +8,10 @@ include_once './CalendarCalculations.php';
 
 /**
  * @author Elmar Dott
- * 
- * @editor me beech, Olivia
  */
 class Calendar {
 
-    private $months = array("January", "February", "March", "April", "Mai", "Juni",
+    private $months = array("Januar", "Februar", "M?rz", "April", "Mai", "Juni",
         "Juli", "August", "September", "Oktober", "November", "Dezember");
     private $days = array("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So");
     private $daysCountOfMonth = array("31", "28", "31", "30", "31", "30", "31",
@@ -51,9 +49,8 @@ class Calendar {
         $view->setCurrentDate($this->day, $this->month, $this->year);
         $view->setHolidays($this->holidays);
         $view->calculateRows($start, $end); //start, end
-        echo "<div id=\"calendarActual\">";
+
         echo $view->drawGrid();
-        echo "</div>";
     }
 
     private function setMonthName($month) {

@@ -15,6 +15,7 @@ $(document).ready(() => {
 	})
 
 	$("#sessionToggleLabel").click(() => {
+		$('#calendarActual').hide();
 		$("#pastSessions").toggle();
 	})
 })
