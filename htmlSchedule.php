@@ -23,18 +23,18 @@ $ShowFutureSessions = 3000000;
 function getFile($path)
 {
 	$f = fopen($path, 'r');
-   $s = '';
+	$s = '';
 
-   if( !$f )
-      return $s;
+	if( !$f )
+		return $s;
 
-   while( ($line = fgets($f)) )
-   {
-      $s = $s . $line;
-   }
+	while( ($line = fgets($f)) )
+	{
+		$s = $s . $line;
+	}
 
-   fclose($f);
-   return $s;
+	fclose($f);
+	return $s;
 }
 
 function getNextDay($currentDay, $direction=1)
