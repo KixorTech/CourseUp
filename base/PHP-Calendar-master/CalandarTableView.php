@@ -109,6 +109,9 @@ class CalandarTableView {
                     $space_cnt++;
                 } else if ($counter <= $end) {
                     $calendarGrid .= $counter;
+                    // if (3 <= rand(1,10)) {
+                        $calendarGrid .= "\nTODO: random task\n";
+                    // }
                     $counter++;
                 } else {
                     $calendarGrid .= "&nbsp;";

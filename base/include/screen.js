@@ -11,6 +11,7 @@ $(document).ready(() => {
 		console.log("boi");
 		$("#pastSessions").hide();
 		$("#sessionToggleLabel").toggle();
+		$('#calendarActual').toggle();
 	})
 
 	$("#sessionToggleLabel").click(() => {

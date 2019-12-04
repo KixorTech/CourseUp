@@ -272,21 +272,23 @@ function getFileHtmlSchedule($fileContents)
 	$scheduleHtml = '';
 	$itemsDue = Array();
 
+	$scheduleHtml .= '<script src="include/jquery.min.js"></script>';
+	$scheduleHtml .= '<script src="include/screen.js"></script>';
+
 	//http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
 	$scheduleHtml .= '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle grid format</label>';
 	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 	$scheduleHtml .= '<input type="checkbox" id="toggleCalendarFormat" checked>';
-	// $scheduleHtml .= "<div id=\"calendarFormat\">";
+	$scheduleHtml .= "<div id=\"calendarFormat\">\n\n";
 
-	// $calender2 = new \eu\freeplace\php\calendar\Calendar();
-	// $calender2->draw();
+	$scheduleHtml .= "testing";
+	$calender2 = new \eu\freeplace\php\calendar\Calendar();
+	$calToAdd = $calender2->draw();
+	$scheduleHtml .= $calToAdd;
 
-	// $scheduleHtml .= "</div>\n\n";
+	$scheduleHtml .= "</div>\n\n";
 
-	$scheduleHtml .= '<script src="include/jquery.min.js"></script>';
-	$scheduleHtml .= '<script src="include/screen.js"></script>';
 
-	
 	$scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
 	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 	$scheduleHtml .= '<input type="checkbox" id="hidePastSessions" checked>';
