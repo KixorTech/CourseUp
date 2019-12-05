@@ -310,15 +310,14 @@ function getFileHtmlSchedule($fileContents)
 		if($currentDay > $futureSessionTime)
 			return $scheduleHtml;
 
-		$firstDay = $i == 1;
-		$dontMakeButton = $firstDay && $currentDay > $pastSessionTime && !$pastSessionsDone;
+		$dontMakeButton = $currentDay > $pastSessionTime && $i <= $ShowPastSessions && !$pastSessionsDone;
 		if($dontMakeButton) {
 			$scheduleHtml .= "</div>\n\n";
 			$pastSessionsDone = TRUE;
 		}
 		else if($currentDay > $pastSessionTime && !$pastSessionsDone) {
 			$scheduleHtml .= "</div>\n\n";
-	$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
+			$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
 			$pastSessionsDone = TRUE;
 		}
 
