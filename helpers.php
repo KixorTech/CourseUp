@@ -149,10 +149,11 @@ function getWebRoot()
 	$rootPath = dirname($_SERVER['PHP_SELF']);
 
 	//remove trailing slash
-	$hasTrailingSlash = substr($rootPath, -1) == '/';
-	if($hasTrailingSlash)
-		$rootPath = rtrim($rootPath, '/');
+	// $hasTrailingSlash = substr($rootPath, -1) == '/';
+	// if($hasTrailingSlash)
+	$rootPath = rtrim($rootPath, '/');
 
+	$rootPath = trim($rootPath, '\\'); // this should work on any OS; only removes if the beginning is "\"
 	return $rootPath;
 }
 

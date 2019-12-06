@@ -11,6 +11,8 @@ See http://courseup.org for license information.
 
 #require_once('Parsedown.php');
 require_once('PDExtension.php');
+include './Calendar.php';
+
 
 //TODO move these to a default config setting
 $FirstQuarterDay = '';
@@ -289,6 +291,7 @@ function getFileHtmlSchedule($fileContents)
 	$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelA" onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
 	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 	$scheduleHtml .= "<div id=\"pastSessionContent\">\n\n";
+
 	$now = new DateTime();
 	$pastSessionTime = $now;
 	$futureSessionTime = $now;

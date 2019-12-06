@@ -206,6 +206,31 @@ background: linear-gradient(#fff, #ddd);
 }
 
 
+#toggleCalendarFormat ~ #calendarFormat {
+}
+
+#toggleCalendarFormat:checked ~ #calendarFormat {
+display:none;
+}
+
+#toggleCalendarFormat {
+display:none;
+}
+
+#formatToggleLabel {
+color: #666;
+border: 1px solid #aaa;
+padding: 2px;
+margin: 2px;
+}
+
+#formatToggleLabel:active {
+position: relative;
+left: 1px;
+top: 1px;
+}
+
+
 .textC1 { color: #66c2a5; }
 .textC2 { color: #fc8d62; }
 .textC3 { color: #8da0cb; }

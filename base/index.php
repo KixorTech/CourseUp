@@ -19,7 +19,7 @@ require_once('CourseUp/PDExtension.php');
 require_once('CourseUp/htmlSchedule.php');
 require_once('CourseUp/common.php');
 
-$publicErrorMessages = $config['PublicErrorMessages'];
+$publicErrorMessages = true;//$config['PublicErrorMessages'];
 if($publicErrorMessages) {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -30,20 +30,25 @@ include('header.htm');
 
 {
 	$contentPath = $resource . 'content.md';
-	$indexPath = $resource . 'index.md';
+	// $indexPath = 'index.php';
 
 	$f = '';
-	if(file_exists($indexPath))
-		$f = file_get_contents($indexPath);
-	else if(file_exists($contentPath))
+	// if(file_exists($indexPath)) {
+	// 	$f = file_get_contents($indexPath);
+	// 	//print 'index f: ' . $f;
+	// }
+	 if(file_exists($contentPath)) {
 		$f = file_get_contents($contentPath);
+		// print 'content f: ' . $f;
+	}
 
 	$isScheduleDoc = false;
-	$calendarKeyword = '/^\\\calendar\n/';
-	$isScheduleDoc = preg_match($calendarKeyword, $f);
+	$calendarKeyword = '/^\\\\calendar\r|^\\\\calendar\n/'; // match begin line, lots of whitespace, \calendar, whitespace, end of line
+	$isScheduleDoc = preg_match($calendarKeyword, $f); // find better way to detect \calendar
 
 	if($isScheduleDoc)
 	{
+		print 'yeezy';
 		$f = preg_replace($calendarKeyword, '', $f);
 		print '<p><h3>';
 		print $config['CourseTitle'];
@@ -55,6 +60,7 @@ include('header.htm');
 	}
 	else
 	{
+		print 'neezy';
 		$p = PDExtension::instance()->text($f);
 		//$p = ParseDown::instance()->text($f);
 		echo $p;

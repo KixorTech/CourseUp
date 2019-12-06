@@ -1,0 +1,1 @@
+Copy-Item -Path "./base/*" -Destination "../" -Recurse
