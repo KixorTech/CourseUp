@@ -16,6 +16,9 @@ class CalandarTableView {
     private $holidays;
     private $rows;
 
+    // <link rel="stylesheet" href="styles/bootstrap.min.css">
+    // <script src="scripts/popper.min.js"></script>
+    // <script src="scripts/bootstrap.min.js"></script>
     public function __construct($headline) {
         $this->headline = $headline;
     }
@@ -37,13 +40,13 @@ class CalandarTableView {
     public function header($days, $monthName) {
         $this->monthName = $monthName;
         $this->header = "<tr>
-        <th width='20'>" . $days[0] . "</th>
-        <th width='20'>" . $days[1] . "</th>
-        <th width='20'>" . $days[2] . "</th>
-        <th width='20'>" . $days[3] . "</th>
-        <th width='20'>" . $days[4] . "</th>
-        <th width='20'>" . $days[5] . "</th>
-        <th width='20'>" . $days[6] . "</th>
+        <th width='20' class='calWidth'>" . $days[0] . "</th>
+        <th width='20' class='calWidth'>" . $days[1] . "</th>
+        <th width='20' class='calWidth'>" . $days[2] . "</th>
+        <th width='20' class='calWidth'>" . $days[3] . "</th>
+        <th width='20' class='calWidth'>" . $days[4] . "</th>
+        <th width='20' class='calWidth'>" . $days[5] . "</th>
+        <th width='20' class='calWidth'>" . $days[6] . "</th>
       </tr>";
     }
 
