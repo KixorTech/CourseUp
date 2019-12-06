@@ -24,13 +24,11 @@ class CalandarTableView {
     }
 
     public function drawGrid() {
-        return "<div style='width: 600px; height: 600px; border: 1px dotted red;'>"
-                // . "<h1 style='font-size: 14px; width: 100%; text-align: center; background-color: yellow;'>"
-                // . $this->headline . "</h1>"
-                . "<p style='font-size: 24px; width: 100%; text-align: center; background-color: grey;'>"
+        return "<div>"
+                . "<p style='font-size: 24px; width: 100%; text-align: center; background-color: LightGray;'>"
                 . $this->monthName . "&nbsp; " . $this->year . "</p>"
                 . "<table align='center' border='0' cellpadding='0' cellspacing='0'
-                            style='font-size: 20px; color: black; background-color: white; text-align: center; border: 1px solid wheat;'>"
+                            style='font-size: 20px; color: black; background-color: white; text-align: center; border: 2px solid Gray;'>"
                 . $this->header
                 . $this->rows
                 . "</table>"
@@ -95,7 +93,7 @@ class CalandarTableView {
 
                 //current day
                 if ($this->day == $counter) {
-                    $style .= " border:1px solid;";
+                    $style .= " border:1px solid; background-color: rgb(55, 212, 174, 0.3)";
                     $class .= " currentDay ";
                 }
 
