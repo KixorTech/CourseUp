@@ -21,16 +21,16 @@ class CalandarTableView {
     }
 
     public function drawGrid() {
-        return "<div style='width: 150px; height: 150px; border: 1px dotted red;'>"
-                . "<h1 style='font-size: 14px; width: 100%; text-align: center; background-color: yellow;'>"
-                . $this->headline . "</h1>"
+        return "<div style='width: 600px; height: 600px; border: 1px dotted red;'>"
+                // . "<h1 style='font-size: 14px; width: 100%; text-align: center; background-color: yellow;'>"
+                // . $this->headline . "</h1>"
+                . "<p style='font-size: 24px; width: 100%; text-align: center; background-color: grey;'>"
+                . $this->monthName . "&nbsp; " . $this->year . "</p>"
                 . "<table align='center' border='0' cellpadding='0' cellspacing='0'
-                            style='font-size: 12px; color: black; background-color: beige; text-align: center; border: 1px solid wheat;'>"
+                            style='font-size: 20px; color: black; background-color: white; text-align: center; border: 1px solid wheat;'>"
                 . $this->header
                 . $this->rows
                 . "</table>"
-                . "<p style='font-size: 12px; width: 100%; text-align: center; background-color: yellow;'>"
-                . $this->monthName . "&nbsp; " . $this->year . "</p>"
                 . "</div>";
     }
 
@@ -43,7 +43,7 @@ class CalandarTableView {
         <th width='20'>" . $days[3] . "</th>
         <th width='20'>" . $days[4] . "</th>
         <th width='20'>" . $days[5] . "</th>
-        <th width='20' style='color: red;'>" . $days[6] . "</th>
+        <th width='20'>" . $days[6] . "</th>
       </tr>";
     }
 
@@ -73,22 +73,23 @@ class CalandarTableView {
                 $class = "";
                 $title = "";
 
-                //sunday
-                if (($j == 7) && ($counter < $end) || ($counter == $start)) {
-                    $style .= " color:red;";
-                    $class .= "sundays ";
-                }
-                //holiday
-                if (isset($holiday[$this->month][$counter][1])) {
-                    if ($holiday[$this->month][$counter][1] == '1') {
-                        $style .= " color:red;";
-                    } elseif ($holiday[$this->month][$counter][1] == '2') {
-                        $style .= " color:blue;";
-                    }
-                    $style .= " font-weight:bold;";
-                    $class .= "holidays ";
-                    $title = $holiday[$this->month][$counter][0];
-                }
+                // //sunday
+                // if (($j == 7) && ($counter < $end) || ($counter == $start)) {
+                //     $style .= " color:red;";
+                //     $class .= "sundays ";
+                // }
+                // //holiday
+                // if (isset($holiday[$this->month][$counter][1])) {
+                //     if ($holiday[$this->month][$counter][1] == '1') {
+                //         $style .= " color:red;";
+                //     } elseif ($holiday[$this->month][$counter][1] == '2') {
+                //         $style .= " color:blue;";
+                //     }
+                //     $style .= " font-weight:bold;";
+                //     $class .= "holidays ";
+                //     $title = $holiday[$this->month][$counter][0];
+                // }
+
                 //current day
                 if ($this->day == $counter) {
                     $style .= " border:1px solid;";

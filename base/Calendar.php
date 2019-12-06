@@ -13,9 +13,9 @@ include_once './CalendarCalculations.php';
  */
 class Calendar {
 
-    private $months = array("January", "February", "March", "April", "Mai", "Juni",
-        "Juli", "August", "September", "Oktober", "November", "Dezember");
-    private $days = array("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So");
+    private $months = array("January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December");
+    private $days = array("Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun");
     private $daysCountOfMonth = array("31", "28", "31", "30", "31", "30", "31",
         "31", "30", "31", "30", "31");
     private $holidays;
