@@ -204,3 +204,7 @@ font-size: 2em;
 .calWidth {
 	width: 75px;
 }
+
+#newCalendarDiv {
+	margin: 10px;
+}
