@@ -2,15 +2,17 @@
 // <script type="text/javascript">
 function tableCreate() {
     $dom = new DOMDocument();
-    $dom->loadHTML("index.php");
+	$dom->loadHTML("index.php");
 
 	$body = $dom->getElementsByTagName('body')[0];
+
+    // $dom = new DOMDocument();
 
 	// echo $body->length;
 	
 	$tblDiv = $dom->createElement('div', 'these are words');
 
-	$dom->importNode($tblDiv);
+	$dom->appendChild($tblDiv);
 	echo $dom->saveHTML();
 	
 	// appendHTML($tblDiv, '<div>these are words</div>');
@@ -53,6 +55,7 @@ function tableCreate() {
 	// tbl.appendChild(tbdy);
 	// $tblDiv.append(tbl);
 	$body->appendChild($tblDiv);
+	$dom->saveHTML();
 }
 
 
