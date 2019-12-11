@@ -11,8 +11,7 @@ See http://courseup.org for license information.
 
 #require_once('Parsedown.php');
 require_once('PDExtension.php');
-include './Calendar.php';
-
+require_once('Calendar.php');
 
 //TODO move these to a default config setting
 $FirstQuarterDay = '';
@@ -309,6 +308,99 @@ function getFileHtmlSchedule($fileContents)
 	$weekCount = 1;
 
 	for($i=1; $i<count($sessions); $i++)
+	{
+		if($currentDay > $futureSessionTime)
+			return $scheduleHtml;
+
+		$dontMakeButton = $currentDay > $pastSessionTime && $i <= $ShowPastSessions && !$pastSessionsDone;
+		if($dontMakeButton) {
+			$scheduleHtml .= "</div>\n\n";
+			$pastSessionsDone = TRUE;
+		}
+		else if($currentDay > $pastSessionTime && !$pastSessionsDone) {
+			$scheduleHtml .= "</div>\n\n";
+			$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
+			$pastSessionsDone = TRUE;
+		}
+
+		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $weekCount, $itemsDue);
+
+		$endOfWeek =  $i > 0 && $i % $daysInWeek == 0;
+		if($endOfWeek) {
+			$sessionHtml = $sessionHtml . "\n-------\n";
+			$weekCount++;
+		}
+
+		if(isLastDayBeforeBreak($currentDay)) {
+			$sessionHtml = $sessionHtml . "<span class=\"breakMark\">Break</span>\n\n-------\n-------\n";
+		}
+
+		$sessionHtml = PDExtension::instance()->text($sessionHtml); 
+		$scheduleHtml = $scheduleHtml . $sessionHtml;
+		for($j=0; $j<count($itemsDue); $j++)
+			$itemsDue[$j]->daysTillDue--;
+
+		$currentDay = getNextClassDay($currentDay);
+	}
+
+	return $scheduleHtml;
+	//$s = ParsedownExtra::instance()->text($scheduleHtml); 
+	//return $s;
+}
+
+function fileGetHtmlScheduleCalendar($fileContents)
+{
+	getConfigSetting('FirstQuarterDay');
+	getConfigSetting('LastBeforeBreak');
+	getConfigSetting('FirstAfterBreak');
+	getConfigSetting('ClassOnWeekDays');
+	getConfigSetting('ShowPastSessions');
+	getConfigSetting('ShowFutureSessions');
+
+	global $ShowPastSessions;
+	global $ShowFutureSessions;
+	global $ClassOnWeekDays;
+
+	date_default_timezone_set('UTC');
+
+	$f = $fileContents;
+
+	$f = PDExtension::instance()->parseInput($f); 
+	$f = removeCommentLines($f);
+
+	Calendar::getInstance()->parseCalendarFile($f);
+	return;
+
+	$sessions = explode('Session:', $f);
+
+	global $FirstQuarterDay;
+	$currentDay = clone $FirstQuarterDay;
+	$scheduleHtml = '';
+	$itemsDue = Array();
+
+	//http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
+	$scheduleHtml .= '<input type="checkbox" id="pastSessionsCheckbox" checked>';
+	$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelA" onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
+	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
+	$scheduleHtml .= "<div id=\"pastSessionContent\">\n\n";
+
+	$now = new DateTime();
+	$pastSessionTime = $now;
+	$futureSessionTime = $now;
+	$dayAndABit = new DateInterval('P1DT6H');
+	$now->sub($dayAndABit);
+	$pastSessionsDone = FALSE;
+
+	for($i=0; $i<$ShowPastSessions; $i++)
+		$pastSessionTime = getPrevClassDay($pastSessionTime);
+	for($i=0; $i<$ShowFutureSessions; $i++)
+		$futureSessionTime = getNextClassDay($futureSessionTime);
+
+	#$daysInWeek = strlen($config['ClassOnWeekDays']);
+	$daysInWeek = count($ClassOnWeekDays);
+	$weekCount = 1;
+
+	for($i=0; $i<count($sessions); $i++)
 	{
 		if($currentDay > $futureSessionTime)
 			return $scheduleHtml;

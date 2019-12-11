@@ -54,7 +54,7 @@ include('header.htm');
 		print $config['CourseTitle'];
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
-		$schedule = getFileHtmlSchedule($f);
+		$schedule = fileGetHtmlScheduleCalendar($f);
 		print $schedule;
 		print '</div>';
 	}
