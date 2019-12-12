@@ -62,7 +62,6 @@ class Config
 				self::$ettings[$key] = $val;
 			}
 		}
-		print_r(self::$ettings);
 	}
 
 	public function setConfigSettings($key, $contents) {
@@ -70,7 +69,10 @@ class Config
 	}
 
 	public function getConfigSetting($key) {
-		return self::$ettings[$key];
+		if (in_array($key, array_keys(self::$ettings))) {
+			return self::$ettings[$key];
+		}
+		return null;
 	}
 
 	public static function getInstance() 

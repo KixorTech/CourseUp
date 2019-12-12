@@ -48,10 +48,9 @@ include('header.htm');
 
 	if($isScheduleDoc)
 	{
-		print 'yeezy';
 		$f = preg_replace($calendarKeyword, '', $f);
 		print '<p><h3>';
-		print $config['CourseTitle'];
+		print Config::getInstance()->getConfigSetting('CourseTitle');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
 		$schedule = fileGetHtmlScheduleCalendar($f);
@@ -60,7 +59,6 @@ include('header.htm');
 	}
 	else
 	{
-		print 'neezy';
 		$p = PDExtension::instance()->text($f);
 		//$p = ParseDown::instance()->text($f);
 		echo $p;
