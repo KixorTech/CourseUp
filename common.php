@@ -22,6 +22,7 @@ require_once('spyc.php');
 $configPath = getFileRoot().'/../config.yaml';
 $config = spyc_load_file($configPath);
 Config::getInstance()->loadSettings($config);
+Config::getInstance()->getConfigSetting("FirstQuarterDay");
 
 $online = checkOnline();
 if($online)

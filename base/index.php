@@ -19,7 +19,7 @@ require_once('CourseUp/PDExtension.php');
 require_once('CourseUp/htmlSchedule.php');
 require_once('CourseUp/common.php');
 
-$publicErrorMessages = true;//$config['PublicErrorMessages'];
+$publicErrorMessages = false;//$config['PublicErrorMessages'];
 if($publicErrorMessages) {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);

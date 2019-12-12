@@ -33,12 +33,12 @@ class Calendar
 			$ses_num++;
 			$events[$ses_num] = $ses;
 		}
-		for ($x = 1; $x <= $ses_num; $x++) {
-			print 'Session ' . $x . ':';
-			print '<br>';
-			print $events[$x];
-			print '<br><br>';
-		}
+		// for ($x = 1; $x <= $ses_num; $x++) {
+		// 	print 'Session ' . $x . ':';
+		// 	print '<br>';
+		// 	print $events[$x];
+		// 	print '<br><br>';
+		// }
 	}
 
 	public static function getInstance() 

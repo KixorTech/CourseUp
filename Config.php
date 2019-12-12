@@ -12,61 +12,65 @@ See http://courseup.org for license information.
 class Config
 {
 	private static $instance = null;
-	private $ettings;
+	private static $ettings;
 
 	private function __construct() 
 	{
-		$ettings = array();
+		self::$ettings = array();
 	}
 
 	public function loadSettings($configArray) {
-		$ettings = array($configArray);
+		self::$ettings = $configArray;
 
-		foreach($ettings as $configItem) {
 
-		}
-
-		$tzName = $config['TimeZone'];
+		$tzName = self::$ettings['TimeZone'];
 		$tz = new DateTimeZone($tzName);
-		if(strpos($key, 'FirstQuarterDay') !== FALSE) {
-			$FirstQuarterDay = DateTime::createFromFormat('Y-m-d', $val, $tz);
+
+		foreach(array_keys(self::$ettings) as $key) {
+			$val = self::$ettings[$key];
+			// $val = trim($val); TODO
+
+			if(strpos($key, 'FirstQuarterDay') !== FALSE) {
+				self::$ettings[$key] = DateTime::createFromFormat('Y-m-d', $val, $tz);
+			}
+			else if(strpos($key, 'LastBeforeBreak') !== FALSE) {
+				self::$ettings[$key] = DateTime::createFromFormat('Y-m-d', $val, $tz);
+			}
+			else if(strpos($key, 'FirstAfterBreak') !== FALSE) {
+				self::$ettings[$key] = DateTime::createFromFormat('Y-m-d', $val, $tz);
+			}
+			else if(strpos($key, 'ClassOnWeekDays') !== FALSE) {
+				$ClassOnWeekDays = array();
+				$days = strtolower($val);
+				//print $val .' '. $days;
+				if( strpos($days, 'm') !== FALSE)
+					array_push($ClassOnWeekDays, 'Mon');
+				if( strpos($days, 't') !== FALSE)
+					array_push($ClassOnWeekDays, 'Tue');
+				if( strpos($days, 'w') !== FALSE)
+					array_push($ClassOnWeekDays, 'Wed');
+				if( strpos($days, 'r') !== FALSE)
+					array_push($ClassOnWeekDays, 'Thu');
+				if( strpos($days, 'f') !== FALSE)
+					array_push($ClassOnWeekDays, 'Fri');
+				self::$ettings[$key] = $ClassOnWeekDays;
+			}
+			else if(strpos($key, 'ShowPastSessions') !== FALSE) {
+				self::$ettings[$key] = $val;
+			}
+			else if(strpos($key, 'ShowFutureSessions') !== FALSE) {
+				self::$ettings[$key] = $val;
+			}
 		}
-		else if(strpos($key, 'LastBeforeBreak') !== FALSE) {
-			$LastBeforeBreak = DateTime::createFromFormat('Y-m-d', $val, $tz);
-		}
-		else if(strpos($key, 'FirstAfterBreak') !== FALSE) {
-			$FirstAfterBreak = DateTime::createFromFormat('Y-m-d', $val, $tz);
-		}
-		else if(strpos($key, 'ClassOnWeekDays') !== FALSE) {
-			$ClassOnWeekDays = array();
-			$days = strtolower($val);
-			//print $val .' '. $days;
-			if( strpos($days, 'm') !== FALSE)
-				array_push($ClassOnWeekDays, 'Mon');
-			if( strpos($days, 't') !== FALSE)
-				array_push($ClassOnWeekDays, 'Tue');
-			if( strpos($days, 'w') !== FALSE)
-				array_push($ClassOnWeekDays, 'Wed');
-			if( strpos($days, 'r') !== FALSE)
-				array_push($ClassOnWeekDays, 'Thu');
-			if( strpos($days, 'f') !== FALSE)
-				array_push($ClassOnWeekDays, 'Fri');
-			//print_r($ClassOnWeekDays);
-		}
-		else if(strpos($key, 'ShowPastSessions') !== FALSE) {
-			$ShowPastSessions = $val;
-		}
-		else if(strpos($key, 'ShowFutureSessions') !== FALSE) {
-			$ShowFutureSessions = $val;
-		}
+		print_r(self::$ettings);
 	}
 
 	public function setConfigSettings($key, $contents) {
-		$ettings[$key] = $contents;
+		self::$ettings[$key] = $contents;
 	}
 
 	public function getConfigSetting($key) {
-		return $ettings[$key];
+		return self::$ettings[$key];
 	}
 
 	public static function getInstance() 
