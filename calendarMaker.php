@@ -10,12 +10,11 @@ function tableCreate() {
 
 	// echo $body->length;
 	
-	$tblDiv = $dom->createElement('div', 'these are words');
-	$tblDiv2 = $dom->createElement('div', 'these are words');
+	$tblDiv = $dom->createElement('div');
+	// $tblDiv2 = $dom->createElement('div', 'these are words');
 
     $tblDiv->setAttribute('id', 'newCalendarDiv2');
 
-	$dom->appendChild($tblDiv);
 	// $tblDiv->appendChild($tblDiv2);
 	
 	// appendHTML($tblDiv, '<div>these are words</div>');
@@ -29,8 +28,10 @@ function tableCreate() {
 	$numWeeks = 5;
 	$numDaysAWeek = 3;
 
-	$tblDiv->setAttribute('style', 'width:100%;');
-	$tblDiv->setAttribute('border', '1px solid #aaa;');
+	
+	$tbl = $dom->createElement('table');
+	$tbl->setAttribute('style', 'width:100%;');
+	$tbl->setAttribute('border', '1px solid #aaa;');
 	$tbdy = $dom->createElement('tbody');
 	for ($w = 0; $w < $numWeeks; $w++) {
 		for ($d = 0; $d < $numDaysAWeek; $d++) {
@@ -53,9 +54,11 @@ function tableCreate() {
 			$tbdy->appendChild($tr);
 		}
 	}
-	$tblDiv->appendChild($tbdy);
-	// $tblDiv.append(tbl);
+	$tbl->appendChild($tbdy);
+	$tblDiv->appendChild($tbl);
 	// $body->appendChild($tblDiv);
+	$dom->appendChild($tblDiv);
+	
 	echo $dom->saveHTML();
 }
 
