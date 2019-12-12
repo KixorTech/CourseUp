@@ -61,9 +61,9 @@ include('header.htm');
 		print '</div>';
 		// $calender2 = new \eu\freeplace\php\calendar\Calendar();
 		// $calToAdd = $calender2->draw();
-		// print "<div>";
+		print "<div id='createdTable'>";
 		tableCreate();
-		// print "</div>";
+		print "</div>";
 	}
 	else
 	{

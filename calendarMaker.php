@@ -2,24 +2,28 @@
 // <script type="text/javascript">
 function tableCreate() {
     $dom = new DOMDocument();
-	$dom->loadHTML("index.php");
+	// $dom->loadHTML("index.php");
 
-	$body = $dom->getElementsByTagName('body')[0];
+	// $body = $dom->getElementsByTagName('body')[0];
 
     // $dom = new DOMDocument();
 
 	// echo $body->length;
 	
 	$tblDiv = $dom->createElement('div', 'these are words');
+	$tblDiv2 = $dom->createElement('div', 'these are words');
+
+    $tblDiv->setAttribute('id', 'newCalendarDiv2');
 
 	$dom->appendChild($tblDiv);
+	$tblDiv->appendChild($tblDiv2);
+
 	echo $dom->saveHTML();
 	
 	// appendHTML($tblDiv, '<div>these are words</div>');
 
 	// echo $tblDiv->saveHTML();
 
-    $tblDiv->setAttribute('id', 'newCalendarDiv2');
     // $tblDiv->innerHTML = "hi";
 
 	// echo $tblDiv;
@@ -54,8 +58,8 @@ function tableCreate() {
 	// }
 	// tbl.appendChild(tbdy);
 	// $tblDiv.append(tbl);
-	$body->appendChild($tblDiv);
-	$dom->saveHTML();
+	// $body->appendChild($tblDiv);
+	// $dom->saveHTML();
 }
 
 
