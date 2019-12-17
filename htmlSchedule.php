@@ -204,10 +204,6 @@ function getSessionHtml($session, $dayCount, &$currentDay, &$weekCount, &$itemsD
 
 function fileGetHtmlScheduleCalendar($fileContents)
 {
-	global $ShowPastSessions;
-	global $ShowFutureSessions;
-	global $ClassOnWeekDays;
-
 	date_default_timezone_set('UTC');
 
 	$f = $fileContents;
@@ -236,6 +232,9 @@ function fileGetHtmlScheduleCalendar($fileContents)
 	$dayAndABit = new DateInterval('P1DT6H');
 	$now->sub($dayAndABit);
 	$pastSessionsDone = FALSE;
+
+	$ShowPastSessions = $config_obj->getConfigSetting('ShowPastSessions');
+	$ShowFutureSessions = $config_obj->getConfigSetting('ShowFutureSessions');
 
 	for($i=0; $i<$ShowPastSessions; $i++)
 		$pastSessionTime = getPrevClassDay($pastSessionTime);
