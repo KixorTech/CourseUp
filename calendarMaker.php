@@ -29,24 +29,45 @@ function tableCreate() {
 	// echo $tblDiv;
 
 	$numWeeks = 5;
-	$numDaysAWeek = 3;
+	$classDaysPerWeek = ['M','R','F'];
+	$attributeNames = ['Homework Assignments', 'Labs', 'Readings'];
+	
 
 	
 	$tbl = $dom->createElement('table');
 	$tbl->setAttribute('style', 'width:100%;');
 	$tbl->setAttribute('border', '1px solid #aaa;');
 	$tbdy = $dom->createElement('tbody');
+
+	$headerRow = $dom->createElement('tr'); // TODO: add header column
+	$th = $dom->createElement('th');
+	$th->textContent = "Week";
+	$headerRow->appendChild($th);
+
+	$th = $dom->createElement('th');
+	$th->textContent = "Day";
+	$headerRow->appendChild($th);
+
+	for ($i = 0; $i < sizeof($attributeNames); $i++){
+		$th = $dom->createElement('th');
+		$th->textContent = $attributeNames[$i];
+		$headerRow->appendChild($th);
+	}
+	$tbdy->appendChild($headerRow);
+	
+
+
 	for ($w = 0; $w < $numWeeks; $w++) {
-		for ($d = 0; $d < $numDaysAWeek; $d++) {
+		for ($d = 0; $d < sizeof($classDaysPerWeek); $d++) {
 			$tr = $dom->createElement('tr');
-			for ($c = 0; $c < 6; $c++) {
+			for ($c = 0; $c < sizeof($attributeNames)+2; $c++) {
 				$td = $dom->createElement('td');
 				$text = ''; // '\u0020' // adds a space?
 				if ($c == 0 && $d == 0) {
 					$text = "Week " . $w;
 				}
 				if ($c == 1) {
-					$text = "Day " . ($d + $w*$numDaysAWeek);
+					$text = "Day " . ($d + $w*sizeof($classDaysPerWeek));
 				}
 
 				$td->textContent = $text;
