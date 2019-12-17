@@ -211,7 +211,8 @@ function fileGetHtmlScheduleCalendar($fileContents)
 	$f = PDExtension::instance()->parseInput($f); 
 	$f = removeCommentLines($f);
 
-	Calendar::getInstance()->parseCalendarFile($f);
+	$cal = Calendar::getInstance();
+	$cal->parseCalendarFile($f);
 	$config_obj = Config::getInstance();
 	
 	$sessions = explode('Session:', $f);
@@ -244,7 +245,7 @@ function fileGetHtmlScheduleCalendar($fileContents)
 	$daysInWeek = count($config_obj->getConfigSetting('ClassOnWeekDays'));
 	$weekCount = 1;
 
-	for($i=1; $i<count($sessions); $i++)
+	for($i=1; $i<$cal->numSessions(); $i++)
 	{
 		if($currentDay > $futureSessionTime)
 			return $scheduleHtml;
@@ -260,7 +261,7 @@ function fileGetHtmlScheduleCalendar($fileContents)
 			$pastSessionsDone = TRUE;
 		}
 
-		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $weekCount, $itemsDue);
+		$sessionHtml = getSessionHtml($cal->getSession($i), $i, $currentDay, $weekCount, $itemsDue);
 
 		$endOfWeek =  $i > 0 && $i % $daysInWeek == 0;
 		if($endOfWeek) {

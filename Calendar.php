@@ -15,11 +15,12 @@ require_once('common.php');
 class Calendar
 {
 	private static $instance = null;
-	private $events;
+	private static $events;
+	private static $ses_num;
 
 	private function __construct() 
 	{
-		$events = array();
+		self::$events = array();
 	}
 
 	public function parseCalendarFile($f) 
@@ -27,18 +28,22 @@ class Calendar
 		$sessions = explode('Session:', $f);
 		array_shift($sessions);
 
-		$ses_num = 0;
+		self::$ses_num = 0;
 		
 		foreach($sessions as $ses) {
-			$ses_num++;
-			$events[$ses_num] = $ses;
+			self::$ses_num++;
+			self::$events[self::$ses_num] = $ses;
 		}
-		// for ($x = 1; $x <= $ses_num; $x++) {
-		// 	print 'Session ' . $x . ':';
-		// 	print '<br>';
-		// 	print $events[$x];
-		// 	print '<br><br>';
-		// }
+	}
+
+	public function getSession($day) 
+	{
+		return self::$events[$day];
+	}
+
+	public function numSessions()
+	{
+		return self::$ses_num;
 	}
 
 	public static function getInstance() 
