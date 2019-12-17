@@ -1,5 +1,8 @@
 <?php
 // <script type="text/javascript">
+
+// the following function was reference from
+// https://stackoverflow.com/questions/14643617/create-table-using-javascript
 function tableCreate() {
     $dom = new DOMDocument();
 	// $dom->loadHTML("index.php");
@@ -13,7 +16,7 @@ function tableCreate() {
 	$tblDiv = $dom->createElement('div');
 	// $tblDiv2 = $dom->createElement('div', 'these are words');
 
-    $tblDiv->setAttribute('id', 'newCalendarDiv2');
+    $tblDiv->setAttribute('id', 'newCalendarDiv');
 
 	// $tblDiv->appendChild($tblDiv2);
 	
