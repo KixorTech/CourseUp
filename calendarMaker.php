@@ -1,7 +1,11 @@
 <?php
+require_once('htmlSchedule.php');
+
 // the following function was reference from
 // https://stackoverflow.com/questions/14643617/create-table-using-javascript
 function tableCreate() {
+	global $ClassOnWeekDays;
+
     $dom = new DOMDocument();
 	$tblDiv = $dom->createElement('div');
 	$tblDiv->setAttribute('id', 'newCalendarDiv');
@@ -9,7 +13,7 @@ function tableCreate() {
 	// Once we have the datasource figured out, the following attributes
 	// will be retrieved from there.
 	$numWeeks = 5;
-	$classDaysPerWeek = ['M','R','F'];
+	$classDaysPerWeek = $ClassOnWeekDays;
 	$attributeNames = ['Homework Assignments', 'Labs', 'Readings'];
 	
 
