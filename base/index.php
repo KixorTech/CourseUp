@@ -53,7 +53,7 @@ include('header.htm');
 		print Config::getInstance()->getConfigSetting('CourseTitle');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
-		$schedule = fileGetHtmlScheduleCalendar($f);
+		$schedule = $parser($f);
 		print $schedule;
 		print '</div>';
 	}

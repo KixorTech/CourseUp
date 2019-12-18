@@ -27,3 +27,5 @@ ShowFutureSessions: 5
 PublicErrorMessages: false
 
 TimeZone: America/Indiana/Indianapolis
+
+DefaultView: List

@@ -8,6 +8,7 @@ micah@kixortech.com
 
 See http://courseup.org for license information.
 */
+require_once('htmlSchedule.php');
 
 class Config
 {
@@ -60,7 +61,10 @@ class Config
 			}
 			else if(strpos($key, 'ShowFutureSessions') !== FALSE) {
 				self::$ettings[$key] = $val;
-			}
+			} else if(strpos($key, 'DefaultView') !==
+				FALSE) {
+				self::$ettings[$key] = $val;
+			} 
 		}
 	}
 
@@ -83,6 +87,13 @@ class Config
 		}
 		return self::$instance;
 	}
+
+	public function buildParserArray() {
+	$parsers = array();
+	$parsers['List'] = "fileGetHtmlScheduleCalendar";
+
+	return $parsers;
+}
 
 }
 
