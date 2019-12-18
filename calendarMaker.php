@@ -5,6 +5,7 @@ require_once('htmlSchedule.php');
 // https://stackoverflow.com/questions/14643617/create-table-using-javascript
 function tableCreate() {
 	global $ClassOnWeekDays;
+	// global $FirstQuarterDay; // TODO: get grid to display actual date
 
     $dom = new DOMDocument();
 	$tblDiv = $dom->createElement('div');
@@ -29,7 +30,7 @@ function tableCreate() {
 	$headerRow->appendChild($th);
 
 	$th = $dom->createElement('th');
-	$th->textContent = "Day";
+	$th->textContent = "Session";
 	$headerRow->appendChild($th);
 
 	for ($i = 0; $i < sizeof($attributeNames); $i++){
@@ -47,10 +48,10 @@ function tableCreate() {
 				$td = $dom->createElement('td');
 				$text = '';
 				if ($c == 0 && $d == 0) {
-					$text = "Week " . $w;
+					$text = "Week " . ($w + 1);
 				}
 				if ($c == 1) {
-					$text = "Day " . ($d + $w*sizeof($classDaysPerWeek));
+					$text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $classDaysPerWeek[$d];
 				}
 				$td->textContent = $text;
 				$tr->appendChild($td);

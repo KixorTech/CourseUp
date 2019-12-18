@@ -9,8 +9,8 @@ $(document).ready(() => {
 	$("#newCalendarDiv").hide();
 
 	$("#toggleCalendarFormat").click(() => {
-		console.log("boi");
 		$("#pastSessions").hide();
+		// $("#currentSessions").toggle();
 		$("#sessionToggleLabel").toggle();
 		$('#newCalendarDiv').toggle();
 	});
