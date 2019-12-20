@@ -7,7 +7,7 @@
 #See http://courseup.org for license information.
 
 
-CourseTitle: "Edit config.yaml to change course title"
+CourseTitle: "Super Amazing Test Course"
 
 MenuLinks:
   - MenuLinkName: Schedule
@@ -17,9 +17,9 @@ MenuLinks:
   - MenuLinkName: To add links
     MenuLinkURL: /anotherlink/
 
-FirstQuarterDay: 2016-03-07
-LastBeforeBreak: 2016-04-01
-FirstAfterBreak: 2016-04-11
+FirstQuarterDay: 2019-12-02
+LastBeforeBreak: 2019-12-20
+FirstAfterBreak: 2020-01-06
 ClassOnWeekDays: mtrf
 ShowPastSessions: 0
 ShowFutureSessions: 5
@@ -27,3 +27,5 @@ ShowFutureSessions: 5
 PublicErrorMessages: false
 
 TimeZone: America/Indiana/Indianapolis
+
+DefaultView: List

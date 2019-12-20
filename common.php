@@ -9,17 +9,21 @@ micah@kixortech.com
 See http://courseup.org for license information.
 */
 
-
-
 require_once("helpers.php");
 require_once("session.php");
 require_once("https.php");
+require_once("Config.php");
 //require_once("basicAuth.php");
 //require_once('db.php');
 
 require_once('spyc.php');
+
 $configPath = getFileRoot().'/../config.yaml';
-$config = spyc_load_file($configPath);
+$config_temp = spyc_load_file($configPath);
+Config::getInstance()->loadSettings($config_temp);
+
+$parsers = Config::getInstance()->buildParserArray();
+$parser = $parsers[Config::getInstance()->getConfigSetting("DefaultView")];
 
 $online = checkOnline();
 if($online)
@@ -27,7 +31,6 @@ if($online)
 
 require_once('quiz.php');
 require_once('rubric.php');
-
 
 ?>
 

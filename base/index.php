@@ -21,7 +21,7 @@ require_once('CourseUp/common.php');
 require_once('CourseUp/calendarMaker.php');
 
 
-$publicErrorMessages = true;//$config['PublicErrorMessages'];
+$publicErrorMessages = false;//$config['PublicErrorMessages'];
 if($publicErrorMessages) {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -50,13 +50,12 @@ include('header.htm');
 
 	if($isScheduleDoc)
 	{
-		print 'yeezy';
 		$f = preg_replace($calendarKeyword, '', $f);
 		print '<p><h3>';
-		print $config['CourseTitle'];
+		print Config::getInstance()->getConfigSetting('CourseTitle');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
-		$schedule = getFileHtmlSchedule($f);
+		$schedule = $parser($f);
 		print $schedule;
 		print '</div>';
 		// $calender2 = new \eu\freeplace\php\calendar\Calendar();
@@ -67,7 +66,6 @@ include('header.htm');
 	}
 	else
 	{
-		print 'neezy';
 		$p = PDExtension::instance()->text($f);
 		//$p = ParseDown::instance()->text($f);
 		echo $p;

@@ -11,16 +11,8 @@ See http://courseup.org for license information.
 
 #require_once('Parsedown.php');
 require_once('PDExtension.php');
-include './Calendar.php';
-
-
-//TODO move these to a default config setting
-$FirstQuarterDay = '';
-$LastBeforeBreak = '';
-$FirstAfterBreak = '';
-$ClassOnWeekDays = '';
-$ShowPastSessions = 1;
-$ShowFutureSessions = 3000000;
+require_once('Calendar.php');
+require_once('Config.php');
 
 function getFile($path)
 {
@@ -81,56 +73,6 @@ function removeCommentLines($string)
 			$outS = $outS . $line . "\n";
 	}
 	return $outS;
-}
-
-//TODO this is brittle, invalid keys are not detected
-//TODO extract this to a config object that maintains the default values
-function getConfigSetting($key)
-{
-	global $config;
-	global $FirstQuarterDay;
-	global $LastBeforeBreak;
-	global $FirstAfterBreak;
-	global $ClassOnWeekDays;
-	global $ShowPastSessions;
-	global $ShowFutureSessions;
-
-	$val = $config[$key];
-	$val = trim($val);
-
-	$tzName = $config['TimeZone'];
-	$tz = new DateTimeZone($tzName);
-	if(strpos($key, 'FirstQuarterDay') !== FALSE) {
-		$FirstQuarterDay = DateTime::createFromFormat('Y-m-d', $val, $tz);
-	}
-	else if(strpos($key, 'LastBeforeBreak') !== FALSE) {
-		$LastBeforeBreak = DateTime::createFromFormat('Y-m-d', $val, $tz);
-	}
-	else if(strpos($key, 'FirstAfterBreak') !== FALSE) {
-		$FirstAfterBreak = DateTime::createFromFormat('Y-m-d', $val, $tz);
-	}
-	else if(strpos($key, 'ClassOnWeekDays') !== FALSE) {
-		$ClassOnWeekDays = array();
-		$days = strtolower($val);
-		//print $val .' '. $days;
-		if( strpos($days, 'm') !== FALSE)
-			array_push($ClassOnWeekDays, 'Mon');
-		if( strpos($days, 't') !== FALSE)
-			array_push($ClassOnWeekDays, 'Tue');
-		if( strpos($days, 'w') !== FALSE)
-			array_push($ClassOnWeekDays, 'Wed');
-		if( strpos($days, 'r') !== FALSE)
-			array_push($ClassOnWeekDays, 'Thu');
-		if( strpos($days, 'f') !== FALSE)
-			array_push($ClassOnWeekDays, 'Fri');
-		//print_r($ClassOnWeekDays);
-	}
-	else if(strpos($key, 'ShowPastSessions') !== FALSE) {
-		$ShowPastSessions = $val;
-	}
-	else if(strpos($key, 'ShowFutureSessions') !== FALSE) {
-		$ShowFutureSessions = $val;
-	}
 }
 
 class ItemDue {
@@ -209,8 +151,8 @@ function getBulletList($string, $currentDay, &$itemsDue)
 
 function onBreak($date)
 {
-	global $LastBeforeBreak;
-	global $FirstAfterBreak;
+	$LastBeforeBreak = Config::getInstance()->getConfigSetting('LastBeforeBreak');
+	$FirstAfterBreak = Config::getInstance()->getConfigSetting('FirstAfterBreak');
 
 	if($date->format('U') > $LastBeforeBreak->format('U') &&
 		$date->format('U') < $FirstAfterBreak->format('U'))
@@ -220,7 +162,7 @@ function onBreak($date)
 
 function isLastDayBeforeBreak($date)
 {
-	global $LastBeforeBreak;
+	$LastBeforeBreak = Config::getInstance()->getConfigSetting('LastBeforeBreak');
 	if($date->format('U') == $LastBeforeBreak->format('U'))
 		return TRUE;
 	return FALSE;
@@ -228,7 +170,7 @@ function isLastDayBeforeBreak($date)
 
 function isClassDay($date)
 {
-	global $ClassOnWeekDays;
+	$ClassOnWeekDays = Config::getInstance()->getConfigSetting('ClassOnWeekDays');
 	$day = $date->format('D');
 
 	foreach($ClassOnWeekDays as $d)
@@ -260,29 +202,22 @@ function getSessionHtml($session, $dayCount, &$currentDay, &$weekCount, &$itemsD
 	return $row;
 }
 
-function getFileHtmlSchedule($fileContents)
+function fileGetHtmlScheduleCalendar($fileContents)
 {
-	getConfigSetting('FirstQuarterDay');
-	getConfigSetting('LastBeforeBreak');
-	getConfigSetting('FirstAfterBreak');
-	getConfigSetting('ClassOnWeekDays');
-	getConfigSetting('ShowPastSessions');
-	getConfigSetting('ShowFutureSessions');
-
-	global $ShowPastSessions;
-	global $ShowFutureSessions;
-	global $ClassOnWeekDays;
-
 	date_default_timezone_set('UTC');
 
 	$f = $fileContents;
-	$f = PDExtension::instance()->parseInput($f); 
 
+	$f = PDExtension::instance()->parseInput($f); 
 	$f = removeCommentLines($f);
+
+	$cal = Calendar::getInstance();
+	$cal->parseCalendarFile($f);
+	$config_obj = Config::getInstance();
+	
 	$sessions = explode('Session:', $f);
 
-	global $FirstQuarterDay;
-	$currentDay = clone $FirstQuarterDay;
+	$currentDay = $config_obj->getConfigSetting('FirstQuarterDay');
 	$scheduleHtml = '';
 	$itemsDue = Array();
 
@@ -305,16 +240,18 @@ function getFileHtmlSchedule($fileContents)
 	$now->sub($dayAndABit);
 	$pastSessionsDone = FALSE;
 
+	$ShowPastSessions = $config_obj->getConfigSetting('ShowPastSessions');
+	$ShowFutureSessions = $config_obj->getConfigSetting('ShowFutureSessions');
+
 	for($i=0; $i<$ShowPastSessions; $i++)
 		$pastSessionTime = getPrevClassDay($pastSessionTime);
 	for($i=0; $i<$ShowFutureSessions; $i++)
 		$futureSessionTime = getNextClassDay($futureSessionTime);
 
-	#$daysInWeek = strlen($config['ClassOnWeekDays']);
-	$daysInWeek = count($ClassOnWeekDays);
+	$daysInWeek = count($config_obj->getConfigSetting('ClassOnWeekDays'));
 	$weekCount = 1;
 
-	for($i=1; $i<count($sessions); $i++)
+	for($i=1; $i<$cal->numSessions(); $i++)
 	{
 		if($currentDay > $futureSessionTime)
 			return $scheduleHtml;
@@ -332,7 +269,7 @@ function getFileHtmlSchedule($fileContents)
 			$scheduleHtml .= "<div id=\"currentSessions\">\n\n";
 		}
 
-		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $weekCount, $itemsDue);
+		$sessionHtml = getSessionHtml($cal->getSession($i), $i, $currentDay, $weekCount, $itemsDue);
 
 		$endOfWeek =  $i > 0 && $i % $daysInWeek == 0;
 		if($endOfWeek) {
