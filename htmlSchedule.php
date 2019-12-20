@@ -323,11 +323,13 @@ function getFileHtmlSchedule($fileContents)
 		if($dontMakeButton) {
 			$scheduleHtml .= "</div>\n\n";
 			$pastSessionsDone = TRUE;
+			$scheduleHtml .= "<div id=\"currentSessions\">\n\n";
 		}
 		else if($currentDay > $pastSessionTime && !$pastSessionsDone) {
 			$scheduleHtml .= "</div>\n\n";
 			$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
 			$pastSessionsDone = TRUE;
+			$scheduleHtml .= "<div id=\"currentSessions\">\n\n";
 		}
 
 		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $weekCount, $itemsDue);
@@ -349,7 +351,7 @@ function getFileHtmlSchedule($fileContents)
 
 		$currentDay = getNextClassDay($currentDay);
 	}
-
+	$scheduleHtml .= "</div>\n\n";
 	return $scheduleHtml;
 	//$s = ParsedownExtra::instance()->text($scheduleHtml); 
 	//return $s;
