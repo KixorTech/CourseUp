@@ -286,9 +286,15 @@ function getFileHtmlSchedule($fileContents)
 	$scheduleHtml = '';
 	$itemsDue = Array();
 
+	$scheduleHtml .= '<script src="include/jquery.min.js"></script>';
+	$scheduleHtml .= '<script src="include/screen.js"></script>';
+
 	//http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
-	$scheduleHtml .= '<input type="checkbox" id="pastSessionsCheckbox" checked>';
-	$scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelA" onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
+	$scheduleHtml .= '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle grid format</label>';
+	// //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
+	$scheduleHtml .= '<input type="checkbox" id="toggleCalendarFormat" checked>';
+	
+	$scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
 	//$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 	$scheduleHtml .= "<div id=\"pastSessionContent\">\n\n";
 

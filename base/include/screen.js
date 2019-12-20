@@ -2,18 +2,21 @@
 This file is part of the CourseUp project.
 http://courseup.org
 
-(c) us beech
+(c) Olivia Penry and Tyson Clark
 */
 
-
 $(document).ready(() => {
+	$("#newCalendarDiv").hide();
+
 	$("#toggleCalendarFormat").click(() => {
-		console.log("boi");
 		$("#pastSessions").hide();
+		// $("#currentSessions").toggle();
 		$("#sessionToggleLabel").toggle();
-	})
+		$('#newCalendarDiv').toggle();
+	});
 
 	$("#sessionToggleLabel").click(() => {
+		$('#newCalendarDiv').hide();
 		$("#pastSessions").toggle();
 	})
 })

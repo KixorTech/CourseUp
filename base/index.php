@@ -18,6 +18,8 @@ if(isset($_GET['resource'])) {
 require_once('CourseUp/PDExtension.php');
 require_once('CourseUp/htmlSchedule.php');
 require_once('CourseUp/common.php');
+require_once('CourseUp/calendarMaker.php');
+
 
 $publicErrorMessages = true;//$config['PublicErrorMessages'];
 if($publicErrorMessages) {
@@ -57,6 +59,11 @@ include('header.htm');
 		$schedule = getFileHtmlSchedule($f);
 		print $schedule;
 		print '</div>';
+		// $calender2 = new \eu\freeplace\php\calendar\Calendar();
+		// $calToAdd = $calender2->draw();
+		print "<div id='createdTable'>";
+		tableCreate();
+		print "</div>";
 	}
 	else
 	{
