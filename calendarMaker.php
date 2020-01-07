@@ -1,10 +1,14 @@
 <?php
 require_once('htmlSchedule.php');
+require_once('common.php');
 
 // the following function was reference from
 // https://stackoverflow.com/questions/14643617/create-table-using-javascript
 function tableCreate() {
-	global $ClassOnWeekDays;
+	$cal = Calendar::getInstance();
+	$config = Config::getInstance();
+
+	$ClassOnWeekDays = $config->getConfigSetting("ClassOnWeekDays");
 	// global $FirstQuarterDay; // TODO: get grid to display actual date
 
     $dom = new DOMDocument();
