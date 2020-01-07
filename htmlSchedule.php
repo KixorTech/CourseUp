@@ -294,13 +294,4 @@ function fileGetHtmlScheduleCalendar($fileContents)
 	//return $s;
 }
 
-function getHtmlSchedule()
-{
-	$f = file_get_contents('schedule_data.txt');
-	return getFileHtmlSchedule($f);
-}
-
-//$s = getHtmlSchedule();
-//echo $s;
-
 ?>
