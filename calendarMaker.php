@@ -13,6 +13,11 @@ function tableCreate() {
 
 	// echo $FirstQuarterDay->format('m-d');
 
+	// $oneDay = new DateInterval('P60D');
+	// $FirstQuarterDay->add($oneDay);
+
+	// echo $FirstQuarterDay->format('m-d');
+
     $dom = new DOMDocument();
 	$tblDiv = $dom->createElement('div');
 	$tblDiv->setAttribute('id', 'newCalendarDiv');
