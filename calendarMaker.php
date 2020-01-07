@@ -9,7 +9,9 @@ function tableCreate() {
 	$config = Config::getInstance();
 
 	$ClassOnWeekDays = $config->getConfigSetting("ClassOnWeekDays");
-	// global $FirstQuarterDay; // TODO: get grid to display actual date
+	$FirstQuarterDay = $config->getConfigSetting("FirstQuarterDay");
+
+	// echo $FirstQuarterDay->format('m-d');
 
     $dom = new DOMDocument();
 	$tblDiv = $dom->createElement('div');
