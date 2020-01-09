@@ -40,6 +40,9 @@ class Config
 			else if(strpos($key, 'FirstAfterBreak') !== FALSE) {
 				self::$ettings[$key] = DateTime::createFromFormat('Y-m-d', $val, $tz);
 			}
+			else if(strpos($key, 'LastQuarterDay') !== FALSE) {
+				self::$ettings[$key] = DateTime::createFromFormat('Y-m-d', $val, $tz);
+			}
 			else if(strpos($key, 'ClassOnWeekDays') !== FALSE) {
 				$ClassOnWeekDays = array();
 				$days = strtolower($val);
