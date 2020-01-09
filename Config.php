@@ -9,6 +9,7 @@ micah@kixortech.com
 See http://courseup.org for license information.
 */
 require_once('htmlSchedule.php');
+require_once('ListView.php');
 
 class Config
 {

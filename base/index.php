@@ -60,9 +60,7 @@ include('header.htm');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
 
-		print $parser;
-		print 'test';
-		$schedule = $parser;
+		$schedule = $parser->parseCalendar();
 		print $schedule;
 		print '</div>';
 		// $calender2 = new \eu\freeplace\php\calendar\Calendar();

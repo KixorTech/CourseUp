@@ -1,5 +1,6 @@
 <?php
-require_once("htmlSchedule.php");
+require_once('htmlSchedule.php');
+require_once('CalendarView.php');
 
 class ListView implements CalendarView
 {
