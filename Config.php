@@ -64,6 +64,11 @@ class Config
 				self::$ettings[$key] = $val;
 			}
 		}
+
+		if (!isset(self::$ettings['DefaultView']))
+		{
+			self::$ettings['DefaultView'] = 'List';
+		}
 	}
 
 	public function setConfigSettings($key, $contents) {
