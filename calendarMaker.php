@@ -4,7 +4,9 @@ require_once('common.php');
 
 // the following function was reference from
 // https://stackoverflow.com/questions/14643617/create-table-using-javascript
-function tableCreate() {
+class CalendarTable implements CalendarView {
+
+function parseCalendar() {
 	$cal = Calendar::getInstance();
 	$config = Config::getInstance();
 
@@ -70,5 +72,6 @@ function tableCreate() {
 	$dom->appendChild($tblDiv);
 	
 	echo $dom->saveHTML();
+}
 }
 ?>

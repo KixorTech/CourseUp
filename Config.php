@@ -10,6 +10,7 @@ See http://courseup.org for license information.
 */
 require_once('htmlSchedule.php');
 require_once('ListView.php');
+require_once('calendarMaker.php');
 
 class Config
 {
@@ -93,6 +94,7 @@ class Config
 	{
 		$parsers = array();
 		$parsers['List'] = new ListView();
+		$parsers['Table'] = new CalendarTable();
 
 		return $parsers;
 	}
