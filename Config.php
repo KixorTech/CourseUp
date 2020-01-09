@@ -91,12 +91,13 @@ class Config
 		return self::$instance;
 	}
 
-	public function buildParserArray() {
-	$parsers = array();
-	$parsers['List'] = "fileGetHtmlScheduleCalendar";
+	public function buildParserArray() 
+	{
+		$parsers = array();
+		$parsers['List'] = "fileGetHtmlScheduleCalendar";
 
-	return $parsers;
-}
+		return $parsers;
+	}
 
 }
 

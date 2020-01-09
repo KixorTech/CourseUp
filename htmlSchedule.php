@@ -202,21 +202,13 @@ function getSessionHtml($session, $dayCount, &$currentDay, &$weekCount, &$itemsD
 	return $row;
 }
 
-function fileGetHtmlScheduleCalendar($fileContents)
+function fileGetHtmlScheduleCalendar()
 {
 	date_default_timezone_set('UTC');
 
-	$f = $fileContents;
-
-	$f = PDExtension::instance()->parseInput($f); 
-	$f = removeCommentLines($f);
-
 	$cal = Calendar::getInstance();
-	$cal->parseCalendarFile($f);
 	$config_obj = Config::getInstance();
 	
-	$sessions = explode('Session:', $f);
-
 	$currentDay = $config_obj->getConfigSetting('FirstQuarterDay');
 	$scheduleHtml = '';
 	$itemsDue = Array();
@@ -293,14 +285,5 @@ function fileGetHtmlScheduleCalendar($fileContents)
 	//$s = ParsedownExtra::instance()->text($scheduleHtml); 
 	//return $s;
 }
-
-function getHtmlSchedule()
-{
-	$f = file_get_contents('schedule_data.txt');
-	return getFileHtmlSchedule($f);
-}
-
-//$s = getHtmlSchedule();
-//echo $s;
 
 ?>
