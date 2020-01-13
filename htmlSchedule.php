@@ -149,8 +149,9 @@ function getBulletList($string, $currentDay, &$itemsDue)
 
 	foreach($itemsDue as $item)
 	{
-		if($item->daysTillDue == 0)
-			$list = $list . '* Due: '.trim($item->session, '*')."\n";
+		if($item->daysTillDue == 0) {
+			$list = $list . '* Due: '.trim($item->session, ' *')."\n";
+		}
 
 		
 	}
