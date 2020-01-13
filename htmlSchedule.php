@@ -128,7 +128,6 @@ function getBulletList($string, $currentDay, &$itemsDue)
 					$dueDate = getNextClassDay($dueDate);
 				if (isset($hourDue)) {
 					$timeDue = date("g:i a", strtotime($hourDue));
-					echo $timeDue;
 					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $timeDue .  ')';
 				} else {
 					$session = $session . ' (due ' .$dueDate->format('D M d') . ')';
