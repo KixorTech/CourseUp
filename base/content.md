@@ -145,7 +145,7 @@ Session:
 * And so forth
 
 Session:
-* And so forth
+* Test Assignment due +2
 
 Session:
 * And so forth

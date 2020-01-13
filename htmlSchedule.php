@@ -114,7 +114,8 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				$p = explode('due +', $session);
 				$session = $p[0];
 				$session = getItemLink($session);
-				$daysTillDue = $p[1];
+				$daysTillDue = explode('.', $p[1])[0];
+				$hourDue = explode('.', $p[1])[1];
 
 				$itemDue = new ItemDue();
 				$itemDue->session = $session;
@@ -125,7 +126,14 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				$dueDate = $currentDay;
 				for($d=0; $d<$daysTillDue; $d++)
 					$dueDate = getNextClassDay($dueDate);
-				$session = $session . ' (due ' .$dueDate->format('D M d') .')';
+				if (isset($hourDue)) {
+					$timeDue = date("g:i a", strtotime($hourDue));
+					echo $timeDue;
+					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $timeDue .  ')';
+				} else {
+					$session = $session . ' (due ' .$dueDate->format('D M d') . ')';
+				}
+				
 				//TODO fix timezone issue
 				$dueDate->add($endOfDay);
 				//$timer = '<script language="javascript">timer('. $dueDate->format('U') .');</script>';
