@@ -16,7 +16,7 @@ Session:
  * +Plus symbols automatically link to that resource
  * Due dates are counted in sessions units due +4
  //* Items can be commented
- * Links can be <a href="resource">manually</a> added due +3
+ * Links can be <a href="resource">manually</a> added due +4.15:00
 
 Session:
 * Continue learning at an alarming rate

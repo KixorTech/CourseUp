@@ -78,6 +78,7 @@ function removeCommentLines($string)
 class ItemDue {
 	public $session;
 	public $daysTillDue;
+	public $timeDue;
 }
 
 function getItemLink($s)
@@ -114,21 +115,28 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				$p = explode('due +', $session);
 				$session = $p[0];
 				$session = getItemLink($session);
-				$daysTillDue = explode('.', $p[1])[0];
-				$hourDue = explode('.', $p[1])[1];
 
+				if (strpos($p[1], '.')) {
+					$daysTillDue = explode('.', $p[1])[0];
+					$hourDue = explode('.', $p[1])[1];
+					$hourDue = date("g:i a", strtotime($hourDue));
+				} else {
+					$daysTillDue = intval($p[1]);
+					$hourDue = -1;
+				}
+				
 				$itemDue = new ItemDue();
 				$itemDue->session = $session;
 				$itemDue->daysTillDue = $daysTillDue;
+				$itemDue->timeDue = $hourDue;
 				$itemsDue[] = $itemDue;
 
 				$endOfDay = new DateInterval('PT23H59M');
 				$dueDate = $currentDay;
 				for($d=0; $d<$daysTillDue; $d++)
 					$dueDate = getNextClassDay($dueDate);
-				if (isset($hourDue)) {
-					$timeDue = date("g:i a", strtotime($hourDue));
-					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $timeDue .  ')';
+				if ($hourDue != -1) {
+					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $hourDue .  ')';
 				} else {
 					$session = $session . ' (due ' .$dueDate->format('D M d') . ')';
 				}
@@ -150,7 +158,11 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	foreach($itemsDue as $item)
 	{
 		if($item->daysTillDue == 0) {
-			$list = $list . '* Due: '.trim($item->session, ' *')."\n";
+			$list = $list . '* Due: '.trim($item->session, ' *');
+			if ($item->timeDue != -1) {
+				$list = $list . ' at '.trim($item->timeDue);
+			}
+			$list = $list ."\n";
 		}
 
 		
