@@ -14,33 +14,45 @@ function parseCalendar() {
 	$currentDay = $config->getConfigSetting("FirstQuarterDay");
 	$lastDay = $config->getConfigSetting("LastQuarterDay");
 
-    $dom = new DOMDocument();
-	$tblDiv = $dom->createElement('div');
-	$tblDiv->setAttribute('id', 'newCalendarDiv');
+	// $dom = new DOMDocument();
+	
+	$HTMLString = '<div id="newCalendarDiv">';
+	// $tblDiv = $dom->createElement('div');
+	// $tblDiv->setAttribute('id', 'newCalendarDiv');
 
 	$attributeNames = ['Assignments'];
 	
 	// ===== Making the header: 
-	$tbl = $dom->createElement('table');
-	$tbl->setAttribute('style', 'width:100%;');
-	$tbl->setAttribute('border', '1px solid #aaa;');
-	$tbdy = $dom->createElement('tbody');
+	
+	$HTMLString = $HTMLString . '<table style="width:100%", border="1px solid #aaa">';
+	// $tbl = $dom->createElement('table');
+	// $tbl->setAttribute('style', 'width:100%;');
+	// $tbl->setAttribute('border', '1px solid #aaa;');
 
-	$headerRow = $dom->createElement('tr');
-	$th = $dom->createElement('th');
-	$th->textContent = "Week";
-	$headerRow->appendChild($th);
+	$HTMLString = $HTMLString . '<tbody>';
+	// $tbdy = $dom->createElement('tbody');
 
-	$th = $dom->createElement('th');
-	$th->textContent = "Session";
-	$headerRow->appendChild($th);
+	$HTMLString = $HTMLString . '<tr>';
+	// $headerRow = $dom->createElement('tr');
+
+	$HTMLString = $HTMLString . '<th>Week</th>';
+	// $th = $dom->createElement('th');
+	// $th->textContent = "Week";
+	// $headerRow->appendChild($th);
+
+	$HTMLString = $HTMLString . '<th>Session</th>';
+	// $th = $dom->createElement('th');
+	// $th->textContent = "Session";
+	// $headerRow->appendChild($th);
 
 	for ($i = 0; $i < sizeof($attributeNames); $i++){
-		$th = $dom->createElement('th');
-		$th->textContent = $attributeNames[$i];
-		$headerRow->appendChild($th);
+		$HTMLString = $HTMLString . '<th>' . $attributeNames[$i] . '</th>';
+		// $th = $dom->createElement('th');
+		// $th->textContent = $attributeNames[$i];
+		// $headerRow->appendChild($th);
 	}
-	$tbdy->appendChild($headerRow);
+	$HTMLString = $HTMLString . '</tr>';
+	// $tbdy->appendChild($headerRow);
 	
 	// ===== Making the table:
 	$w=0; #week
@@ -48,45 +60,54 @@ function parseCalendar() {
 	$itemsDue = Array();
 	while ($currentDay <= $lastDay) {
 		for ($d = 0; $d < sizeof($classDaysPerWeek); $d++) {
-			$tr = $dom->createElement('tr');
+			$HTMLString = $HTMLString . '<tr>';
+			// $tr = $dom->createElement('tr');
+
 			for ($c = 0; $c < sizeof($attributeNames)+2; $c++) {
-				$td = $dom->createElement('td');
-				$text = '';
+				$HTMLString = $HTMLString . '<td>';
+				// $td = $dom->createElement('td');
+
+				// $text = '';
 				if ($c == 0 && $d == 0) {
-					$text = "Week " . ($w + 1);
-					$td->textContent = $text;
+					$HTMLString = $HTMLString . "Week " . ($w + 1);
+					// $text = "Week " . ($w + 1);
+					// $td->textContent = $text;
 				}
 				else if ($c == 1) {
-					$text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $currentDay->format('D M d');
-					// $text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $classDaysPerWeek[$d];
-					$td->textContent = $text;
+					$HTMLString = $HTMLString . ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $currentDay->format('D M d');
+					// $text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $currentDay->format('D M d');
+					// //$text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $classDaysPerWeek[$d];
+					// $td->textContent = $text;
 				}
 				else if ($c == 2){
 					
 					$sessionHtml = getBulletList($cal->getSession($s), clone $currentDay, $itemsDue);
 					$sessionHtml = PDExtension::instance()->text($sessionHtml);
-					// $text = $sessionHtml;
-					$sDom = $dom->createElement('div');
-					$sDom->innerHTML = $sessionHtml;
-					$td->appendChild($sDom);
+					$HTMLString = $HTMLString . $sessionHtml;
 					$s++;
 				}
 				
-				// $td->textContent = $text;
-				$tr->appendChild($td);
+				$HTMLString = $HTMLString . '</td>';
+				// $tr->appendChild($td);
 			}
-			$tbdy->appendChild($tr);
+			$HTMLString = $HTMLString . '</tr>';
+			// $tbdy->appendChild($tr);
 
 			$currentDay = getNextClassDay($currentDay);
 			if ($currentDay > $lastDay) break;
 		}
 		$w += 1;
 	}
-	$tbl->appendChild($tbdy);
-	$tblDiv->appendChild($tbl);
-	$dom->appendChild($tblDiv);
+	$HTMLString = $HTMLString . '</tbody>';
+	// $tbl->appendChild($tbdy);
+
+	$HTMLString = $HTMLString . '</table>';
+	// $tblDiv->appendChild($tbl);
+
+	$HTMLString = $HTMLString . '</div>';
+	// $dom->appendChild($tblDiv);
 	
-	echo $dom->saveHTML();
+	echo $HTMLString;
 }
 }
 ?>
