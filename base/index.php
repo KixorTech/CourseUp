@@ -16,7 +16,7 @@ if(isset($_GET['resource'])) {
 
 //include '../CourseUp/Parsedown.php';
 require_once('CourseUp/PDExtension.php');
-require_once('CourseUp/htmlSchedule.php');
+require_once('CourseUp/Calendar.php');
 require_once('CourseUp/common.php');
 require_once('CourseUp/calendarMaker.php');
 

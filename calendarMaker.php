@@ -1,5 +1,4 @@
 <?php
-require_once('htmlSchedule.php');
 require_once('common.php');
 
 // the following function was reference from
