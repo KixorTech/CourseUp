@@ -51,18 +51,20 @@ include('header.htm');
 	if($isScheduleDoc)
 	{
 		$f = preg_replace($calendarKeyword, '', $f);
+		$f = PDExtension::instance()->parseInput($f); 
+		$f = removeCommentLines($f);
+		Calendar::getInstance()->parseCalendarFile($f);
+
 		print '<p><h3>';
 		print Config::getInstance()->getConfigSetting('CourseTitle');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
-		$schedule = $parser($f);
+
+		$schedule = $parser->parseCalendar();
 		print $schedule;
 		print '</div>';
 		// $calender2 = new \eu\freeplace\php\calendar\Calendar();
 		// $calToAdd = $calender2->draw();
-		print "<div id='createdTable'>";
-		tableCreate();
-		print "</div>";
 	}
 	else
 	{
