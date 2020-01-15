@@ -41,7 +41,9 @@ function tableCreate() {
 	$tbdy->appendChild($headerRow);
 	
 	// ===== Making the table:
-	$w=0;
+	$w=0; #week
+	$s=1; #session
+	$itemsDue = Array();
 	while ($currentDay <= $lastDay) {
 		for ($d = 0; $d < sizeof($classDaysPerWeek); $d++) {
 			$tr = $dom->createElement('tr');
@@ -50,12 +52,25 @@ function tableCreate() {
 				$text = '';
 				if ($c == 0 && $d == 0) {
 					$text = "Week " . ($w + 1);
+					$td->textContent = $text;
 				}
-				if ($c == 1) {
+				else if ($c == 1) {
 					$text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $currentDay->format('D M d');
 					// $text = ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $classDaysPerWeek[$d];
+					$td->textContent = $text;
 				}
-				$td->textContent = $text;
+				else if ($c == 2){
+					
+					$sessionHtml = getBulletList($cal->getSession($s), clone $currentDay, $itemsDue);
+					$sessionHtml = PDExtension::instance()->text($sessionHtml);
+					// $text = $sessionHtml;
+					$sDom = $dom->createElement('div');
+					$sDom->innerHTML = $sessionHtml;
+					$td->appendChild($sDom);
+					$s++;
+				}
+				
+				// $td->textContent = $text;
 				$tr->appendChild($td);
 			}
 			$tbdy->appendChild($tr);
