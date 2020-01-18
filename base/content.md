@@ -16,7 +16,8 @@ Session:
  * +Plus symbols automatically link to that resource
  * Due dates are counted in sessions units due +4
  //* Items can be commented
- * Links can be <a href="resource">manually</a> added due +4.15:00
+ * Links can be <a href="resource">manually</a> added due +6.15:45
+ * 3 Exams due 2019-12-19.17:05
 
 Session:
 * Continue learning at an alarming rate

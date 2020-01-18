@@ -148,19 +148,28 @@ function getBulletList($string, $currentDay, &$itemsDue)
 		if(strlen($item) > 0)
 		{
 			$session = $item;
-			if(strpos($session, 'due +'))
+			if(strpos($session, 'due'))
 			{
-				$p = explode('due +', $session);
+				if (!strpos($session, 'due +') &&
+						!preg_match('/.+ due \d\d\d\d-\d\d-\d\d*/', $session)) {
+					print 'Incorrect Due Date Formatting';
+					return;
+				}
+
+				$p = explode('due ', $session);
+				$p[1] = ltrim($p[1], '+');
 				$session = $p[0];
 				$session = getItemLink($session);
+				// print_r($p);
 
 				if (strpos($p[1], '.')) {
-					$daysTillDue = explode('.', $p[1])[0];
+					$daysTillDue = getSessionDueDate(explode('.', $p[1])[0], $currentDay);
 					$hourDue = explode('.', $p[1])[1];
 					$hourDue = date("g:i a", strtotime($hourDue));
 				} else {
-					$daysTillDue = intval($p[1]);
+					$daysTillDue = getSessionDueDate($p[1], $currentDay);
 					$hourDue = -1;
+					//print 'daysTilDue: ' . $daysTillDue;
 				}
 				
 				$itemDue = new ItemDue();
@@ -207,6 +216,20 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	}
 
 	return $list;
+}
+
+function getSessionDueDate($dueDate, $currentDay) {
+	if (preg_match('/\d\d\d\d-\d\d-\d\d/', $dueDate)) {
+		$date = new DateTime($dueDate);
+		$days = 0;
+		while ($currentDay < $date) {
+			$currentDay = getNextClassDay($currentDay);
+			$days++;
+		}
+		return $days;
+	} else {
+		return $dueDate;
+	}
 }
 
 function onBreak($date)
