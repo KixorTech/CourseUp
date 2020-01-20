@@ -18,6 +18,7 @@ Session:
  //* Items can be commented
  * Links can be <a href="resource">manually</a> added due +6.15:45
  * 3 Exams due 2019-12-19.17:05
+ * Quiz due 2020-01-05.17:05
 
 Session:
 * Continue learning at an alarming rate

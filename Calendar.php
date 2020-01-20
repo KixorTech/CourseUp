@@ -163,7 +163,9 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				// print_r($p);
 
 				if (strpos($p[1], '.')) {
-					$daysTillDue = getSessionDueDate(explode('.', $p[1])[0], $currentDay);
+					$assignmentDate = explode('.', $p[1])[0];
+					$daysTillDue = getSessionDueDate($assignmentDate, $currentDay);
+					
 					$hourDue = explode('.', $p[1])[1];
 					$hourDue = date("g:i a", strtotime($hourDue));
 				} else {
@@ -176,6 +178,7 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				$itemDue->session = $session;
 				$itemDue->daysTillDue = $daysTillDue;
 				$itemDue->timeDue = $hourDue;
+				$itemDue->dateDue = $assignmentDate;
 				$itemsDue[] = $itemDue;
 
 				$endOfDay = new DateInterval('PT23H59M');
@@ -183,7 +186,7 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				for($d=0; $d<$daysTillDue; $d++)
 					$dueDate = getNextClassDay($dueDate);
 				if ($hourDue != -1) {
-					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $hourDue .  ')';
+					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $hourDue . ')';
 				} else {
 					$session = $session . ' (due ' .$dueDate->format('D M d') . ')';
 				}
@@ -206,6 +209,10 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	{
 		if($item->daysTillDue == 0) {
 			$list = $list . '* Due: '.trim($item->session, ' *');
+			if (isset($item->dateDue)) {
+				$date = $item->dateDue;
+				$list = $list . ' on <u>' . date_format($date, 'D M yy').'</u>';
+			}
 			if ($item->timeDue != -1) {
 				$list = $list . ' at '.trim($item->timeDue);
 			}
@@ -218,18 +225,28 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	return $list;
 }
 
-function getSessionDueDate($dueDate, $currentDay) {
+function getSessionDueDate(&$dueDate, $currentDay) {
 	if (preg_match('/\d\d\d\d-\d\d-\d\d/', $dueDate)) {
-		$date = new DateTime($dueDate);
+		$dueDate = new DateTime($dueDate);
 		$days = 0;
-		while ($currentDay < $date) {
+		while ($currentDay < $dueDate) {
 			$currentDay = getNextClassDay($currentDay);
 			$days++;
 		}
-		return $days;
+		$diff = $currentDay->diff( $dueDate );
+		$diffDays = (integer)$diff->format( "%R%a" );
+		if ($diffDays >= 0) {
+			$dueDate = null;
+		}
+		while ($diffDays < 0) {
+			$diffDays++;
+			$days--;
+		}
 	} else {
-		return $dueDate;
+		$days = $dueDate;
+		$dueDate = null;
 	}
+	return $days;
 }
 
 function onBreak($date)
@@ -289,6 +306,7 @@ class ItemDue {
 	public $session;
 	public $daysTillDue;
 	public $timeDue;
+	public $dateDue;
 }
 
 ?>
