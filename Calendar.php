@@ -211,7 +211,7 @@ function getBulletList($string, $currentDay, &$itemsDue)
 			$list = $list . '* Due: '.trim($item->session, ' *');
 			if (isset($item->dateDue)) {
 				$date = $item->dateDue;
-				$list = $list . ' on <u>' . date_format($date, 'D M yy').'</u>';
+				$list = $list . ' on <b>' . date_format($date, 'D M d').'</b>';
 			}
 			if ($item->timeDue != -1) {
 				$list = $list . ' at '.trim($item->timeDue);
