@@ -162,6 +162,7 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				$session = getItemLink($session);
 				// print_r($p);
 
+				$assignmentDate = null;
 				if (strpos($p[1], '.')) {
 					$assignmentDate = explode('.', $p[1])[0];
 					$daysTillDue = getSessionDueDate($assignmentDate, $currentDay);
@@ -171,25 +172,31 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				} else {
 					$daysTillDue = getSessionDueDate($p[1], $currentDay);
 					$hourDue = -1;
-					//print 'daysTilDue: ' . $daysTillDue;
 				}
 				
 				$itemDue = new ItemDue();
 				$itemDue->session = $session;
 				$itemDue->daysTillDue = $daysTillDue;
 				$itemDue->timeDue = $hourDue;
-				$itemDue->dateDue = $assignmentDate;
+				$itemDue->nonClassDue = $assignmentDate;
 				$itemsDue[] = $itemDue;
 
 				$endOfDay = new DateInterval('PT23H59M');
 				$dueDate = $currentDay;
-				for($d=0; $d<$daysTillDue; $d++)
+				for($d=0; $d<$daysTillDue; $d++) {
 					$dueDate = getNextClassDay($dueDate);
-				if ($hourDue != -1) {
-					$session = $session . ' (due ' .$dueDate->format('D M d') . ' at '. $hourDue . ')';
-				} else {
-					$session = $session . ' (due ' .$dueDate->format('D M d') . ')';
 				}
+
+				if (isset($itemDue->nonClassDue)) {
+					$date = $itemDue->nonClassDue;
+					$session = $session . ' (due ' . date_format($date, 'D M d');
+				} else {
+					$session = $session . ' (due ' .$dueDate->format('D M d');
+				}
+				if ($hourDue != -1) {
+					$session = $session . ' at '. $hourDue;
+				}
+				$session = $session . ')';
 				
 				//TODO fix timezone issue
 				$dueDate->add($endOfDay);
@@ -208,9 +215,9 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	foreach($itemsDue as $item)
 	{
 		if($item->daysTillDue == 0) {
-			$list = $list . '* Due: '.trim($item->session, ' *');
-			if (isset($item->dateDue)) {
-				$date = $item->dateDue;
+			$list = $list . '* <b>Due:</b> '.trim($item->session, ' *');
+			if (isset($item->nonClassDue)) {
+				$date = $item->nonClassDue;
 				$list = $list . ' on <b>' . date_format($date, 'D M d').'</b>';
 			}
 			if ($item->timeDue != -1) {
@@ -306,7 +313,7 @@ class ItemDue {
 	public $session;
 	public $daysTillDue;
 	public $timeDue;
-	public $dateDue;
+	public $nonClassDue;
 }
 
 ?>
