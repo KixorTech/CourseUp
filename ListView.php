@@ -1,5 +1,4 @@
 <?php
-require_once('htmlSchedule.php');
 require_once('CalendarView.php');
 
 class ListView implements CalendarView
@@ -63,7 +62,7 @@ class ListView implements CalendarView
                 $scheduleHtml .= "<div id=\"currentSessions\">\n\n";
             }
     
-            $sessionHtml = getSessionHtml($cal->getSession($i), $i, $currentDay, $weekCount, $itemsDue);
+            $sessionHtml = getSessionHtml($i, $currentDay, $weekCount, $itemsDue);
     
             $endOfWeek =  $i > 0 && $i % $daysInWeek == 0;
             if($endOfWeek) {
