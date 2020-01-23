@@ -244,11 +244,10 @@ function getSessionDueDate(&$dueDate, $currentDay) {
 		$diffDays = (integer)$diff->format( "%R%a" );
 		if ($diffDays >= 0) {
 			$dueDate = null;
-		}
-		while ($diffDays < 0) {
-			$diffDays++;
+		} else {
 			$days--;
 		}
+		
 	} else {
 		$days = $dueDate;
 		$dueDate = null;
