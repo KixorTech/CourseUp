@@ -1,9 +1,9 @@
 <?php
-require_once('common.php');
+require_once('CalendarView.php');
 
 // the following function was reference from
 // https://stackoverflow.com/questions/14643617/create-table-using-javascript
-class CalendarTable implements CalendarView {
+class TableView implements CalendarView {
 
 function parseCalendar() {
 	$cal = Calendar::getInstance();

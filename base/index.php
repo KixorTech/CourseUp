@@ -18,8 +18,6 @@ if(isset($_GET['resource'])) {
 require_once('CourseUp/PDExtension.php');
 require_once('CourseUp/Calendar.php');
 require_once('CourseUp/common.php');
-require_once('CourseUp/calendarMaker.php');
-
 
 $publicErrorMessages = false;//$config['PublicErrorMessages'];
 if($publicErrorMessages) {

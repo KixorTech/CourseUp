@@ -9,7 +9,7 @@ micah@kixortech.com
 See http://courseup.org for license information.
 */
 require_once('ListView.php');
-require_once('calendarMaker.php');
+require_once('TableView.php');
 
 class Config
 {
@@ -98,11 +98,10 @@ class Config
 	{
 		$parsers = array();
 		$parsers['List'] = new ListView();
-		$parsers['Table'] = new CalendarTable();
+		$parsers['Table'] = new TableView();
 
 		return $parsers;
 	}
-
 }
 
 ?>
