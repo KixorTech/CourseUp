@@ -48,6 +48,8 @@ function parseCalendar() {
 					$sessionHtml = PDExtension::instance()->text($sessionHtml);
 					$HTMLString = $HTMLString . $sessionHtml;
 					$s++;
+					for($j=0; $j<count($itemsDue); $j++)
+                		$itemsDue[$j]->daysTillDue--;
 				}
 				$HTMLString = $HTMLString . '</td>';
 			}
