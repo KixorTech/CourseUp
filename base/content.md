@@ -1,160 +1,51 @@
-\calendar
 
-//This file is part of the CourseUp project.
-//http://courseup.org
-//
-//(c) Micah Taylor
-//micah@kixortech.com
-//
-//See http://courseup.org for license information.
+#LaTeX test
 
+**Math mode, double $$**
 
-// ----------------------------------------
-Session:
-* Read the [syllabus](/syllabus/)
-* Bullet lists might be useful
- * +Plus symbols automatically link to that resource
- * Due dates are counted in sessions units due +4
- //* Items can be commented
- * Links can be <a href="resource">manually</a> added due +6.15:45
- * 3 Exams due 2019-12-19.17:05
- * Quiz due 2019-12-18.17:05
- * Bad Assignment due 2020-01-05.17:00
+Some text before
+$$x\cdot y\times z$$ and
 
-Session:
-* Continue learning at an alarming rate
+$$ \int_{-\infty}^\infty\frac{x}{\sqrt{x^2}}dx $$
 
-Session:
-* And so forth
+and
 
-Session:
-* And so forth
+$$
+\mathbf{M}_{projection}=
+\begin{bmatrix}
+\frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\\\
+0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\\\
+0 & 0 & \frac{2}{n-f} & -\frac{n+f}{n-f} \\\\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
 
-Session:
-* And so forth
+after
 
-Session:
-* And so forth
+**Inline mode, single $**
 
-Session:
-* And so forth
+Some text before $x\cdot y\times z$ and $\int_{-\infty}^\infty\frac{x}{\sqrt{x^2}}dx$
+and
+$
+\mathbf{M}_{projection}=
+\begin{bmatrix}
+\frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\\\
+0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\\\
+0 & 0 & \frac{2}{n-f} & -\frac{n+f}{n-f} \\\\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$
+after.
 
-Session:
-* And so forth
+##Inline mode, \\(, \\)
 
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* Test Assignment due +2
-
-Session:
-* And so forth
-
-Session:
-* And so forth
-
-Session:
-* And so forth
+Some text before \(x\cdot y\times z\) and \( \int_{-\infty}^\infty\frac{x}{\sqrt{x^2}}dx \) and \(
+\mathbf{M}_{projection}=
+\begin{bmatrix}
+\frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\\\
+0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\\\
+0 & 0 & \frac{2}{n-f} & -\frac{n+f}{n-f} \\\\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\)
+after
