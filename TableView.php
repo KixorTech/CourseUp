@@ -57,7 +57,6 @@ function parseCalendar() {
 
 			if(isLastDayBeforeBreak($currentDay)) {
 				$HTMLString = $HTMLString . '<tr bgcolor="lightgrey"> <td colspan="3"; align="center"> <b> BREAK </b> </td>  </tr>';
-				echo "AAAAAAAH";
             }
 			
 			$currentDay = getNextClassDay($currentDay);
