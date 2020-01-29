@@ -19,7 +19,7 @@ function parseCalendar() {
 	
 	$HTMLString = $HTMLString . '<table style="width:100%", border="1px solid #aaa">';
 	$HTMLString = $HTMLString . '<tbody>';
-	$HTMLString = $HTMLString . '<tr>';
+	$HTMLString = $HTMLString . '<tr bgcolor="#A4A4A4">';
 	$HTMLString = $HTMLString . '<th>Week</th>';
 	$HTMLString = $HTMLString . '<th>Session</th>';
 
@@ -54,6 +54,12 @@ function parseCalendar() {
 				$HTMLString = $HTMLString . '</td>';
 			}
 			$HTMLString = $HTMLString . '</tr>';
+
+			if(isLastDayBeforeBreak($currentDay)) {
+				$HTMLString = $HTMLString . '<tr bgcolor="lightgrey"> <td colspan="3"; align="center"> <b> BREAK </b> </td>  </tr>';
+				echo "AAAAAAAH";
+            }
+			
 			$currentDay = getNextClassDay($currentDay);
 			if ($currentDay > $lastDay) break;
 		}
