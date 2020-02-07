@@ -19,10 +19,12 @@ class Calendar
 	private static $instance = null;
 	private static $events;
 	private static $ses_num;
+	private static $due_list;
 
 	private function __construct() 
 	{
 		self::$events = array();
+		self::$due_list = array();
 	}
 
 	public function parseCalendarFile($f) 
@@ -55,6 +57,10 @@ class Calendar
 			self::$instance = new Calendar();
 		}
 		return self::$instance;
+	}
+
+	public static function addToDueList($itemDue, $dueDay) {
+		self::$due_list[$itemDue] = $dueDay;
 	}
 }
 
@@ -216,6 +222,7 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	{
 		if($item->daysTillDue == 0) {
 			$list = $list . '* <b>Due:</b> '.trim($item->session, ' *');
+			addItemDueToCalendarList($item, $currentDay);
 			if (isset($item->nonClassDue)) {
 				$date = $item->nonClassDue;
 				$list = $list . ' on <b>' . date_format($date, 'D M d').'</b>';
@@ -225,11 +232,24 @@ function getBulletList($string, $currentDay, &$itemsDue)
 			}
 			$list = $list ."\n";
 		}
-
-		
 	}
-
 	return $list;
+}
+
+function addItemDueToCalendarList($item, $currentDay) {
+	if (isset($item->nonClassDue)) {
+		$date = date_format($item->nonClassDue, 'D M d');
+		if ($item->timeDue != -1) {
+			$date = $date." at ".trim($item->timeDue);
+		}
+		Calendar::getInstance()->addToDueList(trim($item->session, ' *'), $date);
+	} else if ($item->timeDue != -1) {
+		$date = date_format($currentDay, 'D M d'). ' at '.trim($item->timeDue);
+		Calendar::getInstance()->addToDueList(trim($item->session, ' *'), $date);
+	} else {
+		$date = date_format($currentDay, 'D M d');
+		Calendar::getInstance()->addToDueList(trim($item->session, ' *'), $date);
+	}
 }
 
 function getSessionDueDate(&$dueDate, $currentDay) {

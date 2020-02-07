@@ -25,7 +25,7 @@ Session:
 * Continue learning at an alarming rate
 
 Session:
-* And so forth
+* Look at [orthographic projections](/orthographic/) due +6
 
 Session:
 * And so forth
