@@ -6,13 +6,12 @@ require_once('CalendarView.php');
 class TableView implements CalendarView {
 
 function parseCalendar() {
-	$cal = Calendar::getInstance();
 	$config = Config::getInstance();
 
 	$classDaysPerWeek = $config->getConfigSetting("ClassOnWeekDays");
 	$currentDay = $config->getConfigSetting("FirstQuarterDay");
 	$lastDay = $config->getConfigSetting("LastQuarterDay");
-	$attributeNames = ['Assignments'];
+	$attributeNames = ['Assignments', 'TestColumn'];
 	$HTMLString = '<div id="newCalendarDiv">';
 	
 	// ===== Making the header: 
@@ -31,7 +30,6 @@ function parseCalendar() {
 	// ===== Making the table:
 	$w=0; #week
 	$s=1; #session
-	$itemsDue = Array();
 	while ($currentDay <= $lastDay) {
 		for ($d = 0; $d < sizeof($classDaysPerWeek); $d++) {
 			$HTMLString = $HTMLString . '<tr>';
@@ -40,23 +38,22 @@ function parseCalendar() {
 				if ($c == 0 && $d == 0) {
 					$HTMLString = $HTMLString . "Week " . ($w + 1);
 				}
+				else if ($c == 0) { //do nothing
+				
+				}
 				else if ($c == 1) {
 					$HTMLString = $HTMLString . ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $currentDay->format('D M d');
 				}
-				else if ($c == 2){
-					$sessionHtml = getBulletList($cal->getSession($s), clone $currentDay, $itemsDue);
-					$sessionHtml = PDExtension::instance()->text($sessionHtml);
-					$HTMLString = $HTMLString . $sessionHtml;
-					$s++;
-					for($j=0; $j<count($itemsDue); $j++)
-                		$itemsDue[$j]->daysTillDue--;
+				else {
+					$HTMLString = $HTMLString . $this->getContentForAddedColumn($attributeNames, $c-2, $s, $currentDay);
 				}
 				$HTMLString = $HTMLString . '</td>';
 			}
 			$HTMLString = $HTMLString . '</tr>';
 
 			if(isLastDayBeforeBreak($currentDay)) {
-				$HTMLString = $HTMLString . '<tr bgcolor="lightgrey"> <td colspan="3"; align="center"> <b> BREAK </b> </td>  </tr>';
+				$numCol = 2 + sizeof($attributeNames);
+				$HTMLString = $HTMLString . '<tr bgcolor="lightgrey"> <td colspan="' . $numCol . '"; align="center"> <b> BREAK </b> </td>  </tr>';
             }
 			
 			$currentDay = getNextClassDay($currentDay);
@@ -68,6 +65,24 @@ function parseCalendar() {
 	$HTMLString = $HTMLString . '</table>';
 	$HTMLString = $HTMLString . '</div>';	
 	echo $HTMLString;
+}
+
+function getContentForAddedColumn($attributes, $ColumnNumber, &$SessionNumber, $currentDay) {
+	$HTMLStringtemp = '';
+	if ($attributes[$ColumnNumber] == 'Assignments') { //This is what would be done for 'Assignments'
+		$cal = Calendar::getInstance();
+		$itemsDue = Array();
+		$sessionHtml = getBulletList($cal->getSession($SessionNumber), clone $currentDay, $itemsDue);
+		$sessionHtml = PDExtension::instance()->text($sessionHtml);
+		$HTMLStringtemp = $sessionHtml;
+		$SessionNumber++;
+		for($j=0; $j<count($itemsDue); $j++)
+			$itemsDue[$j]->daysTillDue--;
+	}
+	else if ($attributes[$ColumnNumber] == 'TestColumn') { //This is what would be done for 'TestColumn'
+		$HTMLStringtemp = 'test';
+	}
+	return $HTMLStringtemp;
 }
 }
 ?>
