@@ -99,7 +99,7 @@ function requireLatex()
 function embedLatex()
 {
 	//<!--script src="../../ASCIIMathML.js"></script-->
-	print '<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> MathJax.Hub.Config({jax: ["input/TeX","output/HTML-CSS"],displayAlign: "left"}); </script>';
+	// print '<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> MathJax.Hub.Config({jax: ["input/TeX","output/HTML-CSS"],displayAlign: "left"}); </script>';
 }
 
 function printPaths()
