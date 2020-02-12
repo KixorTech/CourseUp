@@ -13,6 +13,7 @@ See http://courseup.org for license information.
 require_once('PDExtension.php');
 require_once('Config.php');
 require_once('common.php');
+require_once('helpers.php');
 
 class Calendar
 {
@@ -223,7 +224,7 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	{
 		if($item->daysTillDue == 0) {
 			$list = $list . '* <b>Due:</b> '.trim($item->session, ' *');
-			addItemDueToCalendarList($item, $currentDay);
+			addItemDueToCalendarDueList($item, $currentDay);
 			if (isset($item->nonClassDue)) {
 				$date = $item->nonClassDue;
 				$list = $list . ' on <b>' . date_format($date, 'D M d').'</b>';
@@ -237,7 +238,15 @@ function getBulletList($string, $currentDay, &$itemsDue)
 	return $list;
 }
 
-function addItemDueToCalendarList($item, $currentDay) {
+function addItemDueToCalendarDueList($item, $currentDay) {
+	echo getHost();
+
+	$rawText = $item->session;
+	if (preg_match("/\[.*\]\(.*\)/", $rawText)) {
+		
+	}
+
+
 	if (isset($item->nonClassDue)) {
 		$date = date_format($item->nonClassDue, 'D M d');
 		if ($item->timeDue != -1) {
