@@ -63,6 +63,8 @@ class Calendar
 	// TODO: Change how the item's name is stored, see if it is a url and store that url if available
 	public static function addToDueList($itemDue, $dueDay) {
 		self::$due_list[$itemDue] = $dueDay;
+		print_r(self::$due_list);
+		echo "<br><br>";
 	}
 }
 
@@ -239,27 +241,43 @@ function getBulletList($string, $currentDay, &$itemsDue)
 }
 
 function addItemDueToCalendarDueList($item, $currentDay) {
-	echo getHost();
-
 	$rawText = $item->session;
+	$url = NULL;
+	$pathToResource = NULL;
 	if (preg_match("/\[.*\]\(.*\)/", $rawText)) {
-		
+		$name = getStringBetween($rawText, "[", "]");
+		$pathToResource = getStringBetween($rawText, "(", ")");
 	}
+	else if (preg_match('/<a href=".*">.*<\/a>/', $rawText)) {
+		$name = getStringBetween($rawText, "\">", "</a>");
+		$pathToResource = "/".getStringBetween($rawText, "<a href=\"", "\">");
+	}
+	$url = getHost().$pathToResource;
 
-
-	if (isset($item->nonClassDue)) {
-		$date = date_format($item->nonClassDue, 'D M d');
-		if ($item->timeDue != -1) {
-			$date = $date." at ".trim($item->timeDue);
+	if (isset($pathToResource)) {
+		if (isset($item->nonClassDue)) {
+			$date = date_format($item->nonClassDue, 'D M d');
+			if ($item->timeDue != -1) {
+				$date = $date." at ".trim($item->timeDue);
+			}
+			Calendar::getInstance()->addToDueList($url, $date);
+		} else if ($item->timeDue != -1) {
+			$date = date_format($currentDay, 'D M d'). ' at '.trim($item->timeDue);
+			Calendar::getInstance()->addToDueList(trim($url, ' *'), $date);
+		} else {
+			$date = date_format($currentDay, 'D M d');
+			Calendar::getInstance()->addToDueList(trim($url, ' *'), $date);
 		}
-		Calendar::getInstance()->addToDueList(trim($item->session, ' *'), $date);
-	} else if ($item->timeDue != -1) {
-		$date = date_format($currentDay, 'D M d'). ' at '.trim($item->timeDue);
-		Calendar::getInstance()->addToDueList(trim($item->session, ' *'), $date);
-	} else {
-		$date = date_format($currentDay, 'D M d');
-		Calendar::getInstance()->addToDueList(trim($item->session, ' *'), $date);
 	}
+}
+
+function getStringBetween($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
 }
 
 function getSessionDueDate(&$dueDate, $currentDay) {
