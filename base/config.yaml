@@ -12,10 +12,8 @@ CourseTitle: "Super Amazing Test Course"
 MenuLinks:
   - MenuLinkName: Schedule
     MenuLinkURL: /
-  - MenuLinkName: Edit config.yaml
-    MenuLinkURL: /link/
-  - MenuLinkName: To add links
-    MenuLinkURL: /anotherlink/
+  - MenuLinkName: Test Page
+    MenuLinkURL: /test/
 
 FirstQuarterDay: 2019-12-02
 LastBeforeBreak: 2019-12-20
