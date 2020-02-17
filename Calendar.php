@@ -60,11 +60,9 @@ class Calendar
 		return self::$instance;
 	}
 
-	// TODO: Change how the item's name is stored, see if it is a url and store that url if available
+	// DONE: Change how the item's name is stored, see if it is a url and store that url if available
 	public static function addToDueList($itemDue, $dueDay) {
 		self::$due_list[$itemDue] = $dueDay;
-		print_r(self::$due_list);
-		echo "<br><br>";
 	}
 }
 
