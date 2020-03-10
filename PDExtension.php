@@ -61,10 +61,16 @@ class PDExtension extends ParsedownExtra
 		return $block;
 	}
 
-
+	private function handleVars($markdown)
+	{
+		return $markdown;
+	}
 
 	function parseInput($markup)
 	{
+		// replace vars first
+		$markup = self::handleVars($markup);
+
 		//handle input keyword
 		$maxInputRecurs = 4;
 		for($depth=0; $depth<$maxInputRecurs; $depth++)
