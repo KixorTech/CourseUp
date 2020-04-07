@@ -16,6 +16,7 @@ if(isset($_GET['resource'])) {
 
 //include '../CourseUp/Parsedown.php';
 require_once('CourseUp/PDExtension.php');
+require_once('CourseUp/PDVariables.php');
 require_once('CourseUp/Calendar.php');
 require_once('CourseUp/common.php');
 
@@ -41,6 +42,9 @@ include('header.htm');
 		$f = file_get_contents($contentPath);
 		// print 'content f: ' . $f;
 	}
+
+	$PDV = new PDVariables();
+	$f = $PDV->handleVars($f);
 
 	$isScheduleDoc = false;
 	$calendarKeyword = '/^\\\\calendar\r|^\\\\calendar\n/'; // match begin line, lots of whitespace, \calendar, whitespace, end of line

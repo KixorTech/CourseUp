@@ -11,7 +11,7 @@ See http://courseup.org for license information.
 
 require_once('Parsedown.php');
 require_once('ParsedownExtra.php');
-
+require_once('PDVariables.php');
 
 class PDExtension extends ParsedownExtra
 {
@@ -61,16 +61,8 @@ class PDExtension extends ParsedownExtra
 		return $block;
 	}
 
-	private function handleVars($markdown)
-	{
-		return $markdown;
-	}
-
 	function parseInput($markup)
 	{
-		// replace vars first
-		$markup = self::handleVars($markup);
-
 		//handle input keyword
 		$maxInputRecurs = 4;
 		for($depth=0; $depth<$maxInputRecurs; $depth++)
@@ -214,8 +206,12 @@ class PDExtension extends ParsedownExtra
 
 	function text($text)
 	{
-		global $publicErrorMessages;
+		// replace vars first
+		// $vars = new PDVariables();
+		// $markup = $vars->handleVars($text);
 		$markup = $text;
+
+		global $publicErrorMessages;
 
 		$webRootPath = '';
 		if(function_exists('getWebRoot'))

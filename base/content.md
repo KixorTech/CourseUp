@@ -8,6 +8,8 @@
 //
 //See http://courseup.org for license information.
 
+ _name=Isaac
+ _birth=62798
 
 // ----------------------------------------
 Session:
@@ -20,6 +22,7 @@ Session:
  * 3 Exams due 2019-12-19.17:05
  * Quiz due 2019-12-18.17:05
  * Bad Assignment due 2020-01-05.17:00
+ * Hello my name is _name and _birth
 
 Session:
 * Continue learning at an alarming rate

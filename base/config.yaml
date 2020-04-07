@@ -27,4 +27,4 @@ PublicErrorMessages: false
 
 TimeZone: America/Indiana/Indianapolis
 
-DefaultView: Table
+DefaultView: List

@@ -15,12 +15,10 @@ class Config
 {
 	private static $instance = null;
 	private static $ettings;
-	private static $vars;
 
 	private function __construct() 
 	{
 		self::$ettings = array();
-		self::$vars = array();
 	}
 
 	public function loadSettings($configArray) {
@@ -103,27 +101,6 @@ class Config
 		$parsers['Table'] = new TableView();
 
 		return $parsers;
-	}
-
-	public function declareVar($key, $value)
-	{
-		if (!array_key_exists($key, self::$vars))
-		{
-			self::$vars[$key] = $value;
-		}
-	}
-
-	public function setVar($key, $value)
-	{
-		if (array_key_exists($key, self::$vars))
-		{
-			self::$vars[$key] = $value;
-		}
-	}
-
-	public function getVar($key)
-	{
-		return self::$vars[$key];
 	}
 }
 
