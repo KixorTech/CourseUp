@@ -4,5 +4,4 @@ php:
   - 7.3.11
 
 script:
-  - ls
-  - phpunit CourseUp/Tests/
+  - phpunit tests/
