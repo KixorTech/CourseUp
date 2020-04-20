@@ -58,9 +58,10 @@ include('header.htm');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
 
-		// $parsers = Config::getInstance()->buildParserArray();
-		// $parser = $parsers[Config::getInstance()->getConfigSetting("DefaultView")];
-
+		// ideally, we'd have a function in Config or common
+		// that would allow us to cycle through
+		// the different calendar display choices, but this is
+		// a solution for now.
 		print '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle grid format</label>';
         print '<input type="checkbox" id="toggleCalendarFormat">';
 
@@ -82,13 +83,10 @@ include('header.htm');
 			print '</div>';
 		}
 		
-		// print $parsers["List"]->parseCalendar();
-		// print $parsers["Table"]->parseCalendar();
+		// Code before hand: 
 		// $schedule = $parser->parseCalendar();
 		// print $schedule;
 		print '</div>';
-		// $calender2 = new \eu\freeplace\php\calendar\Calendar();
-		// $calToAdd = $calender2->draw();
 	}
 	else
 	{
