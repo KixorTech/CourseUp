@@ -65,10 +65,13 @@ class PDExtension extends ParsedownExtra
 
 	function parseInput($markup)
 	{
-		// echo preg_replace('/[^\\\\]\$|^\$/', '', 'Hello $wor\$ld $ dog');
-		$matches = preg_split('/[^$]\$|^\$/', $markup); // dollar sign at the beginning of a line and not following a backslash
-		// $matches = preg_split('/[^\\\\]\$|^\$/', $markup); // dollar sign at the beginning of a line and not following a backslash
-		echo '<pre>'; print_r($matches); echo '</pre>';
+		// Some preg_split testing: 
+		
+		// $matches = preg_split('/[^$]\$|^\$/', $markup); // looking for double dollar sign
+		// echo '<pre>'; print_r($matches); echo '</pre>';
+
+		// $matches = preg_split('/[^\\\\]\$|^\$/', $markup); // dollar sign at the beginning of a line
+		// echo '<pre>'; print_r($matches); echo '</pre>';
 
 		//handle input keyword
 		$maxInputRecurs = 4;
