@@ -151,18 +151,18 @@ color: #333;
 	vertical-align: text-top;
 }
 
-#pastSessionsCheckbox ~ #pastSessionContent {
+#hidePastSessions ~ #pastSessionContent {
 }
 
-#pastSessionsCheckbox:checked ~ #pastSessionContent {
+#hidePastSessions:checked ~ #pastSessionContent {
 display:none;
 }
 
-#pastSessionsCheckbox:checked ~ #sessionToggleLabelB {
+#hidePastSessions:checked ~ #sessionToggleLabelB {
 visibility: hidden;
 }
 
-#pastSessionsCheckbox {
+#hidePastSessions {
 display:none;
 }
 
@@ -209,7 +209,11 @@ background: linear-gradient(#fff, #ddd);
 #toggleCalendarFormat ~ #calendarFormat {
 }
 
-#toggleCalendarFormat:checked ~ #calendarFormat {
+#toggleCalendarFormat:checked ~ #Calendar1 {
+display:none;
+}
+
+#toggleCalendarFormat:not(:checked) ~ #Calendar2 {
 display:none;
 }
 
@@ -222,6 +226,13 @@ color: #666;
 border: 1px solid #aaa;
 padding: 2px;
 margin: 2px;
+}
+
+#sessionToggleLabel {
+	color: #666;
+	border: 1px solid #aaa;
+	padding: 2px;
+	margin: 2px;
 }
 
 #formatToggleLabel:active {

@@ -14,16 +14,17 @@ class ListView implements CalendarView
         $scheduleHtml = '';
         $itemsDue = Array();
     
-        $scheduleHtml .= '<script src="include/jquery.min.js"></script>';
-        $scheduleHtml .= '<script src="include/screen.js"></script>';
+        // $scheduleHtml .= '<script src="include/jquery.min.js"></script>';
+        // $scheduleHtml .= '<script src="include/screen.js"></script>';
     
         //http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
-        $scheduleHtml .= '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle grid format</label>';
         // //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
-        $scheduleHtml .= '<input type="checkbox" id="toggleCalendarFormat" checked>';
         
-        $scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
         //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
+
+        $scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
+        $scheduleHtml .= '<input type="checkbox" id="hidePastSessions">';
+
         $scheduleHtml .= "<div id=\"pastSessionContent\">\n\n";
     
         $now = new DateTime();

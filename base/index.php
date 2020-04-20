@@ -58,8 +58,34 @@ include('header.htm');
 		print '</h3></p>';
 		print '<div class="scheduleTable">';
 
-		$schedule = $parser->parseCalendar();
-		print $schedule;
+		// $parsers = Config::getInstance()->buildParserArray();
+		// $parser = $parsers[Config::getInstance()->getConfigSetting("DefaultView")];
+
+		print '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle grid format</label>';
+        print '<input type="checkbox" id="toggleCalendarFormat">';
+
+		if(Config::getInstance()->getConfigSetting("DefaultView") == "List") {
+			print '<div id=Calendar1>';
+			print $parsers["List"]->parseCalendar();
+			print '</div>';
+
+			print '<div id=Calendar2>';
+			print $parsers["Table"]->parseCalendar();
+			print '</div>';
+		} else {
+			print '<div id=Calendar1>';
+			print $parsers["Table"]->parseCalendar();
+			print '</div>';
+
+			print '<div id=Calendar2>';
+			print $parsers["List"]->parseCalendar();
+			print '</div>';
+		}
+		
+		// print $parsers["List"]->parseCalendar();
+		// print $parsers["Table"]->parseCalendar();
+		// $schedule = $parser->parseCalendar();
+		// print $schedule;
 		print '</div>';
 		// $calender2 = new \eu\freeplace\php\calendar\Calendar();
 		// $calToAdd = $calender2->draw();

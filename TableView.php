@@ -16,7 +16,7 @@ function parseCalendar() {
 	$HTMLString = '<div id="newCalendarDiv">';
 	
 	// ===== Making the header: 
-	
+	$HTMLString = $HTMLString . '<div id="tableViewEntire">';
 	$HTMLString = $HTMLString . '<table style="width:100%", border="1px solid #aaa">';
 	$HTMLString = $HTMLString . '<tbody>';
 	$HTMLString = $HTMLString . '<tr bgcolor="#A4A4A4">';
@@ -67,6 +67,7 @@ function parseCalendar() {
 	$HTMLString = $HTMLString . '</tbody>';
 	$HTMLString = $HTMLString . '</table>';
 	$HTMLString = $HTMLString . '</div>';	
+	$HTMLString = $HTMLString . '</div>';
 	echo $HTMLString;
 }
 }
