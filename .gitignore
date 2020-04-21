@@ -1,1 +1,11 @@
+<<<<<<< HEAD
 .DS_Store
+=======
+# MacOS
+.DS_Store
+Base/.DS_Store
+
+vendor/
+composer.json
+composer.lock
+>>>>>>> master
