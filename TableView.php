@@ -16,12 +16,12 @@ function parseCalendar() {
 	$HTMLString = '<div id="TableViewDiv">';
 	
 	// ===== Making the header: (TODO move into CSS?)
-	$HTMLString = $HTMLString . '<div id="tableViewEntire">';
-	$HTMLString = $HTMLString . '<table style="width:100%", border="1px solid #aaa">';
-	$HTMLString = $HTMLString . '<tbody>';
-	$HTMLString = $HTMLString . '<tr bgcolor="#A4A4A4">';
-	$HTMLString = $HTMLString . '<th>Week</th>';
-	$HTMLString = $HTMLString . '<th>Session</th>';
+	$HTMLString .= '<div id="tableViewEntire">';
+	$HTMLString .= '<table style="width:100%", border="1px solid #aaa">';
+	$HTMLString .= '<tbody>';
+	$HTMLString .= '<tr bgcolor="#A4A4A4">';
+	$HTMLString .= '<th>Week</th>';
+	$HTMLString .= '<th>Session</th>';
 
 	for ($i = 0; $i < sizeof($attributeNames); $i++){
 		$HTMLString = $HTMLString . '<th>' . $attributeNames[$i] . '</th>';

@@ -22,8 +22,8 @@ class ListView implements CalendarView
         
 //         //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 
-        $scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
-        $scheduleHtml .= '<input type="checkbox" id="hidePastSessions">';
+        $scheduleHtml .= '<label id="top-PastSessionsLabel" class="standardLabel" for="hidePastSessions">Toggle past sessions</label>';
+        $scheduleHtml .= '<input id="hidePastSessions" class="pastSessionsCheckbox" type="checkbox" >';
 
         $scheduleHtml .= "<div id='pastSessionContent'>";
     
@@ -59,7 +59,11 @@ class ListView implements CalendarView
             }
             else if($currentDay > $pastSessionTime && !$pastSessionsDone) {
                 $scheduleHtml .= "</div>\n\n";
-                $scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle Past Sessions</label>';
+                $scheduleHtml .= '<label id="bottom-PastSessionsLabel" class="standardLabel" for="hidePastSessions">Toggle past sessions' /*. '</label>'*/ ;
+                $scheduleHtml .= '<input ' . /*'id="hidePastSessionsB"' .*/ 'class="pastSessionsCheckbox" type="checkbox" >';
+                $scheduleHtml .= '</label>';
+                // $scheduleHtml .= '<label class="sessionToggleLabel" id="sessionToggleLabelB"'>;
+                // $scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle Past Sessions</label>';
                 $pastSessionsDone = TRUE;
                 $scheduleHtml .= "<div id=\"currentSessions\">\n\n";
             }

@@ -62,26 +62,10 @@ include('header.htm');
 		// that would allow us to cycle through
 		// the different calendar display choices, but this is
 		// a solution for now.
-		print '<label id="formatToggleLabel" for="toggleCalendarFormat">Toggle Schedule Format</label>';
-        print '<input type="checkbox" id="toggleCalendarFormat">';
+		print '<label id="formatToggleLabel" class="standardLabel" for="toggleCalendarFormat">Toggle Schedule Format</label>';
+        print '<input id="toggleCalendarFormat" type="checkbox">';
 
-		// echo 'does this work???';
-		// if (Config::getInstance()->getConfigSetting("DefaultView") == "List") { 
-		// 	echo 'it is list';
-		// } else {
-		// 	echo 'not list';
-		// };
-
-		// if statement doesn't matter, only Table works
 		if(Config::getInstance()->getConfigSetting("DefaultView") == "Table") {
-			// print '<div id=Calendar1>';
-			// print $parsers["List"]->parseCalendar();
-			// print '</div>';
-
-			// print '<div id=Calendar2>';
-			// print $parsers["Table"]->parseCalendar();
-			// print '</div>';
-
 			print '<div id="Calendar1">';
 			print $parsers["Table"]->parseCalendar();
 			print '</div>';
@@ -89,15 +73,7 @@ include('header.htm');
 			print '<div id="Calendar2">';
 			print $parsers["List"]->parseCalendar();
 			print '</div>';
-		} else {
-			// print '<div id=Calendar1>';
-			// print $parsers["Table"]->parseCalendar();
-			// print '</div>';
-
-			// print '<div id=Calendar2>';
-			// print $parsers["List"]->parseCalendar();
-			// print '</div>';
-			
+		} else {			
 			print '<div id="Calendar1">';
 			print $parsers["List"]->parseCalendar();
 			print '</div>';
@@ -107,7 +83,7 @@ include('header.htm');
 			print '</div>';
 		}
 		
-		// Code before hand: 
+		// Previous code: 
 		// $schedule = $parser->parseCalendar();
 		// print $schedule;
 		print '</div>';
