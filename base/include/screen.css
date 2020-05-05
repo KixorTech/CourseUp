@@ -221,25 +221,86 @@ display:none;
 display:none;
 }
 
+#formatToggleLabel:active {
+	position: relative;
+	margin: 2px;
+	left: 1px;
+	top: 1px;
+	background: linear-gradient(#fff, #ddd);
+	border: 1px outset #aaa;
+	border-radius: 3px;
+	/* padding: 2px 10px 2px 10px; */
+}
+
 #formatToggleLabel {
-color: #666;
-border: 1px solid #aaa;
-padding: 2px;
-margin: 2px;
+	padding: 2px 10px 2px 10px;
+	margin: 2px;
+	background: linear-gradient(#fff, #ddd);
+	border: 1px outset #aaa;
+	border-radius: 3px;
+	/* the following lines make it so text doesn't highlight when the button is pressed */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	/* color: #666; */
+	/* border: 1px solid #aaa; */
+	/* padding: 2px; */
+	/* margin: 2px; */
+}
+
+#formatToggleLabel:hover {
+	color: #666;
+	padding: 2px 10px 2px 10px;
+	margin: 2px;
+	background: linear-gradient(#fff, #e8e8e8);
+	border: 1px outset #aaa;
+	border-radius: 3px;
+	/* border: 1px outset #ccc; */
+	/* background-color: #e8e8e8; */
+}
+
+#sessionToggleLabel:active {
+	position: relative;
+	left: 1px;
+	top: 6px; /* should be (div nonactive val + 1) */
+	background: linear-gradient(#fff, #ddd);
+	border: 1px outset #aaa;
+	border-radius: 3px;
+	/* padding: 2px 10px 2px 10px; */
+	/* margin: 2px; */
 }
 
 #sessionToggleLabel {
-	color: #666;
-	border: 1px solid #aaa;
-	padding: 2px;
+	display: inline-block;
+	padding: 2px 10px 2px 10px;
 	margin: 2px;
+	background: linear-gradient(#fff, #ddd);
+	border: 1px outset #aaa;
+	border-radius: 3px;
+	position: relative;
+	top: 5px;
+	bottom: 5px;
+	/* the following lines make it so text doesn't highlight when the button is pressed */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	/* color: #666; */
+	/* padding: 2px; */
+	/* margin: 2px; */
+	/* border: 1px solid #aaa; */
 }
 
-#formatToggleLabel:active {
-position: relative;
-left: 1px;
-top: 1px;
+#sessionToggleLabel:hover {
+	padding: 2px 10px 2px 10px;
+	margin: 2px;
+	color: #666;
+	background-color: #e8e8e8;
+	background: linear-gradient(#fff, #e8e8e8);
+	border: 1px outset #aaa;
+	border-radius: 3px;
+	/* border: 1px outset #ccc; */
 }
+
 
 
 .textC1 { color: #66c2a5; }

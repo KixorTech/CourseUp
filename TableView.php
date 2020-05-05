@@ -37,7 +37,8 @@ function parseCalendar() {
 			$HTMLString = $HTMLString . '<tr>';
 			for ($c = 0; $c < sizeof($attributeNames)+2; $c++) {
 				$HTMLString = $HTMLString . '<td>';
-				if ($c == 0 && $d == 0) {
+				// if ($c == 0 && $d == 0) {
+				if ($c==0 && $currentDay->format('D') == $classDaysPerWeek[0]){ // TODO: make this the first day of classes
 					$HTMLString = $HTMLString . "Week " . ($w + 1);
 				}
 				else if ($c == 1) {
