@@ -16,7 +16,7 @@ function parseCalendar() {
 	$HTMLString = '<div id="newCalendarDiv">';
 	
 	// ===== Making the header: 
-	
+	$HTMLString = $HTMLString . '<div id="tableViewEntire">';
 	$HTMLString = $HTMLString . '<table style="width:100%", border="1px solid #aaa">';
 	$HTMLString = $HTMLString . '<tbody>';
 	$HTMLString = $HTMLString . '<tr bgcolor="#A4A4A4">';
@@ -37,7 +37,8 @@ function parseCalendar() {
 			$HTMLString = $HTMLString . '<tr>';
 			for ($c = 0; $c < sizeof($attributeNames)+2; $c++) {
 				$HTMLString = $HTMLString . '<td>';
-				if ($c == 0 && $d == 0) {
+				// if ($c == 0 && $d == 0) {
+				if ($c==0 && $currentDay->format('D') == $classDaysPerWeek[0]){ // TODO: make this the first day of classes
 					$HTMLString = $HTMLString . "Week " . ($w + 1);
 				}
 				else if ($c == 1) {
@@ -67,6 +68,7 @@ function parseCalendar() {
 	$HTMLString = $HTMLString . '</tbody>';
 	$HTMLString = $HTMLString . '</table>';
 	$HTMLString = $HTMLString . '</div>';	
+	$HTMLString = $HTMLString . '</div>';
 	echo $HTMLString;
 }
 }
