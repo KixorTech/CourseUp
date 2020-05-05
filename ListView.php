@@ -11,21 +11,21 @@ class ListView implements CalendarView
         $config_obj = Config::getInstance();
         
         $currentDay = $config_obj->getConfigSetting('FirstQuarterDay');
-        $scheduleHtml = '';
+        $scheduleHtml = "<div1 id='ListViewDiv'>";
         $itemsDue = Array();
     
-        // $scheduleHtml .= '<script src="include/jquery.min.js"></script>';
-        // $scheduleHtml .= '<script src="include/screen.js"></script>';
+//         // $scheduleHtml .= '<script src="include/jquery.min.js"></script>';
+//         // $scheduleHtml .= '<script src="include/screen.js"></script>';
     
-        //http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
-        // //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
+//         //http://stackoverflow.com/questions/6019845/show-hide-div-on-click-with-css
+//         // //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
         
-        //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
+//         //$scheduleHtml .= '<input type="checkbox" checked>Hide past sessions</label>';
 
         $scheduleHtml .= '<label id="sessionToggleLabel" for="hidePastSessions">Toggle past sessions</label>';
         $scheduleHtml .= '<input type="checkbox" id="hidePastSessions">';
 
-        $scheduleHtml .= "<div id=\"pastSessionContent\">\n\n";
+        $scheduleHtml .= "<div id='pastSessionContent'>";
     
         $now = new DateTime();
         $pastSessionTime = $now;
@@ -48,7 +48,8 @@ class ListView implements CalendarView
         for($i=1; $i<$cal->numSessions(); $i++)
         {
             if($currentDay > $futureSessionTime)
-                return $scheduleHtml;
+                break;
+                // return $scheduleHtml;
     
             $dontMakeButton = $currentDay > $pastSessionTime && $i <= $ShowPastSessions && !$pastSessionsDone;
             if($dontMakeButton) {
@@ -58,7 +59,7 @@ class ListView implements CalendarView
             }
             else if($currentDay > $pastSessionTime && !$pastSessionsDone) {
                 $scheduleHtml .= "</div>\n\n";
-                $scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle past sessions</label>';
+                $scheduleHtml .= '<label class="sessionToggle" id="sessionToggleLabelB"  onclick="//document.getElementById(\'sessionToggleLabelB\').scrollIntoView(true)" for="pastSessionsCheckbox">Toggle Past Sessions</label>';
                 $pastSessionsDone = TRUE;
                 $scheduleHtml .= "<div id=\"currentSessions\">\n\n";
             }
@@ -82,10 +83,12 @@ class ListView implements CalendarView
     
             $currentDay = getNextClassDay($currentDay);
         }
-        $scheduleHtml .= "</div>\n\n";
-        return $scheduleHtml;
-        //$s = ParsedownExtra::instance()->text($scheduleHtml); 
-        //return $s;
+        $scheduleHtml .= '</div>';
+        $scheduleHtml .= '</div1>';
+        echo $scheduleHtml;
+//         // $s = ParsedownExtra::instance()->text($scheduleHtml); 
+//         // echo $s;
+//         //return $s;
     }
 }
 

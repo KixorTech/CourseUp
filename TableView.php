@@ -13,9 +13,9 @@ function parseCalendar() {
 	$currentDay = $config->getConfigSetting("FirstQuarterDay");
 	$lastDay = $config->getConfigSetting("LastQuarterDay");
 	$attributeNames = ['Assignments'];
-	$HTMLString = '<div id="newCalendarDiv">';
+	$HTMLString = '<div id="TableViewDiv">';
 	
-	// ===== Making the header: 
+	// ===== Making the header: (TODO move into CSS?)
 	$HTMLString = $HTMLString . '<div id="tableViewEntire">';
 	$HTMLString = $HTMLString . '<table style="width:100%", border="1px solid #aaa">';
 	$HTMLString = $HTMLString . '<tbody>';
@@ -38,7 +38,7 @@ function parseCalendar() {
 			for ($c = 0; $c < sizeof($attributeNames)+2; $c++) {
 				$HTMLString = $HTMLString . '<td>';
 				// if ($c == 0 && $d == 0) {
-				if ($c==0 && $currentDay->format('D') == $classDaysPerWeek[0]){ // TODO: make this the first day of classes
+				if ($c==0 && $currentDay->format('D') == $classDaysPerWeek[0]){
 					$HTMLString = $HTMLString . "Week " . ($w + 1);
 				}
 				else if ($c == 1) {
