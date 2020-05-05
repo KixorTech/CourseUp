@@ -15,15 +15,15 @@ MenuLinks:
   - MenuLinkName: Test Page
     MenuLinkURL: /test/
 
-FirstQuarterDay: 2019-12-02
-LastBeforeBreak: 2019-12-20
-FirstAfterBreak: 2020-01-06
-LastQuarterDay: 2020-01-14
+FirstQuarterDay: 2020-04-06
+LastBeforeBreak: 2020-05-01
+FirstAfterBreak: 2020-05-18
+LastQuarterDay: 2020-06-14
 ClassOnWeekDays: mtrf
 ShowPastSessions: 0
 ShowFutureSessions: 5
 
-PublicErrorMessages: false
+PublicErrorMessages: true
 
 TimeZone: America/Indiana/Indianapolis
 
