@@ -1,11 +1,12 @@
 <?php
 require_once('CalendarView.php');
 
-// the following function was reference from
-// https://stackoverflow.com/questions/14643617/create-table-using-javascript
 class TableView implements CalendarView {
+	
+	function parseCalendar() {
+	// we used the following source as reference:
+	// https://stackoverflow.com/questions/14643617/create-table-using-javascript
 
-function parseCalendar() {
 	$cal = Calendar::getInstance();
 	$config = Config::getInstance();
 
@@ -52,12 +53,12 @@ function parseCalendar() {
 					for($j=0; $j<count($itemsDue); $j++)
                 		$itemsDue[$j]->daysTillDue--;
 				}
-				$HTMLString = $HTMLString . '</td>';
+				$HTMLString .= '</td>';
 			}
-			$HTMLString = $HTMLString . '</tr>';
+			$HTMLString .= '</tr>';
 
 			if(isLastDayBeforeBreak($currentDay)) {
-				$HTMLString = $HTMLString . '<tr bgcolor="lightgrey"> <td colspan="3"; align="center"> <b> BREAK </b> </td>  </tr>';
+				$HTMLString .= '<tr bgcolor="lightgreen"> <td colspan="3"; align="center"> <b> Break </b> </td>  </tr>';
             }
 			
 			$currentDay = getNextClassDay($currentDay);
@@ -65,10 +66,10 @@ function parseCalendar() {
 		}
 		$w += 1;
 	}
-	$HTMLString = $HTMLString . '</tbody>';
-	$HTMLString = $HTMLString . '</table>';
-	$HTMLString = $HTMLString . '</div>';	
-	$HTMLString = $HTMLString . '</div>';
+	$HTMLString .= '</tbody>';
+	$HTMLString .= '</table>';
+	$HTMLString .= '</div>'; // closes TableViewEntire div
+	$HTMLString .= '</div>'; // closes TableViewDiv div
 	echo $HTMLString;
 }
 }
