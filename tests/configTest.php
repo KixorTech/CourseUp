@@ -14,7 +14,7 @@ final class configTest extends TestCase
 {
     public function testGetNextDay(): void
     {
-        $path = __PATH__.'/configTest.yaml';
+        $path = __DIR__.'/configTest.yaml';
         $config_temp = spyc_load_file($path);
         Config::getInstance()->loadSettings($config_temp);
         $parsers = Config::getInstance()->buildParserArray();
