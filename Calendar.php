@@ -45,14 +45,14 @@ class Calendar
 	public function getCalendarString() 
 	{
 		// for testing purposes
-		return print_r(self::$events);
+		return print_r(self::$events, True);
 	}
 
 	public function getDueString()
 	{
 		// for testing purposes
 		// this is populated much later. needs refactoring
-		return print_r(self::$due_list);
+		return print_r(self::$due_list, True);
 	}
 
 	public function getSession($day) 

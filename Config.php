@@ -106,7 +106,7 @@ class Config
 	public function getConfigString() {
 		// for testing purposes
 
-		return print_r(self::$ettings);
+		return print_r(self::$ettings, True);
 	}
 }
 
