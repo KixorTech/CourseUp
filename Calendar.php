@@ -39,7 +39,7 @@ class Calendar
 			self::$ses_num++;
 			self::$events[self::$ses_num] = $ses;
 		}
-		print_r(self::getCalendarString());
+		// print_r(self::getCalendarString());
 	}
 
 	public function getCalendarString() 
