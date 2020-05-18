@@ -102,6 +102,12 @@ class Config
 
 		return $parsers;
 	}
+
+	public function getConfigString() {
+		// for testing purposes
+
+		return print_r(self::$ettings);
+	}
 }
 
 ?>

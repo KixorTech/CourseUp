@@ -39,6 +39,20 @@ class Calendar
 			self::$ses_num++;
 			self::$events[self::$ses_num] = $ses;
 		}
+		print_r(self::getCalendarString());
+	}
+
+	public function getCalendarString() 
+	{
+		// for testing purposes
+		return print_r(self::$events);
+	}
+
+	public function getDueString()
+	{
+		// for testing purposes
+		// this is populated much later. needs refactoring
+		return print_r(self::$due_list);
 	}
 
 	public function getSession($day) 

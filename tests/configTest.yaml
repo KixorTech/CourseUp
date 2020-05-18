@@ -1,0 +1,21 @@
+CourseTitle: "Test Course"
+
+MenuLinks:
+  - MenuLinkName: Schedule
+    MenuLinkURL: /
+  - MenuLinkName: Test Page
+    MenuLinkURL: /test/
+
+FirstQuarterDay: 2016-04-07
+LastBeforeBreak: 2020-05-01
+FirstAfterBreak: 2020-05-18
+LastQuarterDay: 2020-06-14
+ClassOnWeekDays: mtwf
+ShowPastSessions: 0
+ShowFutureSessions: 3
+
+PublicErrorMessages: true
+
+TimeZone: America/Indiana/Indianapolis
+
+DefaultView: List
