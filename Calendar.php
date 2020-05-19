@@ -63,7 +63,12 @@ class Calendar
 
 	public function getSession($day) 
 	{
-		return self::$events[$day];
+		if ($day <= self::$ses_num) {
+			return self::$events[$day];
+		}
+		else {
+			return "";
+		}
 	}
 
 	public function numSessions()
