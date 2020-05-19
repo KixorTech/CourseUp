@@ -1,0 +1,30 @@
+#This file is part of the CourseUp project.
+#http://courseup.org
+#
+#(c) Micah Taylor
+#micah@kixortech.com
+#
+#See http://courseup.org for license information.
+
+
+CourseTitle: "Super Amazing Test Course"
+
+MenuLinks:
+  - MenuLinkName: Schedule
+    MenuLinkURL: /
+  - MenuLinkName: Test Page
+    MenuLinkURL: /test/
+
+FirstQuarterDay: 2020-04-07
+LastBeforeBreak: 2020-05-01
+FirstAfterBreak: 2020-05-18
+LastQuarterDay: 2020-06-14
+ClassOnWeekDays: mtrf
+ShowPastSessions: 0
+ShowFutureSessions: 5
+
+PublicErrorMessages: true
+
+TimeZone: America/Indiana/Indianapolis
+
+DefaultView: Table

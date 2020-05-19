@@ -1,0 +1,17 @@
+CourseTitle: "Test Course"
+
+MenuLinks:
+  - MenuLinkName: Schedule
+    MenuLinkURL: /
+  - MenuLinkName: Test Page
+    MenuLinkURL: /test/
+
+ClassOnWeekDays: mtwf
+ShowPastSessions: 0
+ShowFutureSessions: 3
+
+PublicErrorMessages: true
+
+TimeZone: America/Indiana/Indianapolis
+
+DefaultView: List

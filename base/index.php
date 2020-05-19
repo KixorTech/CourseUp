@@ -30,6 +30,7 @@ include('header.htm');
 
 {
 	$contentPath = $resource . 'content.md';
+	//$contentPath = $resource . 'CourseUp/tests/singletons/calendarTest.md';
 	// $indexPath = 'index.php';
 
 	$f = '';

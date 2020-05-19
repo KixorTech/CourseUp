@@ -8,6 +8,14 @@
 //
 //See http://courseup.org for license information.
 
+// The following is a test for TableView
+// The code this file tests is line 70 in index.php
+// The expected output from that line is placed in the
+// html file with the same name as this one.
+// Below are the following conditions for matching:
+// - config.yaml -> DefaultView: Table
+// - content.md has the contents of this file
+
 
 // ----------------------------------------
 Session:
@@ -158,6 +166,3 @@ Session:
 
 Session:
 * And so forth
-
-Session:
- * last one

@@ -28,8 +28,14 @@ class Calendar
 		self::$due_list = array();
 	}
 
+	private function clearCalendar() {
+		self::$events = array();
+		self::$due_list = array();
+	}
+
 	public function parseCalendarFile($f) 
 	{
+		self::clearCalendar();
 		$sessions = explode('Session:', $f);
 		array_shift($sessions);
 
@@ -39,11 +45,30 @@ class Calendar
 			self::$ses_num++;
 			self::$events[self::$ses_num] = $ses;
 		}
+		// print_r(self::getCalendarString());
+	}
+
+	public function getCalendarString() 
+	{
+		// for testing purposes
+		return print_r(self::$events, True);
+	}
+
+	public function getDueString()
+	{
+		// for testing purposes
+		// this is populated much later. needs refactoring
+		return print_r(self::$due_list, True);
 	}
 
 	public function getSession($day) 
 	{
-		return self::$events[$day];
+		if ($day <= self::$ses_num) {
+			return self::$events[$day];
+		}
+		else {
+			return "";
+		}
 	}
 
 	public function numSessions()
