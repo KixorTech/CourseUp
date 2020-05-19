@@ -5,7 +5,4 @@ php:
 
 script:
   - cp -a ./base/. ../
-  - ls
-  - cd ..
-  - ls
   - phpunit tests/
