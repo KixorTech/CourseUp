@@ -138,7 +138,9 @@ function getHost()
 	try 
 	{
 		return $_SERVER['SERVER_NAME'];
-	} catch {
+	} 
+	catch (Exception $e)
+	{
 		return '';
 	}
 }
