@@ -5,7 +5,6 @@ require_once('../CourseUp/Config.php');
 require_once('../CourseUp/Calendar.php');
 require_once('../CourseUp/TableView.php');
 
-require_once("../CourseUp/helpers.php");
 require_once("../CourseUp/session.php");
 require_once("../CourseUp/https.php");
 
@@ -27,6 +26,6 @@ final class contentBasicTest extends TestCase
         $actual = $tv->parseCalendar();
 
         $expected = file_get_contents(__DIR__ . '/contentBasic.html');
-        $this->assertContains($expected, $actual);
+        $this->assertContains($actual, $expected);
     }
 }
