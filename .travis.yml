@@ -4,6 +4,8 @@ php:
   - 7.3.11
 
 script:
-  - cp -a ./CourseUp/base/. ./
+  - cp -a ./base/. ../
+  - ls
+  - cd ..
   - ls
   - phpunit tests/
