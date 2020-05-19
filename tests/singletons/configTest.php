@@ -33,6 +33,6 @@ final class configTest extends TestCase
 		$actual = str_replace("\t", '', $actual);
 		$actual = str_replace(" ", '', $actual);
 
-        $this->assertEquals([], $config_temp);
+        $this->assertEquals($expected, $actual);
     }
 }
