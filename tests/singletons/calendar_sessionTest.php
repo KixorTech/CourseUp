@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
-require_once('../CourseUp/Calendar.php');
 require_once('../CourseUp/Config.php');
 require_once("../CourseUp/helpers.php");
 require_once("../CourseUp/session.php");
 require_once("../CourseUp/https.php");
+require_once('../CourseUp/Calendar.php');
 
 require_once('../CourseUp/spyc.php');
 
@@ -13,6 +13,11 @@ final class calendar_sessionTest extends TestCase
 {
 	public function testCalendar()
 	{
+		$path = __DIR__.'/configTest.yaml';
+        $Spyc  = new Spyc;
+        $config_temp = $Spyc->loadFile($path);
+		Config::getInstance()->loadSettings($config_temp);
+		
 		$path = file_get_contents(__DIR__.'/calendarTest.md');
 		$calendar = Calendar::getInstance();
 		$calendar->parseCalendarFile($path);
