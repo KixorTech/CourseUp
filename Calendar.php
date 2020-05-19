@@ -28,8 +28,14 @@ class Calendar
 		self::$due_list = array();
 	}
 
+	private function clearCalendar() {
+		self::$events = array();
+		self::$due_list = array();
+	}
+
 	public function parseCalendarFile($f) 
 	{
+		self::clearCalendar();
 		$sessions = explode('Session:', $f);
 		array_shift($sessions);
 
