@@ -4,4 +4,5 @@ php:
   - 7.3.11
 
 script:
+  - cp -a ./base/. ../
   - phpunit tests/
