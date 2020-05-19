@@ -135,7 +135,12 @@ function printHosts()
 
 function getHost()
 {
-	return $_SERVER['SERVER_NAME'];
+	try 
+	{
+		return $_SERVER['SERVER_NAME'];
+	} catch {
+		return '';
+	}
 }
 
 function getURI()
