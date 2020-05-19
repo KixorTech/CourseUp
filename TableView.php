@@ -70,7 +70,7 @@ class TableView implements CalendarView {
 	$HTMLString .= '</table>';
 	$HTMLString .= '</div>'; // closes TableViewEntire div
 	$HTMLString .= '</div>'; // closes TableViewDiv div
-	echo $HTMLString;
+	return $HTMLString;
 }
 }
 ?>
