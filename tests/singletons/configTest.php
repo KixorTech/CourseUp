@@ -13,7 +13,8 @@ final class configTest extends TestCase
     public function testGetNextDay(): void
     {
         $path = __DIR__.'/configTest.yaml';
-        $config_temp = Spyc::YAMLLoad($path);
+        $Spyc  = new Spyc;
+        $config_temp = $Spyc->loadFile($path);
         Config::getInstance()->loadSettings($config_temp);
 
         $actual = Config::getInstance()->getConfigString();
