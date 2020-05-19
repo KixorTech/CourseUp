@@ -26,6 +26,6 @@ final class contentAdvancedTest extends TestCase
         $actual = $tv->parseCalendar();
 
         $expected = file_get_contents(__DIR__ . '/contentAdvanced.html');
-        $this->assertContains($actual, $expected);
+        $this->assertFalse(strpos($actual, $expected) !== false);
     }
 }
