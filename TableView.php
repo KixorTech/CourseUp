@@ -2,7 +2,12 @@
 require_once('CalendarView.php');
 
 class TableView implements CalendarView {
-	
+
+	/* Adding a new column is easy on this view. To add a column:
+		1. Add the column name to $attributeNames
+		2. Write the code in getContentForAddedColumn that gets what you want displayed in that column
+	   An example can be seen if you include 'TestColumn' in $attributeNames.
+	*/
 	function parseCalendar() {
 	// we used the following source as reference:
 	// https://stackoverflow.com/questions/14643617/create-table-using-javascript
@@ -14,6 +19,7 @@ class TableView implements CalendarView {
 	$currentDay = $config->getConfigSetting("FirstQuarterDay");
 	$lastDay = $config->getConfigSetting("LastQuarterDay");
 	$attributeNames = ['Assignments'];
+	// $attributeNames = ['Assignments','TestColumn'];
 	$HTMLString = '<div id="TableViewDiv">';
 	
 	// ===== Making the header: (TODO move into CSS?)
@@ -38,27 +44,21 @@ class TableView implements CalendarView {
 			$HTMLString = $HTMLString . '<tr>';
 			for ($c = 0; $c < sizeof($attributeNames)+2; $c++) {
 				$HTMLString = $HTMLString . '<td>';
-				// if ($c == 0 && $d == 0) {
 				if ($c==0 && $currentDay->format('D') == $classDaysPerWeek[0]){
 					$HTMLString = $HTMLString . "Week " . ($w + 1);
 				}
 				else if ($c == 1) {
 					$HTMLString = $HTMLString . ($d + $w*sizeof($classDaysPerWeek) + 1) . ": " . $currentDay->format('D M d');
 				}
-				else if ($c == 2){
-					$sessionHtml = getBulletList($cal->getSession($s), clone $currentDay, $itemsDue);
-					$sessionHtml = PDExtension::instance()->text($sessionHtml);
-					$HTMLString = $HTMLString . $sessionHtml;
-					$s++;
-					for($j=0; $j<count($itemsDue); $j++)
-                		$itemsDue[$j]->daysTillDue--;
+				else if ($c > 1) {
+					$HTMLString = $HTMLString . $this->getContentForAddedColumn($attributeNames, $c-2, $s, $currentDay);
 				}
 				$HTMLString .= '</td>';
 			}
 			$HTMLString .= '</tr>';
 
 			if(isLastDayBeforeBreak($currentDay)) {
-				$HTMLString .= '<tr bgcolor="lightgreen"> <td colspan="3"; align="center"> <b> Break </b> </td>  </tr>';
+				$HTMLString .= '<tr bgcolor="lightgreen"> <td colspan="' . (sizeof($attributeNames) + 2) . '"; align="center"> <b> Break </b> </td>  </tr>';
             }
 			
 			$currentDay = getNextClassDay($currentDay);
@@ -72,5 +72,24 @@ class TableView implements CalendarView {
 	$HTMLString .= '</div>'; // closes TableViewDiv div
 	echo $HTMLString;
 }
+
+function getContentForAddedColumn($attributes, $ColumnNumber, &$SessionNumber, $currentDay) {
+	$HTMLStringtemp = '';
+	if ($attributes[$ColumnNumber] == 'Assignments') { 
+		$cal = Calendar::getInstance();
+		$itemsDue = Array();
+		$sessionHtml = getBulletList($cal->getSession($SessionNumber), clone $currentDay, $itemsDue);
+		$sessionHtml = PDExtension::instance()->text($sessionHtml);
+		$HTMLStringtemp = $sessionHtml;
+		$SessionNumber++;
+		for($j=0; $j<count($itemsDue); $j++)
+			$itemsDue[$j]->daysTillDue--;
+	}
+	else if ($attributes[$ColumnNumber] == 'TestColumn') { // here as an example for adding a column
+		$HTMLStringtemp = 'test';
+	}
+	return $HTMLStringtemp;
+}
+
 }
 ?>
