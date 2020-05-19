@@ -1,9 +1,15 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
-require_once('../CourseUp/PDExtension.php');
+require_once('../CourseUp/Config.php');
+require_once('../CourseUp/Calendar.php');
 require_once('../CourseUp/TableView.php');
-// include(../CourseUp/base/index.php);
+
+require_once("../CourseUp/helpers.php");
+require_once("../CourseUp/session.php");
+require_once("../CourseUp/https.php");
+
+require_once('../CourseUp/spyc.php');
 
 final class contentAdvancedTest extends TestCase
 {
