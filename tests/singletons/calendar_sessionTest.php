@@ -13,11 +13,6 @@ final class calendar_sessionTest extends TestCase
 {
 	public function testCalendar()
 	{
-		$path = __DIR__.'/configTest.yaml';
-        $Spyc  = new Spyc;
-        $config_temp = $Spyc->loadFile($path);
-		Config::getInstance()->loadSettings($config_temp);
-		
 		$path = file_get_contents(__DIR__.'/calendarTest.md');
 		$calendar = Calendar::getInstance();
 		$calendar->parseCalendarFile($path);

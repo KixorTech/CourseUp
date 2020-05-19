@@ -4,4 +4,5 @@ php:
   - 7.3.11
 
 script:
+  - ln -s ./CourseUp/base/* ./
   - phpunit tests/
