@@ -5,8 +5,6 @@ require_once('../CourseUp/Config.php');
 require_once("../CourseUp/helpers.php");
 require_once("../CourseUp/session.php");
 require_once("../CourseUp/https.php");
-//require_once("basicAuth.php");
-//require_once('db.php');
 
 require_once('../CourseUp/spyc.php');
 
@@ -15,7 +13,7 @@ final class configTest extends TestCase
     public function testGetNextDay(): void
     {
         $path = __DIR__.'/configTest.yaml';
-        $config_temp = spyc_load_file($path);
+        $config_temp = Spyc::YAMLLoad($path);
         Config::getInstance()->loadSettings($config_temp);
 
         $actual = Config::getInstance()->getConfigString();
