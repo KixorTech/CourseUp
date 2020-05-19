@@ -2,6 +2,12 @@
 use PHPUnit\Framework\TestCase;
 
 require_once('../CourseUp/Calendar.php');
+require_once('../CourseUp/Config.php');
+require_once("../CourseUp/helpers.php");
+require_once("../CourseUp/session.php");
+require_once("../CourseUp/https.php");
+
+require_once('../CourseUp/spyc.php');
 
 final class calendar_sessionTest extends TestCase
 {
