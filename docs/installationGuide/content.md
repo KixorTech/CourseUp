@@ -73,7 +73,7 @@ Installation Guide
 
 1. Follow the guide [here](https://www.ostechnix.com/install-apache-mysql-php-lamp-stack-on-ubuntu-18-04-lts/), but do not install MySQL
 2. Find your Apache httpd.conf file (usually at /etc/apache2/httpd.conf)
--. Find the line `#LoadModule rewrite_module modules/mod_rewrite.so` and remove the # at the beginning.
+- Find the line `#LoadModule rewrite_module modules/mod_rewrite.so` and remove the # at the beginning.
 - Change the first two `AllowOverride none` lines to `AllowOverride all`
 3. Clone the CourseUp repo into the Apache web root folder (usually /var/www/html/).
 4. In the Apache root folder run the command: `ln -s ./CourseUp/base/* ./`
