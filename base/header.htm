@@ -41,6 +41,10 @@ if($hasMenuItems) {
   print '<div id="header">';
   for($i=0; $i<$menuLinkCount; $i++) {
     print '<a href="';
+    if (! (substr($menuLinks[$i]['MenuLinkURL'], 0, 7) == 'http://' ||
+           substr($menuLinks[$i]['MenuLinkURL'], 0, 8) == 'https://') ) {
+      printRoot();
+    }
     printRoot();
     //print '/';
     print $menuLinks[$i]['MenuLinkURL'];
