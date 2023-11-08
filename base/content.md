@@ -15,6 +15,7 @@ Session:
 * Bullet lists might be useful
  * +Plus symbols automatically link to that resource
  * Due dates are counted in sessions units due +4
+ * Due Items / can be annotated without changing the link due +5
  //* Items can be commented
  * Links can be <a href="resource">manually</a> added due +3
 
