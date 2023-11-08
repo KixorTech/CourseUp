@@ -67,6 +67,14 @@ function getPrevClassDay($currentDay)
 function getNextClassDay($currentDay)
 { return iterateToClassDay($currentDay, 1); }
 
+function isDoubleDay($day) {
+  global $config;
+  $letters = $config["ClassOnWeekDays"];
+  $dayname = date_format($day, "D");
+  $ps = strpos(strtolower($letters), strtolower($dayname[0]));
+  return (strtolower($letters[$ps]) !== $letters[$ps]);
+}
+
 function removeCommentLines($string)
 {
 	$outS = '';
@@ -191,6 +199,8 @@ function getBulletList($string, $currentDay, &$itemsDue)
 				$endOfDay = new DateInterval('PT23H59M');
 				$dueDate = $currentDay;
 				for($d=0; $d<$daysTillDue; $d++) {
+					// skip two sessions for double-session days
+					if (isDoubleDay($dueDate)) { $d++; }
 					$dueDate = getNextClassDay($dueDate);
 				}
 
@@ -318,7 +328,10 @@ function getFileHtmlSchedule($fileContents)
 	$daysInWeek = count($ClassOnWeekDays);
 	$weekCount = 1;
 
-	for($i=1; $i<count($sessions); $i++)
+	global $ClassOnWeekDays;
+
+	// $i is session index, $ii is day index/iterator.
+	for($ii=1,$i=1; $i<count($sessions); $i++,$ii++)
 	{
 		if($currentDay > $futureSessionTime)
 			return $scheduleHtml;
@@ -334,9 +347,18 @@ function getFileHtmlSchedule($fileContents)
 			$pastSessionsDone = TRUE;
 		}
 
-		$sessionHtml = getSessionHtml($sessions[$i], $i, $currentDay, $weekCount, $itemsDue);
+		$session_dat = $sessions[$i];
 
-		$endOfWeek =  $i > 0 && $i % $daysInWeek == 0;
+		// uppercase sessions consume two sessions, stick 'em together
+		if (isDoubleDay($currentDay)) {
+		  $session_dat = $session_dat . $sessions[$i+1];
+		}
+
+		$sessionHtml = getSessionHtml($session_dat, $i, $currentDay, $weekCount, $itemsDue);
+
+		if (isDoubleDay($currentDay)) { $i = $i + 1; }
+
+		$endOfWeek =  $ii > 0 && $ii % $daysInWeek == 0;
 		if($endOfWeek) {
 			$sessionHtml = $sessionHtml . "\n-------\n";
 			$weekCount++;
@@ -348,8 +370,12 @@ function getFileHtmlSchedule($fileContents)
 
 		$sessionHtml = PDExtension::instance()->text($sessionHtml); 
 		$scheduleHtml = $scheduleHtml . $sessionHtml;
-		for($j=0; $j<count($itemsDue); $j++)
+		for($j=0; $j<count($itemsDue); $j++) {
 			$itemsDue[$j]->daysTillDue--;
+			if (isDoubleDay($currentDay)) {
+				$itemsDue[$j]->daysTillDue--;
+			}
+		}
 
 		$currentDay = getNextClassDay($currentDay);
 	}

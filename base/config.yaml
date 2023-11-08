@@ -20,7 +20,12 @@ MenuLinks:
 FirstQuarterDay: 2016-03-07
 LastBeforeBreak: 2016-04-01
 FirstAfterBreak: 2016-04-11
-ClassOnWeekDays: mtrf
+############################################################
+#VERY IMPORTANT NOTE:
+# Uppercase chars in ClassOnWeekDays consumes two "Session:" blocks 
+# in the content.md schedule source.
+ClassOnWeekDays: mtWrf
+############################################################
 ShowPastSessions: 0
 ShowFutureSessions: 5
 
