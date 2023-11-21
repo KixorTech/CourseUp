@@ -198,11 +198,16 @@ function getBulletList($string, $currentDay, &$itemsDue)
 
 				$endOfDay = new DateInterval('PT23H59M');
 				$dueDate = $currentDay;
-				for($d=0; $d<$daysTillDue; $d++) {
+				for($d=$daysTillDue; $d>0; $d--) {
 					// skip two sessions for double-session days
-					if (isDoubleDay($dueDate)) { $d++; }
+					if (isDoubleDay($dueDate)) { $d--; }
 					$dueDate = getNextClassDay($dueDate);
 				}
+
+				// // can use this for debugging:
+				// $logger = '<script language="javascript">'
+				//	 . 'console.log(\'' . $session . ' due ' . $daysTillDue . '\');</script>';
+				// $session = $session . $logger;
 
 				$session = $session . ' ' . $session_annotation . ' (due ' .$dueDate->format('D M d') .')';
 				//TODO fix timezone issue
@@ -221,8 +226,11 @@ function getBulletList($string, $currentDay, &$itemsDue)
 
 	foreach($itemsDue as $item)
 	{
-		if($item->daysTillDue == 0)
+		// This loop iterates through items and collects any items due.
+		if(($item->daysTillDue == 0) or
+		   ($item->daysTillDue == 1 and isDoubleDay($currentDay))) {
 			$list = $list . '* Due: '.$item->session."\n";
+		}
 	}
 
 	return $list;
