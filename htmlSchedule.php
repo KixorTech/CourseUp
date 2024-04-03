@@ -74,7 +74,7 @@ function removeCommentLines($string)
 
 	foreach($lines as $line)
 	{
-		$commented = 1 == preg_match('_\s*//.*_', $line);
+		$commented = 1 == preg_match('_(\s+|^)//.*_', $line);
 		if( !$commented )
 			$outS = $outS . $line . "\n";
 	}
